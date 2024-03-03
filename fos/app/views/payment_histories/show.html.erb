@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @payment_history %>
+
+<div>
+  <%= link_to "Edit this payment history", edit_payment_history_path(@payment_history) %> |
+  <%= link_to "Back to payment histories", payment_histories_path %>
+
+  <%= button_to "Destroy this payment history", @payment_history, method: :delete %>
+</div>
