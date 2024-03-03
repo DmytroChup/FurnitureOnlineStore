@@ -1,14 +1,38 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+  <h1 class="mb-4">Users</h1>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Patronymic</th>
+      <th>Last Name</th>
+      <th>Role</th>
+      <th>Phone</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.patronymic %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.user_role %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.username %></td>
+        <td><%= user.password %></td>
+        <td>
+          <%= link_to "Show user", user, class: "btn btn-info" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'New doctor', new_user_path, class: 'btn btn-primary mt-3' %>
 </div>
-
-<%= link_to "New user", new_user_path %>

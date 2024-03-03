@@ -1,10 +1,29 @@
-<h1>Editing user</h1>
+<div class="container mt-5">
+  <div class="container">
 
-<%= render "form", user: @user %>
+    <div class="h-container">
+      <h1 class="text-center">Editing user</h1>
+    </div>
 
-<br>
+    <!-- Form with Bootstrap styling -->
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body mx-auto">
+            <%= render "form", user: @user %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+    <br>
+  </div>
+
+  <div class="text-center">
+    <%= link_to "Show this user", @user, class: "btn btn-primary" %> |
+    <%= link_to "Back to users", users_path, class: "btn btn-secondary" %>
+  </div>
 </div>
+
+
+

@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
 
-<%= render @user %>
+  <h1>User</h1>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+  <%= render @user %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+  <div class="d-flex align-items-center gap-2">
+    <%= link_to "Edit this user", edit_user_path(@user), class: 'btn btn-primary' %>
+    <%= link_to "Back to users", users_path, class: 'btn btn-primary' %>
+
+    <%= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %>
+  </div>
 </div>
