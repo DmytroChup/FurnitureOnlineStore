@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
 
-<%= render @cart %>
+  <h1>Cart</h1>
+  <%= render @cart %>
 
-<div>
-  <%= link_to "Edit this cart", edit_cart_path(@cart) %> |
-  <%= link_to "Back to carts", carts_path %>
+  <div class="d-flex align-items-center gap-2">
+    <%= link_to "Edit this cart", edit_cart_path(@cart), class: 'btn btn-primary' %>
+    <%= link_to "Back to carts", carts_path, class: 'btn btn-primary' %>
 
-  <%= button_to "Destroy this cart", @cart, method: :delete %>
+    <%= button_to "Destroy this cart", @cart, method: :delete, class: "btn btn-danger" %>
+  </div>
 </div>
