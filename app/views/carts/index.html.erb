@@ -1,14 +1,40 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+    <p style="color: green"><%= notice %></p>
 
-<h1>Carts</h1>
+    <h1>Carts</h1>
 
-<div id="carts">
-  <% @carts.each do |cart| %>
-    <%= render cart %>
-    <p>
-      <%= link_to "Show this cart", cart %>
-    </p>
-  <% end %>
+<!--    <div id="carts">-->
+      <%# @carts.each do |cart| %>
+        <%#= render cart %>
+<!--        <p>-->
+          <%#= link_to "Show this cart", cart, class: 'btn btn-info'%>
+<!--        </p>-->
+      <%# end %>
+<!--    </div>-->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Cart</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @carts.each do |cart| %>
+      <tr>
+        <td><%= cart.cart_id %></td>
+        <td><%= cart.product_id %></td>
+        <td><%= cart.quantity %></td>
+        <td><%= cart.price %></td>
+        <td>
+          <%= link_to "Show this cart", cart, class: "btn btn-info" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+    <%= link_to "New cart", new_cart_path, class: 'btn btn-primary mt-3'%>
 </div>
-
-<%= link_to "New cart", new_cart_path %>
