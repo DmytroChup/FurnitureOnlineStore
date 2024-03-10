@@ -1,9 +1,19 @@
-<h1>New payment history</h1>
+<div class="mt-4 mb-5">
+  <div class="container">
+    <h1 class="text-center">New payment history</h1>
 
-<%= render "form", payment_history: @payment_history %>
-
-<br>
-
-<div>
-  <%= link_to "Back to payment histories", payment_histories_path %>
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-body mx-auto">
+            <%= render "form", payment_history: @payment_history %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="text-center">
+      <%= link_to "Back to payment histories", payment_histories_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
 </div>
