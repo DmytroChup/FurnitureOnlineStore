@@ -1,14 +1,31 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Subcategories</h1>
-
-<div id="subcategories">
-  <% @subcategories.each do |subcategory| %>
-    <%= render subcategory %>
-    <p>
-      <%= link_to "Show this subcategory", subcategory %>
-    </p>
-  <% end %>
+<div class="text-center">
+  <h1>Subcategories</h1>
 </div>
 
-<%= link_to "New subcategory", new_subcategory_path %>
+<div class="table-responsive mx-auto" style="width: 75%;">
+  <table class="table table-striped" style="width: 100%;">
+    <thead>
+    <tr>
+      <th class="w-20">ID</th>
+      <th class="w-50">Name</th>
+      <th class="w-20">Main category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @subcategories.each do |subcategory| %>
+      <tr>
+        <td><%= subcategory.subcategory_id %></td>
+        <td><%= subcategory.subcategory_name %></td>
+        <td><%= subcategory.category_id %></td>
+        <td>
+          <%= link_to "Show", subcategory, class: "btn btn-primary btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="text-center">
+  <%= link_to "New subcategory", new_subcategory_path, class: "btn btn-success" %>
+</div>
