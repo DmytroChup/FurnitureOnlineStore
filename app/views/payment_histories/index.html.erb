@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Payment histories</h1>
+  <h1>Payment histories</h1>
 
-<div id="payment_histories">
-  <% @payment_histories.each do |payment_history| %>
-    <%= render payment_history %>
-    <p>
-      <%= link_to "Show this payment history", payment_history %>
-    </p>
-  <% end %>
+  <div id="payment_histories">
+    <% @payment_histories.each do |payment_history| %>
+      <%= render payment_history %>
+      <p>
+        <%= link_to "Show this payment history", payment_history %>
+      </p>
+    <% end %>
+  </div>
+
+  <%= link_to "New payment history", new_payment_history_path, class: 'btn btn-primary mt-3' %>
 </div>
-
-<%= link_to "New payment history", new_payment_history_path %>

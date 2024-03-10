@@ -1,10 +1,23 @@
-<h1>Editing cart</h1>
+<div class="container mt-5">
+  <div class="container">
+    <div>
+      <h1 class="text-center">Editing cart</h1>
+    </div>
 
-<%= render "form", cart: @cart %>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body mx-auto">
+            <%= render "form", cart: @cart %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this cart", @cart %> |
-  <%= link_to "Back to carts", carts_path %>
+  <div class="text-center">
+    <%= link_to "Show this cart", @cart, class: "btn btn-primary" %> |
+    <%= link_to "Back to carts", carts_path, class: "btn btn-secondary" %>
+  </div>
 </div>

@@ -1,10 +1,23 @@
-<h1>Editing producer</h1>
+<div class="container mt-5">
+  <div class="container">
+    <div>
+      <h1 class="text-center">Editing producer</h1>
+    </div>
 
-<%= render "form", producer: @producer %>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body mx-auto">
+            <%= render "form", producer: @producer %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this producer", @producer %> |
-  <%= link_to "Back to producers", producers_path %>
+  <div class="text-center">
+    <%= link_to "Show this producer", @producer, class: "btn btn-primary" %> |
+    <%= link_to "Back to producers", producers_path, class: "btn btn-secondary" %>
+  </div>
 </div>

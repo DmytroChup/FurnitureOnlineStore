@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
 
-<%= render @payment_history %>
+  <h1>Payment history</h1>
+  <%= render @payment_history %>
 
-<div>
-  <%= link_to "Edit this payment history", edit_payment_history_path(@payment_history) %> |
-  <%= link_to "Back to payment histories", payment_histories_path %>
+  <div class="d-flex align-items-center gap-2">
+    <%= link_to "Edit this payment history", edit_payment_history_path(@payment_history), class: 'btn btn-primary' %> |
+    <%= link_to "Back to payment histories", payment_histories_path, class: 'btn btn-primary' %>
 
-  <%= button_to "Destroy this payment history", @payment_history, method: :delete %>
+    <%= button_to "Destroy this payment history", @payment_history, method: :delete, class: "btn btn-danger" %>
+  </div>
 </div>
