@@ -17,7 +17,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create product" do
     assert_difference("Product.count") do
-      post products_url, params: { product: { availability: @product.availability, color: @product.color, height: @product.height, length: @product.length, material: @product.material, name: @product.name, price: @product.price, producer: @product.producer, product_id: @product.product_id, subcategory_id: @product.subcategory_id, width: @product.width } }
+      post products_url, params: { product: { availability: @product.availability, color: @product.color, height: @product.height, length: @product.length, material: @product.material, name: @product.name, price: @product.price, producer: @product.producer, subcategory_id: @product.subcategory_id, width: @product.width } }
     end
 
     assert_redirected_to product_url(Product.last)
@@ -34,7 +34,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update product" do
-    patch product_url(@product), params: { product: { availability: @product.availability, color: @product.color, height: @product.height, length: @product.length, material: @product.material, name: @product.name, price: @product.price, producer: @product.producer, product_id: @product.product_id, subcategory_id: @product.subcategory_id, width: @product.width } }
+    patch product_url(@product), params: { product: { availability: @product.availability, color: @product.color, height: @product.height, length: @product.length, material: @product.material, name: @product.name, price: @product.price, producer: @product.producer, subcategory_id: @product.subcategory_id, width: @product.width } }
     assert_redirected_to product_url(@product)
   end
 

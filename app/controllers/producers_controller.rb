@@ -65,6 +65,6 @@ class ProducersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def producer_params
-      params.require(:producer).permit(:producer_id, :producer_name, :country, :email, :phone)
+      params.require(:producer).permit(:producer_name, :country, :email, :phone)
     end
 end
