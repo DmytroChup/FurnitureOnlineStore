@@ -10,7 +10,9 @@ FurnitureOnlineStore - це веб-додаток онлайн-магазину,
 | GET, POST                    | /users/sign_in                                                                                               |
 | DELETE                       | /users/sign_out                                                                                              |
 | GET, POST, PUT, DELETE, PATCH | /users, /products, /categories, /subcategories, /producers, /order-items, /orders, payment-histories, /carts |
+
 ## ER Діаграма:
+
 ![ERD](https://github.com/DmytroChup/FurnitureOnlineStore/blob/main/er-diagram.png)
 
 ## Скрипти :
