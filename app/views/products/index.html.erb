@@ -1,14 +1,57 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: green;"><%= notice %></p>
 
-<h1>Products</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <p style="color: green;"><%= notice %></p>
+      <h1>Products</h1>
+    </div>
+  </div>
 
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
+<div class="table-responsive mx-auto" style="width: 95%;">
+  <table class="table table-striped" style="width: 100%;">
+    <thead>
+    <tr>
+      <th class="w-10">ID</th>
+      <th class="w-10">Subcategory</th>
+      <th class="w-10">Name</th>
+      <th class="w-10">Price</th>
+      <th class="w-10">Height</th>
+      <th class="w-10">Width</th>
+      <th class="w-10">Length</th>
+      <th class="w-10">Color</th>
+      <th class="w-10">Material</th>
+      <th class="w-10">Producer</th>
+      <th class="w-10">Availability</th>
+      <th class="w-10">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.subcategory_id %></td>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= product.height %></td>
+        <td><%= product.width %></td>
+        <td><%= product.length %></td>
+        <td><%= product.color %></td>
+        <td><%= product.material %></td>
+        <td><%= product.producer %></td>
+        <td><%= product.availability %></td>
+        <td>
+          <%= link_to "Show", product, class: "btn btn-primary btn-sm mr-2" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New product", new_product_path %>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 text-center">
+      <%= link_to "New product", new_product_path, class: "btn btn-success" %>
+    </div>
+  </div>
+</div>
