@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_10_142133) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_17_121516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "carts", force: :cascade do |t|
-    t.integer "cart_id"
     t.integer "product_id"
     t.integer "quantity"
     t.float "price"
@@ -24,14 +23,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_142133) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.integer "category_id"
     t.string "category_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "order_item_id"
     t.integer "product_id"
     t.integer "order_id"
     t.integer "quantity"
@@ -41,7 +38,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_142133) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "order_id"
     t.integer "user_id"
     t.integer "payment_id"
     t.datetime "order_date"
@@ -51,7 +47,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_142133) do
   end
 
   create_table "payment_histories", force: :cascade do |t|
-    t.integer "payment_id"
     t.integer "user_id"
     t.string "payment_method"
     t.datetime "payment_date"
@@ -61,7 +56,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_142133) do
   end
 
   create_table "producers", force: :cascade do |t|
-    t.integer "producer_id"
     t.string "producer_name"
     t.string "country"
     t.string "email"
@@ -71,7 +65,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_142133) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer "product_id"
     t.integer "subcategory_id"
     t.string "name"
     t.float "price"
@@ -87,7 +80,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_142133) do
   end
 
   create_table "subcategories", force: :cascade do |t|
-    t.integer "subcategory_id"
     t.string "subcategory_name"
     t.integer "category_id"
     t.datetime "created_at", null: false

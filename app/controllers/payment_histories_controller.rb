@@ -65,6 +65,6 @@ class PaymentHistoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_history_params
-      params.require(:payment_history).permit(:payment_id, :user_id, :payment_method, :payment_date, :amount)
+      params.require(:payment_history).permit(:user_id, :payment_method, :payment_date, :amount)
     end
 end
