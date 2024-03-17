@@ -17,7 +17,7 @@ class SubcategoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create subcategory" do
     assert_difference("Subcategory.count") do
-      post subcategories_url, params: { subcategory: { category_id: @subcategory.category_id, subcategory_id: @subcategory.subcategory_id, subcategory_name: @subcategory.subcategory_name } }
+      post subcategories_url, params: { subcategory: { category_id: @subcategory.category_id, subcategory_name: @subcategory.subcategory_name } }
     end
 
     assert_redirected_to subcategory_url(Subcategory.last)
@@ -34,7 +34,7 @@ class SubcategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update subcategory" do
-    patch subcategory_url(@subcategory), params: { subcategory: { category_id: @subcategory.category_id, subcategory_id: @subcategory.subcategory_id, subcategory_name: @subcategory.subcategory_name } }
+    patch subcategory_url(@subcategory), params: { subcategory: { category_id: @subcategory.category_id, subcategory_name: @subcategory.subcategory_name } }
     assert_redirected_to subcategory_url(@subcategory)
   end
 
