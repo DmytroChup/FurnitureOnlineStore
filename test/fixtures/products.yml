@@ -9,7 +9,7 @@ one:
   length: 1.5
   color: MyString
   material: MyString
-  producer: MyString
+  producer_id: MyString
   availability: MyString
 
 two:
@@ -21,5 +21,5 @@ two:
   length: 1.5
   color: MyString
   material: MyString
-  producer: MyString
+  producer_id: MyString
   availability: MyString
