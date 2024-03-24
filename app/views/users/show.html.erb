@@ -1,18 +1,237 @@
-<div class="container mt-5">
-  <% if notice %>
-    <div class="alert alert-success" role="alert">
-      <%= notice %>
+<!--<div class="container mt-5">-->
+  <%# if notice %>
+<!--    <div class="alert alert-success" role="alert">-->
+      <%#= notice %>
+<!--    </div>-->
+  <%# end %>
+
+<!--  <h1>User</h1>-->
+
+  <%#= render @user %>
+
+<!--  <div class="d-flex align-items-center gap-2">-->
+    <%#= link_to "Edit this user", edit_user_path(@user), class: 'btn btn-primary' %>
+    <%#= link_to "Back to users", users_path, class: 'btn btn-primary' %>
+
+    <%#= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %>
+<!--  </div>-->
+<!--</div>-->
+
+
+<!-------------------------------------------------------------------------->
+<section class="pt-3 mt-5 mb-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Sidebar START -->
+      <div class="col-lg-4 col-xl-3">
+        <!-- Responsive offcanvas body START -->
+        <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+
+          <!-- Offcanvas body -->
+          <div class="offcanvas-body p-3 p-lg-0">
+            <div class="card bg-light w-100">
+              <!-- Card body START -->
+              <div class="card-body p-3">
+                <!-- Content -->
+                <div class="text-center mb-3">
+                  <h6 class="mb-0"><%= current_user.last_name %> <%= current_user.first_name %></h6>
+                  <p class="text-reset text-primary-hover small"><%= current_user.email %></p>
+                  <hr>
+                </div>
+
+                <!-- Sidebar menu item START -->
+                <ul class="nav nav-pills-primary-soft flex-column">
+                  <li class="nav-item">
+                    <%= link_to 'My Profile', user_path(current_user), class: 'nav-link text-dark' %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to 'Order', '#', class: 'nav-link text-dark' %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to 'Payment History', '#', class: 'nav-link text-dark' %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to 'Settings', '#', class: 'nav-link text-dark' %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link text-danger" %>
+                  </li>
+                </ul>
+                <!-- Sidebar menu item END -->
+              </div>
+              <!-- Card body END -->
+            </div>
+          </div>
+        </div>
+        <!-- Responsive offcanvas body END -->
+      </div>
+      <!-- Sidebar END -->
+
+      <!-- Main content START -->
+      <div class="col-lg-8 col-xl-9">
+
+        <!-- Offcanvas menu button -->
+        <div class="d-grid mb-0 d-lg-none w-100">
+          <button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+            <i class="fas fa-sliders-h"></i> Menu
+          </button>
+        </div>
+
+        <div class="vstack gap-3">
+          <!-- Personal info START -->
+          <div class="card border">
+            <!-- Card header -->
+            <div class="card-header border-bottom">
+              <h4 class="card-header-title">Personal Information</h4>
+            </div>
+
+            <!-- Card body START -->
+            <div class="card-body">
+              <!-- Form START -->
+              <%= form_for @user do |f| %>
+                <!-- Name -->
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <%= f.label :last_name, "Last Name<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= f.label :first_name, "First Name<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= f.label :patronymic, "Patronymic<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_field :patronymic, class: "form-control", placeholder: "Enter your patronymic" %>
+                  </div>
+
+                  <div class="col-md-6">
+                    <%= f.label :username, "Username<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_field :username, class: "form-control", placeholder: "Enter your username" %>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="col-md-6">
+                    <%= f.label :email, "Email address<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.email_field :email, class: "form-control", placeholder: "Enter your email id" %>
+                  </div>
+
+                  <!-- Mobile -->
+                  <div class="col-md-6">
+                    <%= f.label :phone, "Mobile number<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_field :phone, class: "form-control", placeholder: "Enter your mobile number" %>
+                  </div>
+
+                  <!-- CSRF Token -->
+                  <!-- Because form_with (in _form.html.erb) automatically enables CSRF token -->
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+                  <!-- Error Messages -->
+                  <% if @user.errors.any? %>
+                    <div class="col-12">
+                      <div style="color: red">
+                        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                        <ul>
+                          <% @user.errors.each do |error| %>
+                            <li><%= error.full_message %></li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    </div>
+                  <% end %>
+
+                  <!-- Button -->
+                  <div class="col-12 text-end">
+                    <%= f.submit "Save Changes", class: "btn btn-primary mb-0" %>
+                    <%#= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %>
+                  </div>
+                </div>
+              <% end %>
+              <!-- Form END -->
+            </div>
+            <!-- Card body END -->
+          </div>
+          <!-- Personal info END -->
+
+          <!-- Update Password START -->
+          <div class="card border">
+            <!-- Card header -->
+            <div class="card-header border-bottom">
+              <h4 class="card-header-title">Update Password</h4>
+              <p class="mb-0">Your current email address is <span class="text-primary"><%= current_user.email %></span></p>
+            </div>
+
+            <!-- Card body START -->
+            <%= form_with(model: current_user, url: user_password_path, method: :put, local: true, class: "card-body") do |form| %>
+              <!-- Current password -->
+              <div class="mb-3">
+                <%= form.label :current_password, class: "form-label" do %>
+                  Current password
+                <% end %>
+                <%= form.password_field :current_password, class: "form-control", placeholder: "Enter current password" %>
+              </div>
+              <!-- New password -->
+              <div class="mb-3">
+                <%= form.label :password, class: "form-label" do %>
+                  Enter new password
+                <% end %>
+                <div class="input-group">
+                  <%= form.password_field :password, class: "form-control fakepassword", placeholder: "Enter new password", id: "psw-input" %>
+                  <span class="input-group-text p-0 bg-transparent">
+                    <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
+                  </span>
+                </div>
+              </div>
+              <!-- Confirm -->
+              <div class="mb-3">
+                <%= form.label :password_confirmation, class: "form-label" do %>
+                  Confirm new password
+                <% end %>
+                <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm new password" %>
+              </div>
+
+              <div class="text-end">
+                <%= form.submit "Change Password", class: "btn btn-primary mb-0" %>
+              </div>
+            <% end %>
+<!--            <form class="card-body">-->
+              <!-- Current password -->
+<!--              <div class="mb-3">-->
+<!--                <label class="form-label">Current password</label>-->
+<!--                <input class="form-control" type="password" placeholder="Enter current password">-->
+<!--              </div>-->
+              <!-- New password -->
+<!--              <div class="mb-3">-->
+<!--                <label class="form-label"> Enter new password</label>-->
+<!--                <div class="input-group">-->
+<!--                  <input class="form-control fakepassword" placeholder="Enter new password" type="password" id="psw-input">-->
+<!--                  <span class="input-group-text p-0 bg-transparent">-->
+<!--										<i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>-->
+<!--									</span>-->
+<!--                </div>-->
+<!--              </div>-->
+              <!-- Confirm -->
+<!--              <div class="mb-3">-->
+<!--                <label class="form-label">Confirm new password</label>-->
+<!--                <input class="form-control" type="password" placeholder="Confirm new password">-->
+<!--              </div>-->
+
+<!--              <div class="text-end">-->
+<!--                <a href="#" class="btn btn-primary mb-0">Change Password</a>-->
+<!--              </div>-->
+<!--            </form>-->
+            <!-- Card body END -->
+          </div>
+          <!-- Update Password END -->
+        </div>
+      </div>
+      <!-- Main content END -->
     </div>
-  <% end %>
-
-  <h1>User</h1>
-
-  <%= render @user %>
-
-  <div class="d-flex align-items-center gap-2">
-    <%= link_to "Edit this user", edit_user_path(@user), class: 'btn btn-primary' %>
-    <%= link_to "Back to users", users_path, class: 'btn btn-primary' %>
-
-    <%= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %>
   </div>
-</div>
+</section>
