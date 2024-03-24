@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_17_121516) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_24_150601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,30 +29,35 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_121516) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "order_id"
     t.integer "quantity"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "product_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "payment_id"
     t.datetime "order_date"
     t.string "order_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "payment_histories_id"
+    t.index ["payment_histories_id"], name: "index_orders_on_payment_histories_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "payment_histories", force: :cascade do |t|
-    t.integer "user_id"
     t.string "payment_method"
     t.datetime "payment_date"
     t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_payment_histories_on_user_id"
   end
 
   create_table "producers", force: :cascade do |t|
@@ -65,7 +70,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_121516) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer "subcategory_id"
     t.string "name"
     t.float "price"
     t.float "height"
@@ -73,17 +77,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_121516) do
     t.float "length"
     t.string "color"
     t.string "material"
-    t.string "producer"
     t.string "availability"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "subcategory_id"
+    t.bigint "producer_id"
+    t.index ["producer_id"], name: "index_products_on_producer_id"
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
   end
 
   create_table "subcategories", force: :cascade do |t|
     t.string "subcategory_name"
-    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -106,4 +114,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_121516) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "payment_histories", column: "payment_histories_id"
+  add_foreign_key "orders", "users"
+  add_foreign_key "payment_histories", "users"
+  add_foreign_key "products", "producers"
+  add_foreign_key "products", "subcategories"
+  add_foreign_key "subcategories", "categories"
 end
