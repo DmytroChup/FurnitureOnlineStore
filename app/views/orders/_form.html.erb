@@ -17,8 +17,8 @@
   </div>
 
   <div>
-    <%= form.label :payment_id, style: "display: block" %>
-    <%= form.number_field :payment_id %>
+    <%= form.label :payment_histories_id, style: "display: block" %>
+    <%= form.number_field :payment_histories_id %>
   </div>
 
   <div>
@@ -29,6 +29,11 @@
   <div>
     <%= form.label :order_address, style: "display: block" %>
     <%= form.text_field :order_address %>
+  </div>
+
+  <div>
+    <%= form.label :order_completion_date, style: "display: block" %>
+    <%= form.datetime_field :order_completion_date %>
   </div>
 
   <div>
