@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :subcategory_id, style: "display: block" %>
-    <%= form.number_field :subcategory_id %>
+    <%= form.collection_select :subcategory_id, Subcategory.all, :id, :subcategory_name, prompt: "Select Subcategory" %>
   </div>
 
   <div>
@@ -53,7 +53,7 @@
 
   <div>
     <%= form.label :producer_id, style: "display: block" %>
-    <%= form.text_field :producer_id %>
+    <%= form.collection_select :producer_id, Producer.all, :id, :email, prompt: "Select Producer" %>
   </div>
 
   <div>
