@@ -95,12 +95,12 @@
               <%= form_for @producer do |f| %>
                 <!-- Name -->
                 <div class="row g-3">
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <%= f.label :producer_name, "Name<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.text_field :producer_name, class: "form-control", placeholder: "Enter your name" %>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <%= f.label :country, "Country<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.text_field :country, class: "form-control", placeholder: "Enter your country" %>
                   </div>
@@ -113,7 +113,7 @@
 
                   <!-- Mobile -->
                   <div class="col-md-6">
-                    <%= f.label :phone, "Mobile number<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.label :phone, "Mobile number".html_safe, class: "form-label" %>
                     <%= f.text_field :phone, class: "form-control", placeholder: "Enter your mobile number" %>
                   </div>
 
@@ -150,29 +150,60 @@
 
         <!-- Product info START -->
         <div id="productInfoBlock" class="card border">
-          <!-- Card header -->
           <div class="card-header border-bottom">
             <h4 class="card-header-title">Products</h4>
           </div>
-          <!-- Card body START -->
           <div class="card-body">
-            <!-- Інформація про замовлення тут -->
+            <div class="table-responsive mx-auto" style="width: 95%;">
+              <table class="table table-striped" style="width: 100%;">
+                <thead>
+                <tr>
+                  <th class="w-10">ID</th>
+                  <th class="w-10">Subcategory</th>
+                  <th class="w-10">Name</th>
+                  <th class="w-10">Price</th>
+                  <th class="w-10">Height</th>
+                  <th class="w-10">Width</th>
+                  <th class="w-10">Length</th>
+                  <th class="w-10">Color</th>
+                  <th class="w-10">Material</th>
+                  <th class="w-10">Availability</th>
+                  <th class="w-10">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @products.each do |product| %>
+                  <tr>
+                    <td><%= product.id %></td>
+                    <td><%= product.subcategory_id %></td>
+                    <td><%= product.name %></td>
+                    <td><%= product.price %></td>
+                    <td><%= product.height %></td>
+                    <td><%= product.width %></td>
+                    <td><%= product.length %></td>
+                    <td><%= product.color %></td>
+                    <td><%= product.material %></td>
+                    <td><%= product.availability %></td>
+                    <td>
+                      <%= link_to "Show", product, class: "btn btn-primary btn-sm mr-2" %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <!-- Card body END -->
         </div>
         <!-- Product info END -->
 
         <!-- newProduct info START -->
         <div id="newProductInfoBlock" class="card border">
-          <!-- Card header -->
           <div class="card-header border-bottom">
             <h4 class="card-header-title">Add New Products</h4>
           </div>
-          <!-- Card body START -->
           <div class="card-body">
-            <!-- Інформація про замовлення тут -->
+            <%= render "products/form", product: Product.new() %>
           </div>
-          <!-- Card body END -->
         </div>
         <!-- newProduct info END -->
 
