@@ -45,8 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_160833) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "payment_histories_id"
-    t.index ["payment_histories_id"], name: "index_orders_on_payment_histories_id"
+    t.bigint "payment_history_id"
+    t.index ["payment_history_id"], name: "index_orders_on_payment_history_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -122,7 +122,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_160833) do
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "payment_histories", column: "payment_histories_id"
+  add_foreign_key "orders", "payment_histories"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_histories", "users"
   add_foreign_key "products", "producers"
