@@ -15,7 +15,7 @@ class AddForeignKeys < ActiveRecord::Migration[7.1]
     add_reference :order_items, :product, foreign_key: true
     add_reference :order_items, :order, foreign_key: true
     add_reference :orders, :user, foreign_key: true
-    add_reference :orders, :payment_histories, foreign_key: true
+    add_reference :orders, :payment_history, foreign_key: true
     add_reference :payment_histories, :user, foreign_key: true
   end
 end

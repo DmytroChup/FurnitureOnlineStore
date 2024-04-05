@@ -43,11 +43,11 @@
                 <!-- Sidebar menu item START -->
                 <ul class="nav nav-pills-primary-soft flex-column">
                   <li class="nav-item">
-                    <%= link_to 'My Profile', user_path(current_user), class: 'nav-link text-dark' %>
+                    <%= link_to 'My Profile', "javascript:void(0)", id: "personalInfoLink", class: 'nav-link text-dark' %>
                   </li>
 
                   <li class="nav-item">
-                    <%= link_to 'Order', '#', class: 'nav-link text-dark' %>
+                    <%= link_to 'Order', "javascript:void(0)", id: "orderLink", class: 'nav-link text-dark' %>
                   </li>
 
                   <li class="nav-item">
@@ -84,7 +84,7 @@
 
         <div class="vstack gap-3">
           <!-- Personal info START -->
-          <div class="card border">
+          <div class="card border" id="personalInfoBlock">
             <!-- Card header -->
             <div class="card-header border-bottom">
               <h4 class="card-header-title">Personal Information</h4>
@@ -160,7 +160,7 @@
           <!-- Personal info END -->
 
           <!-- Update Password START -->
-          <div class="card border">
+          <div class="card border" id="updatePasswordBlock">
             <!-- Card header -->
             <div class="card-header border-bottom">
               <h4 class="card-header-title">Update Password</h4>
@@ -168,70 +168,114 @@
             </div>
 
             <!-- Card body START -->
-            <%= form_with(model: current_user, url: user_password_path, method: :put, local: true, class: "card-body") do |form| %>
-              <!-- Current password -->
-              <div class="mb-3">
-                <%= form.label :current_password, class: "form-label" do %>
-                  Current password
-                <% end %>
-                <%= form.password_field :current_password, class: "form-control", placeholder: "Enter current password" %>
-              </div>
-              <!-- New password -->
-              <div class="mb-3">
-                <%= form.label :password, class: "form-label" do %>
-                  Enter new password
-                <% end %>
-                <div class="input-group">
-                  <%= form.password_field :password, class: "form-control fakepassword", placeholder: "Enter new password", id: "psw-input" %>
-                  <span class="input-group-text p-0 bg-transparent">
-                    <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
-                  </span>
+            <div class="card-body">
+              <%= form_for @user do |form| %>
+
+                <!-- Current password -->
+                <div class="mb-3">
+                  <%= form.label :current_password, class: "form-label" do %>
+                    Current password
+                  <% end %>
+                  <%= form.password_field :current_password, class: "form-control", placeholder: "Enter current password" %>
                 </div>
-              </div>
-              <!-- Confirm -->
-              <div class="mb-3">
-                <%= form.label :password_confirmation, class: "form-label" do %>
-                  Confirm new password
+
+                <!-- New password -->
+                <div class="mb-3">
+                  <%= form.label :password, class: "form-label" do %>
+                    Enter new password
+                  <% end %>
+                  <div class="input-group">
+                    <%= form.password_field :password, class: "form-control fakepassword", placeholder: "Enter new password", id: "psw-input" %>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <i class="bi bi-eye-slash-fill"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Confirm -->
+                <div class="mb-3">
+                  <%= form.label :password_confirmation, class: "form-label" do %>
+                    Confirm new password
+                  <% end %>
+                  <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm new password" %>
+                </div>
+
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <!-- Error Messages -->
+                <% if @user.errors.any? %>
+                  <div class="col-12">
+                    <div style="color: red">
+                      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                      <ul>
+                        <% @user.errors.each do |error| %>
+                          <li><%= error.full_message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
                 <% end %>
-                <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm new password" %>
-              </div>
 
-              <div class="text-end">
-                <%= form.submit "Change Password", class: "btn btn-primary mb-0" %>
-              </div>
-            <% end %>
-<!--            <form class="card-body">-->
-              <!-- Current password -->
-<!--              <div class="mb-3">-->
-<!--                <label class="form-label">Current password</label>-->
-<!--                <input class="form-control" type="password" placeholder="Enter current password">-->
-<!--              </div>-->
-              <!-- New password -->
-<!--              <div class="mb-3">-->
-<!--                <label class="form-label"> Enter new password</label>-->
-<!--                <div class="input-group">-->
-<!--                  <input class="form-control fakepassword" placeholder="Enter new password" type="password" id="psw-input">-->
-<!--                  <span class="input-group-text p-0 bg-transparent">-->
-<!--										<i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>-->
-<!--									</span>-->
-<!--                </div>-->
-<!--              </div>-->
-              <!-- Confirm -->
-<!--              <div class="mb-3">-->
-<!--                <label class="form-label">Confirm new password</label>-->
-<!--                <input class="form-control" type="password" placeholder="Confirm new password">-->
-<!--              </div>-->
-
-<!--              <div class="text-end">-->
-<!--                <a href="#" class="btn btn-primary mb-0">Change Password</a>-->
-<!--              </div>-->
-<!--            </form>-->
+                <div class="text-end">
+                  <%= form.submit "Change Password", class: "btn btn-primary mb-0" %>
+                </div>
+              <% end %>
+            </div>
             <!-- Card body END -->
           </div>
           <!-- Update Password END -->
         </div>
+
+        <!-- Order info START -->
+        <div id="orderInfoBlock" class="card border">
+          <!-- Card header -->
+          <div class="card-header border-bottom">
+            <h4 class="card-header-title">My Orders</h4>
+          </div>
+          <!-- Card body START -->
+          <div class="card-body">
+            <!-- Інформація про замовлення тут -->
+          </div>
+          <!-- Card body END -->
+        </div>
+        <!-- Order info END -->
+
       </div>
       <!-- Main content END -->
     </div>
   </div>
 </section>
+
+<script defer>
+    $(document).ready(function() {
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('psw-input');
+
+        // Скрипт для перемикання видимості пароля
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.querySelector('i').classList.toggle('bi-eye');
+            togglePassword.querySelector('i').classList.toggle('bi-eye-slash-fill');
+        });
+
+        const personalInfoLink = $("#personalInfoLink");
+        const orderLink = $("#orderLink");
+        const personalInfoBlock = $("#personalInfoBlock");
+        const orderInfoBlock = $("#orderInfoBlock");
+        const updatePasswordBlock = $("#updatePasswordBlock");
+
+        personalInfoLink.on("click", function(event) {
+            event.preventDefault();
+            personalInfoBlock.show();
+            updatePasswordBlock.show();
+            orderInfoBlock.hide();
+        });
+
+        orderLink.on("click", function(event) {
+            event.preventDefault();
+            personalInfoBlock.hide();
+            updatePasswordBlock.hide();
+            orderInfoBlock.show();
+        });
+    });
+</script>
