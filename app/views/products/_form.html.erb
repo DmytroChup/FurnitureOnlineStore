@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="col-md-4 mb-3">
-    <%= form.label :subcategory_id, class: "form-label" %>
-    <%= form.number_field :subcategory_id, class: "form-control", placeholder: "Subcategory" %>
+    <%= form.label :subcategory_id, style: "display: block" %>
+    <%= form.collection_select :subcategory_id, Subcategory.all, :id, :subcategory_name, prompt: "-Select-" %>
   </div>
 
   <div class="col-md-4 mb-3">
