@@ -3,11 +3,15 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
-  end
+      @orders = Order.all
+    end
 
   # GET /orders/1 or /orders/1.json
-  def show
+def show
+end
+
+  def list
+    @orders = current_user.orders.includes(order_items: { product: :producer })
   end
 
   # GET /orders/new
@@ -65,6 +69,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:user_id, :payment_histories_id, :order_date, :order_address, :order_completion_date)
+      params.require(:order).permit(:user_id, :payment_history_id, :order_date, :order_address, :order_completion_date)
     end
 end

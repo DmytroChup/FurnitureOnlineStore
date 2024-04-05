@@ -23,6 +23,8 @@ gem 'execjs'
 
 gem 'devise'
 
+gem 'simple_calendar'
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 end

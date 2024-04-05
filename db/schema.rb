@@ -45,9 +45,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_133048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "payment_histories_id"
+    t.bigint "payment_history_id"
     t.datetime "order_completion_date"
-    t.index ["payment_histories_id"], name: "index_orders_on_payment_histories_id"
+    t.index ["payment_history_id"], name: "index_orders_on_payment_history_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -67,6 +67,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_133048) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_producers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_producers_on_reset_password_token", unique: true
   end
 
   create_table "products", force: :cascade do |t|
@@ -116,7 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_133048) do
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "payment_histories", column: "payment_histories_id"
+  add_foreign_key "orders", "payment_histories"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_histories", "users"
   add_foreign_key "products", "producers"

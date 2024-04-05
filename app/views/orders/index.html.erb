@@ -1,14 +1,33 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Orders</h1>
 
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
-  <% end %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Customer</th>
+      <th>Payment</th>
+      <th>Order date</th>
+      <th>Completion date</th>
+      <th>Adress</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.user_id %></td>
+        <td><%= order.payment_history_id %></td>
+        <td><%= order.order_date %></td>
+        <td><%= order.order_completion_date%></td>
+        <td><%= order.order_address %></td>
+        <td>
+          <%= link_to "Show", order, class: "btn btn-primary btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New order", new_order_path %>
+<%= link_to "New Order", new_order_path, class: "btn btn-success" %>
