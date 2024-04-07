@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :subcategory_name, style: "display: block" %>
-    <%= form.text_field :subcategory_name %>
+  <div class="form-group">
+    <%= form.label :subcategory_name, class: "form-label" %>
+    <%= form.text_field :subcategory_name, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :category_id, style: "display: block" %>
-    <%= form.number_field :category_id %>
+    <%= form.collection_select :category_id, Category.all, :id, :category_name, prompt: "-Select-" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create Subcategory", class: "btn btn-primary mt-3" %>
   </div>
 <% end %>

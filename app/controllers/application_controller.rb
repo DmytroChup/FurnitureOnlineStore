@@ -6,7 +6,10 @@ class ApplicationController < ActionController::Base
   def show_footer
     if request.path.include?('/users/sign_in') ||
       request.path.include?('/users/sign_up') ||
-      request.path.include?('/users/password')
+      request.path.include?('/users/password') ||
+      request.path.include?('/producers/sign_in') ||
+      request.path.include?('/producers/password') ||
+      request.path.include?('/producers/sign_up')
       @show_footer = false
     else
       @show_footer = true

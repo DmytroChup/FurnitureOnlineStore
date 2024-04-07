@@ -26,3 +26,27 @@
   margin-bottom: 0;
   list-style: none;
 }
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+#togglePassword {
+  border: 1px solid #d8d8dc;
+}
+
+#orderInfoBlock {
+  display: none;
+}
+
+#productInfoBlock {
+  display: none;
+}
+
+#newProductInfoBlock {
+  display: none;
+}

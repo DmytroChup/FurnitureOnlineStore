@@ -11,57 +11,61 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="col-md-4 mb-3">
     <%= form.label :subcategory_id, style: "display: block" %>
-    <%= form.number_field :subcategory_id %>
+    <%= form.collection_select :subcategory_id, Subcategory.all, :id, :subcategory_name, prompt: "-Select-" %>
   </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="col-md-4 mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Name" %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
+  <div class="row g-3 mb-3">
+    <div class="col-md-4">
+      <%= form.label :height, class: "form-label" %>
+      <%= form.text_field :height, class: "form-control", placeholder: "Height" %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :width, class: "form-label" %>
+      <%= form.text_field :width, class: "form-control", placeholder: "Width" %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :length, class: "form-label" %>
+      <%= form.text_field :length, class: "form-control", placeholder: "Length" %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <%= form.label :color, class: "form-label" %>
+      <%= form.text_field :color, class: "form-control", placeholder: "Color" %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <%= form.label :material, class: "form-label" %>
+      <%= form.text_field :material, class: "form-control", placeholder: "Material" %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :producer_id, value: current_producer.id %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <%= form.label :availability, class: "form-label" %>
+      <%= form.text_field :availability, class: "form-control", placeholder: "Availability" %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <%= form.label :price, class: "form-label" %>
+      <div class="input-group">
+        <span class="input-group-text">$</span>
+        <%= form.text_field :price, class: "form-control", placeholder: "Price" %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :height, style: "display: block" %>
-    <%= form.text_field :height %>
-  </div>
-
-  <div>
-    <%= form.label :width, style: "display: block" %>
-    <%= form.text_field :width %>
-  </div>
-
-  <div>
-    <%= form.label :length, style: "display: block" %>
-    <%= form.text_field :length %>
-  </div>
-
-  <div>
-    <%= form.label :color, style: "display: block" %>
-    <%= form.text_field :color %>
-  </div>
-
-  <div>
-    <%= form.label :material, style: "display: block" %>
-    <%= form.text_field :material %>
-  </div>
-
-  <div>
-    <%= form.label :producer_id, style: "display: block" %>
-    <%= form.text_field :producer_id %>
-  </div>
-
-  <div>
-    <%= form.label :availability, style: "display: block" %>
-    <%= form.text_field :availability %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="col-12 text-end">
+    <%= form.submit "Add Product", class: "btn btn-primary mb-0" %>
   </div>
 <% end %>

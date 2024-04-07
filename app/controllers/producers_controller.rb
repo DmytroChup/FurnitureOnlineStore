@@ -8,6 +8,8 @@ class ProducersController < ApplicationController
 
   # GET /producers/1 or /producers/1.json
   def show
+    @producer = current_producer
+    @products = @producer.products
   end
 
   # GET /producers/new
