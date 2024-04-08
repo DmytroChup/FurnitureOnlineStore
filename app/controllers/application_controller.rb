@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
       request.path.include?('/users/password') ||
       request.path.include?('/producers/sign_in') ||
       request.path.include?('/producers/password') ||
-      request.path.include?('/producers/sign_up')
+      request.path.include?('/producers/sign_up') ||
+      request.path.include?("/users/confirmation") ||
+      request.path.include?("/producers/confirmation")
       @show_footer = false
     else
       @show_footer = true
