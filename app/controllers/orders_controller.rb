@@ -3,16 +3,31 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    if params[:user_id]
+      @orders = Order.where(user_id: params[:user_id])
+    else
+      @orders = Order.all
+    end
   end
 
   # GET /orders/1 or /orders/1.json
   def show
+    # @orders = Order.find(params[:id])
   end
 
   # GET /orders/new
+  # def new
+  #   @order = Order.new
+  #   @order.order_items.build # Add this line to build order items
+  # end
+
   def new
     @order = Order.new
+    @order.order_items.build
+
+    # Product.all.each do |product|
+    #   @order.order_items.build(product_id: product.id)
+    # end
   end
 
   # GET /orders/1/edit
@@ -22,6 +37,7 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
+    items_to_add(order_params)
 
     respond_to do |format|
       if @order.save
@@ -49,7 +65,8 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
-    @order.destroy!
+    @order.order_items.destroy_all  # Удаляем все связанные элементы заказа
+    @order.destroy  # Затем удаляем сам заказ
 
     respond_to do |format|
       format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
@@ -63,8 +80,42 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:user_id, :payment_history_id, :order_date, :order_address)
+  # Only allow a list of trusted parameters through.
+  def order_params
+    params.require(:order).permit(:user_id, :payment_history_id, :order_date, :order_address, product_ids: [])
+  end
+
+  # def order_params
+  #   params.require(:order).permit(
+  #     :user_id,
+  #     :payment_history_id,
+  #     :order_date,
+  #     :order_address,
+  #     product_ids: [],
+  #     order_items_attributes: [:id, :product_id, :quantity]
+  #   )
+  # end
+
+  # def items_to_add(order_params)
+  #   @order.order_items.destroy_all
+  #
+  #   order_items_attributes = order_params[:order_items_attributes]
+  #
+  #   if order_items_attributes.present?
+  #     order_items_attributes.each do |_, item|
+  #       quantity = item[:quantity]
+  #       product_id = item[:product_id]
+  #       @order.order_items.build(product_id: product_id, quantity: quantity)
+  #     end
+  #   end
+  # end
+
+  def items_to_add(order_params)
+    @order.products.clear  # Очищаем все продукты из заказа
+
+    order_params[:product_ids].reject(&:empty?).each do |product_id|
+      @order.products << Product.find_by(id: product_id)
     end
+  end
+
 end

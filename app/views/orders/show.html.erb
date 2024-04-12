@@ -1,6 +1,26 @@
 <p style="color: green"><%= notice %></p>
+<h1 class="title is-1">Order №<%= @order.id %></h1>
+<%#= render @order %>
 
-<%= render @order %>
+<table class="table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Item Name</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @order.products.each do |item| %>
+    <tr>
+      <td><%= item.id %></td>
+      <td><%= item.name %></td>
+      <td>$<%= item.price %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <div>
   <%= link_to "Edit this order", edit_order_path(@order) %> |

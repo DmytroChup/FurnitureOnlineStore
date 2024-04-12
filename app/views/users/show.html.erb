@@ -233,6 +233,7 @@
           </div>
           <!-- Card body START -->
           <div class="card-body">
+            <%= link_to "Мои заказы", orders_path(user_id: current_user.id), class: "btn btn-primary" %>
             <!-- Інформація про замовлення тут -->
           </div>
           <!-- Card body END -->

@@ -12,9 +12,41 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
+
+  <div>
+    <%= form.label :product_ids, "Выберите продукты:", style: "display: block" %>
+    <div class="checkbox-grid">
+      <%= form.collection_check_boxes :product_ids, Product.all, :id, :name, class: "checkbox" do |b| %>
+        <div class="checkbox-item">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!--  <div>-->
+  <%#= form.label :product_ids, "Выберите продукты:", style: "display: block" %>
+  <%#= form.collection_check_boxes :product_ids, Product.all, :id, :name, class: "checkbox" do |b| %>
+  <!--      <div class="checkbox">-->
+  <%#= b.check_box %>
+  <%#= b.label %>
+  <%#= form.fields_for :order_items, OrderItem.new do |oi| %>
+  <%#= oi.hidden_field :product_id, value: b.object.id %>
+  <%#= oi.label :quantity %>
+  <%#= oi.number_field :quantity, class: "form-control" %>
+  <%# end %>
+
+  <%#= form.fields_for :order_items, @order.order_items.build(product_id: b.object.id) do |oi| %>
+  <%#= oi.hidden_field :product_id %>
+  <%#= oi.label :quantity %>
+  <%#= oi.number_field :quantity, class: "form-control" %>
+  <%# end %>
+  <!--      </div>-->
+  <%# end %>
+  <!--  </div>-->
 
   <div>
     <%= form.label :payment_history_id, style: "display: block" %>
