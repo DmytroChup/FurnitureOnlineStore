@@ -1,43 +1,48 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <p style="color: green;"><%= notice %></p>
+      <h1>Orders</h1>
+    </div>
+  </div>
 
-<h1>Orders</h1>
-
-<!--<div id="orders">-->
-<%# @orders.each do |order| %>
-<%#= render order %>
-<!--    <p>-->
-<%#= link_to "Show this order", order %>
-<!--    </p>-->
-<%# end %>
-<!--</div>-->
-<%#= link_to "New order", new_order_path %>
-
-<table class="table">
-  <thead>
-  <tr>
-    <th>id</th>
-    <th>Items</th>
-    <th>Date</th>
-    <th>Address</th>
-  </tr>
-  </thead>
-  <tbody>
-
-  <% @orders.order(created_at: :desc).each do |order| %>
-    <tr>
-      <td><%= link_to order.id, order_path(order) %></td>
-      <td>
-        <% order.products.each do |item| %>
-          <%= item.name %>
+  <div class="table-responsive mx-auto" style="width: 95%;">
+    <table class="table table-striped" style="width: 100%;">
+      <thead>
+      <tr>
+        <th class="w-10">id</th>
+        <th class="w-10">Items</th>
+        <th class="w-10">Total</th>
+        <th class="w-10">Date</th>
+        <th class="w-10">Address</th>
+        <th class="w-10">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @orders.order(created_at: :desc).each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td>
+              <% order.products.each_with_index do |item, index| %>
+                <%= item.name %>
+                <% unless index == order.products.size - 1 %> ,
+                <% end %>
+              <% end %>
+            </td>
+            <td><%= order.total %></td>
+            <td><%= order.order_date %></td>
+            <td><%= order.order_address %></td>
+            <td>
+              <%= link_to "Show this order", order, class: "btn btn-primary btn-sm mr-2" %>
+            </td>
+          </tr>
         <% end %>
-        - <%= link_to "Edit", edit_order_path(order) %>
-      </td>
-      <td><%= order.order_date %></td>
-      <td><%= order.order_address %></td>
-    </tr>
-  <% end %>
-
-  </tbody>
-</table>
-
-<%= link_to "New order", new_order_path(current_user) %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 text-center">
+      <%= link_to "New order", new_order_path(current_user), class: "btn btn-success" %>
+    </div>
+  </div>
+</div>
