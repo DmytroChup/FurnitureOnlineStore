@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_13_123722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "payment_history_id"
+    t.float "total"
     t.index ["payment_history_id"], name: "index_orders_on_payment_history_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -53,7 +54,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
   create_table "payment_histories", force: :cascade do |t|
     t.string "payment_method"
     t.datetime "payment_date"
-    t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
