@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class CartsControllerTest < ActionDispatch::IntegrationTest
@@ -17,7 +19,7 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create cart" do
     assert_difference("Cart.count") do
-      post carts_url, params: { cart: { price: @cart.price, product_id: @cart.product_id, quantity: @cart.quantity } }
+      post carts_url, params: {cart: {price: @cart.price, product_id: @cart.product_id, quantity: @cart.quantity}}
     end
 
     assert_redirected_to cart_url(Cart.last)
@@ -34,7 +36,8 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update cart" do
-    patch cart_url(@cart), params: { cart: { price: @cart.price, product_id: @cart.product_id, quantity: @cart.quantity } }
+    patch cart_url(@cart),
+          params: {cart: {price: @cart.price, product_id: @cart.product_id, quantity: @cart.quantity}}
     assert_redirected_to cart_url(@cart)
   end
 

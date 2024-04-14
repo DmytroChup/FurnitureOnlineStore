@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentHistory < ApplicationRecord
   belongs_to :user
   has_many :orders
