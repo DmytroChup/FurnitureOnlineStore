@@ -26,7 +26,11 @@
                   </li>
 
                   <li class="nav-item">
-                    <%= link_to 'Order', orders_list_path, class: 'nav-link text-dark' %>
+                    <%= link_to 'Order', "#", class: 'nav-link text-dark' %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to 'Order list', orders_list_path, class: 'nav-link text-dark' %>
                   </li>
 
                   <li class="nav-item">
@@ -49,8 +53,6 @@
         </div>
 
       </div>
-
-
 
       <div class="col-lg-8 col-xl-9">
 
@@ -113,6 +115,74 @@
                 </div>
                  <div class="card border">
                 </div>
+                 <div class="card">
+                <div class="card-body text-center">
+
+                  <%= month_calendar do |date| %>
+                    <%= link_to '#' do %>
+                      <div class="calendar-date" data-date="<%= date %>">
+                        <%= date.day %>
+                      </div>
+                    <% end %>
+                  <% end %>
+
+                  <script>
+                      document.addEventListener('DOMContentLoaded', function() {
+                          document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+                              let colorIndex = 0; // Индекс цвета (0 - стандартный, 1 - красный, 2 - зеленый)
+
+                              dateElement.addEventListener('click', function(event) {
+                                  event.preventDefault(); // Предотвращаем прокрутку страницы
+
+                                  // Массив доступных цветов
+                                  const colors = ['', 'green', 'red'];
+
+                                  // Меняем цвет фона при клике
+                                  dateElement.style.backgroundColor = colors[colorIndex];
+                                  colorIndex = (colorIndex + 1) % colors.length; // Переключаем индекс цвета
+                              });
+                          });
+                      });
+
+                      document.addEventListener('DOMContentLoaded', function() {
+                          document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+                              const current_user = <%= current_user.id %>; // Получаем ID текущего пользователя
+
+                              const savedColor = localStorage.getItem(`col_${current_user}_${dateElement.dataset.date}`);
+                              dateElement.style.backgroundColor = savedColor || '';
+
+                              dateElement.addEventListener('click', function(event) {
+                                  event.preventDefault();
+                                  const colors = ['', 'green', 'red'];
+
+                                  const currentColorIndex = colors.indexOf(dateElement.style.backgroundColor);
+                                  const nextColorIndex = (currentColorIndex + 1) % colors.length;
+                                  dateElement.style.backgroundColor = colors[nextColorIndex];
+                                  localStorage.setItem(`col_${current_user}_${dateElement.dataset.date}`, colors[nextColorIndex]);
+                              });
+                          });
+                      });
+
+
+
+                  </script>
+
+                  <style>
+                      .calendar-date {
+                          display: inline-block;
+                          width: 30px;
+                          height: 30px;
+                          border: 1px solid #ccc;
+                          text-align: center;
+                          line-height: 30px;
+                          cursor: pointer;
+                          color: black;
+                      }
+                  </style>
+
+
+                </div>
+                 </div>
                 </div>
                 </div>
                 </div>
