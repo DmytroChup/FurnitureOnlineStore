@@ -129,24 +129,24 @@
                   <script>
                       document.addEventListener('DOMContentLoaded', function() {
                           document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
-                              let colorIndex = 0; // Индекс цвета (0 - стандартный, 1 - красный, 2 - зеленый)
+                              let colorIndex = 0;
 
                               dateElement.addEventListener('click', function(event) {
-                                  event.preventDefault(); // Предотвращаем прокрутку страницы
+                                  event.preventDefault();
 
-                                  // Массив доступных цветов
+
                                   const colors = ['', 'green', 'red'];
 
-                                  // Меняем цвет фона при клике
+
                                   dateElement.style.backgroundColor = colors[colorIndex];
-                                  colorIndex = (colorIndex + 1) % colors.length; // Переключаем индекс цвета
+                                  colorIndex = (colorIndex + 1) % colors.length;
                               });
                           });
                       });
 
                       document.addEventListener('DOMContentLoaded', function() {
                           document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
-                              const current_user = <%= current_user.id %>; // Получаем ID текущего пользователя
+                              const current_user = <%= current_user.id %>;
 
                               const savedColor = localStorage.getItem(`col_${current_user}_${dateElement.dataset.date}`);
                               dateElement.style.backgroundColor = savedColor || '';
