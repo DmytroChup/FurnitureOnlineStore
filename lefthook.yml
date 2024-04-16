@@ -5,9 +5,8 @@ pre-commit:
   commands:
     rubocop:
       tags: backend style
-      glob: "*.rb"
-      exclude: "lint_commit_msg.rb|config|schema.rb|users_controller.rb"
-      run: rubocop {all_files}
+      exclude: "lint_commit_msg.rb"
+      run: rubocop --force-exclusion {all_files}
 
 commit-msg:
   commands:

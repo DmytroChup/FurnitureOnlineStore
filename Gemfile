@@ -27,8 +27,8 @@ gem "devise", "4.9.3"
 
 group :development, :test do
   gem "debug", "1.9.1", platforms: %i[mri windows]
+  gem "lefthook", "~> 1.6.7"
   gem "rubocop", "~> 1.63", require: false
-  gem 'lefthook', '~> 1.6.7'
 end
 
 group :development do
