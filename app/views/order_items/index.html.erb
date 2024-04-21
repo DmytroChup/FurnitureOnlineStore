@@ -1,14 +1,42 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <p style="color: green;"><%= notice %></p>
+      <h1>Order items</h1>
+    </div>
+  </div>
 
-<h1>Order items</h1>
-
-<div id="order_items">
-  <% @order_items.each do |order_item| %>
-    <%= render order_item %>
-    <p>
-      <%= link_to "Show this order item", order_item %>
-    </p>
-  <% end %>
+  <div class="table-responsive mx-auto" style="width: 95%;">
+    <table class="table table-striped" style="width: 100%;">
+      <thead>
+      <tr>
+        <th class="w-10">Order_item</th>
+        <th class="w-10">Product</th>
+        <th class="w-10">Order</th>
+        <th class="w-10">Quantity</th>
+        <th class="w-10">Price</th>
+        <th class="w-10">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.id %></td>
+          <td><%= order_item.product_id %></td>
+          <td><%= order_item.order_id %></td>
+          <td><%= order_item.quantity %></td>
+          <td><%= order_item.price %></td>
+          <td>
+            <%= link_to "Show this order item", order_item, class: "btn btn-primary btn-sm mr-2" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 text-center">
+      <%= link_to "New order item", new_order_item_path, class: "btn btn-success" %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New order item", new_order_item_path %>
