@@ -22,6 +22,8 @@ gem 'sassc-rails'
 gem 'execjs'
 
 gem 'devise'
+gem 'activeadmin', "3.2.0"
+gem 'simple_form'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
