@@ -1,20 +1,20 @@
-# frozen_string_literal: true  
+# frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[show edit update destroy]
 
   # GET /orders or /orders.json
   def index
-    if params[:user_id]
-      @orders = Order.where(user_id: params[:user_id])
-    else
-      @orders = Order.all
-    end
+    @orders = if params[:user_id]
+                Order.where(user_id: params[:user_id])
+              else
+                Order.all
+              end
   end
 
   # GET /orders/1 or /orders/1.json
   def show; end
-  
+
   # GET /orders/new
   def new
     @order = Order.new
@@ -60,8 +60,8 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
-    @order.order_items.destroy_all  # Удаляем все связанные элементы заказа
-    @order.destroy  # Затем удаляем сам заказ
+    @order.order_items.destroy_all # Удаляем все связанные элементы заказа
+    @order.destroy # Затем удаляем сам заказ
 
     respond_to do |format|
       format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
@@ -70,6 +70,7 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def set_order
     @order = Order.find(params[:id])
   end
@@ -77,11 +78,11 @@ class OrdersController < ApplicationController
   # Метод для вычисления и обновления общей суммы заказа
   def calculate_total(order)
     total = order.order_items.sum(:price)
-    order.update(total: total)
+    order.update(total:)
   end
 
   def order_params
     params.require(:order).permit(:user_id, :payment_history_id, :order_date, :order_address, :total,
-                                  order_items_attributes: [:id, :quantity, :product_id, :price])
+                                  order_items_attributes: %i[id quantity product_id price])
   end
 end

@@ -9,10 +9,10 @@ class OrderItem < ApplicationRecord
   private
 
   def set_price
-    if product.price.present? # пока так, потом нужно будет убрать
-      self.price = product.price * quantity
-    else
-      self.price = 0
-    end
+    self.price = if product.price.present? # пока так, потом нужно будет убрать
+                   product.price * quantity
+                 else
+                   0
+                 end
   end
 end
