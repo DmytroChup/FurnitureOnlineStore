@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class PaymentHistoriesControllerTest < ActionDispatch::IntegrationTest
@@ -17,7 +19,9 @@ class PaymentHistoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create payment_history" do
     assert_difference("PaymentHistory.count") do
-      post payment_histories_url, params: { payment_history: { amount: @payment_history.amount, payment_date: @payment_history.payment_date, payment_method: @payment_history.payment_method, user_id: @payment_history.user_id } }
+      post payment_histories_url,
+           params: {payment_history: {amount: @payment_history.amount, payment_date: @payment_history.payment_date,
+payment_method: @payment_history.payment_method, user_id: @payment_history.user_id}}
     end
 
     assert_redirected_to payment_history_url(PaymentHistory.last)
@@ -34,7 +38,9 @@ class PaymentHistoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update payment_history" do
-    patch payment_history_url(@payment_history), params: { payment_history: { amount: @payment_history.amount, payment_date: @payment_history.payment_date, payment_method: @payment_history.payment_method, user_id: @payment_history.user_id } }
+    patch payment_history_url(@payment_history),
+          params: {payment_history: {amount: @payment_history.amount, payment_date: @payment_history.payment_date,
+payment_method: @payment_history.payment_method, user_id: @payment_history.user_id}}
     assert_redirected_to payment_history_url(@payment_history)
   end
 
