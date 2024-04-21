@@ -1,0 +1,186 @@
+<section class="pt-3 mt-5 mb-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Sidebar START -->
+      <div class="col-lg-4 col-xl-3">
+        <!-- Responsive offcanvas body START -->
+        <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+
+          <!-- Offcanvas body -->
+          <div class="offcanvas-body p-3 p-lg-0">
+            <div class="card bg-light w-100">
+              <!-- Card body START -->
+              <div class="card-body p-3">
+                <!-- Content -->
+                <div class="text-center mb-3">
+                  <h6 class="mb-0"><%= current_producer.producer_name %></h6>
+                  <p class="text-reset text-primary-hover small"><%= current_producer.email %></p>
+                  <hr>
+                </div>
+
+                <!-- Sidebar menu item START -->
+                <ul class="nav nav-pills-primary-soft flex-column">
+                  <li class="nav-item">
+                    <a id="personalInfoLink" class="nav-link text-dark"><%= t("sidebar.menu.my_profile") %></a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a id="productLink" class="nav-link text-dark"><%= t("sidebar.menu.products") %></a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a id="newProductLink" class="nav-link text-dark"><%= t("sidebar.menu.new_product") %></a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link text-dark"><%= t("sidebar.menu.settings") %></a>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to 'Order list', orders_prodlist_path(current_producer), class: 'nav-link text-dark' %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= button_to t("buttons.sign_out"), destroy_producer_session_path, method: :delete, class: "nav-link text-danger" %>
+                  </li>
+                </ul>
+                <!-- Sidebar menu item END -->
+              </div>
+              <!-- Card body END -->
+            </div>
+          </div>
+        </div>
+        <!-- Responsive offcanvas body END -->
+      </div>
+      <!-- Sidebar END -->
+
+      <div class="col-lg-8 col-xl-9">
+
+
+        <div class="d-grid mb-0 d-lg-none w-100">
+          <button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+            <i class="fas fa-sliders-h"></i> Menu
+          </button>
+        </div>
+
+        <div class="vstack gap-3">
+
+          <div class="card border">
+
+            <div class="card-header border-bottom">
+              <h4 class="card-header-title">Your orders</h4>
+            </div>
+
+
+            <div class="card-body">
+
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Order date</th>
+                  <th>Adress</th>
+                  <th>Product</th>
+                  <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @orders&.each do |order| %>
+                  <tr>
+                    <td>
+                      <% order.users.each do |user| %>
+                        <%= user.username %><br>
+                      <% end %>
+                    </td>
+                    <td><%= order.order_date %></td>
+                    <td><%= order.order_address %></td>
+                    <td>
+                      <% order.order_items.each do |order_item| %>
+                        <%= order_item.product.name %><br>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% order.order_items.each do |order_item| %>
+                        <%= order_item.price %><br>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="card border">
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+
+              <%= month_calendar do |date| %>
+                <%= link_to '#' do %>
+                  <div class="calendar-date" data-date="<%= date %>">
+                    <%= date.day %>
+                  </div>
+                <% end %>
+              <% end %>
+
+              <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                      document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+                          let colorIndex = 0;
+
+                          dateElement.addEventListener('click', function(event) {
+                              event.preventDefault();
+
+                              const colors = ['', 'green', 'red'];
+
+                              dateElement.style.backgroundColor = colors[colorIndex];
+                              colorIndex = (colorIndex + 1) % colors.length;
+                          });
+                      });
+                  });
+
+                  document.addEventListener('DOMContentLoaded', function() {
+                      document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+                          const current_producer = <%= current_producer.id %>;
+
+                          const savedColor = localStorage.getItem(`col_${current_producer}_${dateElement.dataset.date}`);
+                          dateElement.style.backgroundColor = savedColor || '';
+
+                          dateElement.addEventListener('click', function(event) {
+                              event.preventDefault();
+                              const colors = ['', 'green', 'red'];
+
+                              const currentColorIndex = colors.indexOf(dateElement.style.backgroundColor);
+                              const nextColorIndex = (currentColorIndex + 1) % colors.length;
+                              dateElement.style.backgroundColor = colors[nextColorIndex];
+                              localStorage.setItem(`col_${current_producer}_${dateElement.dataset.date}`, colors[nextColorIndex]);
+                          });
+                      });
+                  });
+
+              </script>
+
+              <style>
+                  .calendar-date {
+                      display: inline-block;
+                      width: 30px;
+                      height: 30px;
+                      border: 1px solid #ccc;
+                      text-align: center;
+                      line-height: 30px;
+                      cursor: pointer;
+                      color: black;
+                  }
+              </style>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>

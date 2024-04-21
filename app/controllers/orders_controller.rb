@@ -23,6 +23,11 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
+    def prodlist
+      @orders = current_producer.orders.includes(order_items: { product: :producer })
+      @orders = current_producer.orders.includes(:users)
+    end
+
     respond_to do |format|
       if @order.save
         format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
