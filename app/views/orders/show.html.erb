@@ -1,22 +1,22 @@
 <div class="container mt-5">
   <p style="color: green"><%= notice %></p>
-  <h1 class="title is-1">Order №<%= @order.id %></h1>
+  <h1 class="title is-1"><%= t("heading.order.order") %> №<%= @order.id %></h1>
 
   <table class="table">
     <thead>
     <tr>
       <th>ID</th>
-      <th>Item Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total Price</th>
+      <th><%= t("activerecord.attributes.order.item_name") %></th>
+      <th><%= t("activerecord.attributes.order_items.price") %></th>
+      <th><%= t("activerecord.attributes.order_items.quantity") %></th>
+      <th><%= t("activerecord.attributes.order.total") %></th>
     </tr>
     </thead>
     <tbody>
     <% @order.order_items.each do |item| %>
       <tr>
         <td><%= item.product.id %></td>
-        <td><%= item.product.name %></td>
+        <td><%= t("products.#{item.product.name}") %></td>
         <td>$<%= item.product.price %></td>
         <td><%= item.quantity %></td>
         <td>$<%= item.price %></td>
@@ -26,10 +26,10 @@
   </table>
 
   <div class="d-flex align-items-center gap-2">
-    <%= link_to "Edit this order", edit_order_path(@order), class: "btn btn-primary" %> |
+    <%= link_to t("buttons.order.edit_order"), edit_order_path(@order), class: "btn btn-primary" %> |
     <%#= link_to "Back to orders", orders_path, class: "btn btn-primary" %>
-    <%= link_to "Back to orders", current_user ? orders_path(user_id: current_user.id) : orders_path, class: "btn btn-primary" %>
+    <%= link_to t("buttons.order.back_orders"), current_user ? orders_path(user_id: current_user.id) : orders_path, class: "btn btn-primary" %>
 
-    <%= button_to "Destroy this order", @order, method: :delete, class: "btn btn-danger" %>
+    <%= button_to t("buttons.order.destroy_order"), @order, method: :delete, class: "btn btn-danger" %>
   </div>
 </div>

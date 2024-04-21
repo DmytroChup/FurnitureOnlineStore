@@ -8,11 +8,11 @@
   <div class="offcanvas-body">
     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 mb-2">
       <li class="nav-item">
-        <%= link_to 'Profile (producer)', producer_path(current_producer), class: 'nav-link' %>
+        <%= link_to t("nav.profile") + ' (producer)', producer_path(current_producer), class: 'nav-link' %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown
+          <%= t("nav.dropdown") %>
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Action</a></li>
@@ -22,11 +22,11 @@
         </ul>
       </li>
       <form class="d-flex mt-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="<%= t('nav.search_form.placeholder') %>" aria-label="<%= t('nav.search_form.placeholder') %>">
+        <button class="btn btn-outline-success" type="submit"><%= t('nav.search_form.button') %></button>
       </form>
       <li class="nav-item mt-4">
-        <%= button_to "Sign out", destroy_producer_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
+        <%= button_to t("buttons.sign_out"), destroy_producer_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
       </li>
     </ul>
   </div>
