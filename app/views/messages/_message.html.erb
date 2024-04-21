@@ -1,0 +1,11 @@
+<div id="message-<%= message.id %>">
+  <small>
+    <% if message.profile.is_a?(User) %>
+      <strong><%= message.profile.username %></strong>
+    <% elsif message.profile.is_a?(Producer) %>
+      <strong><%= message.profile.producer_name %></strong>
+    <% end %>
+    <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+  </small>
+  <p><%= message.content %></p>
+</div>

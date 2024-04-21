@@ -2,6 +2,9 @@ class User < ApplicationRecord
   # has_many :carts
   has_many :orders
   has_many :payment_histories
+
+  has_many :messages, as: :profile
+  has_many :private_chats_as_user, class_name: "PrivateChat", foreign_key: :user_id
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

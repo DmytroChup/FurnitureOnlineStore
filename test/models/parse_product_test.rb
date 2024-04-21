@@ -20,7 +20,6 @@ class ParseFurnitureTest < ActiveSupport::TestCase
 
   test 'should not save duplicate product names' do
     Rake::Task['products:parse'].invoke
-
     # Ensure that no duplicates are saved
     assert_equal 145, Product.count
   end
