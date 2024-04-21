@@ -16,7 +16,7 @@
   </div>
 
   <div class="form-group mt-3">
-    <%= form.label :product_ids, "Select products:", class: "form-label" %>
+    <%= form.label :product_ids, t("heading.order.select_products"), class: "form-label" %>
     <div class="checkbox-grid">
       <%= form.collection_check_boxes :product_ids, Product.all, :id, :name, class: "checkbox" do |b| %>
         <div class="checkbox-item">
@@ -51,7 +51,7 @@
   </div>
 
   <div>
-    <%= form.submit "Create Order", class: "btn btn-primary mt-3" %>
+    <%= form.submit t("buttons.order.create_order"), class: "btn btn-primary mt-3" %>
   </div>
 <% end %>
 

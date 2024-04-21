@@ -42,23 +42,23 @@
                 <!-- Sidebar menu item START -->
                 <ul class="nav nav-pills-primary-soft flex-column">
                   <li class="nav-item">
-                    <a id="personalInfoLink" class="nav-link text-dark">My Profile</a>
+                    <a id="personalInfoLink" class="nav-link text-dark"><%= t("sidebar.menu.my_profile") %></a>
                   </li>
 
                   <li class="nav-item">
-                    <a id="productLink" class="nav-link text-dark">Product</a>
+                    <a id="productLink" class="nav-link text-dark"><%= t("sidebar.menu.products") %></a>
                   </li>
 
                   <li class="nav-item">
-                    <a id="newProductLink" class="nav-link text-dark">New Product</a>
+                    <a id="newProductLink" class="nav-link text-dark"><%= t("sidebar.menu.new_product") %></a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link text-dark">Settings</a>
+                    <a class="nav-link text-dark"><%= t("sidebar.menu.settings") %></a>
                   </li>
 
                   <li class="nav-item">
-                    <%= button_to "Sign out", destroy_producer_session_path, method: :delete, class: "nav-link text-danger" %>
+                    <%= button_to t("buttons.sign_out"), destroy_producer_session_path, method: :delete, class: "nav-link text-danger" %>
                   </li>
                 </ul>
                 <!-- Sidebar menu item END -->
@@ -77,7 +77,7 @@
         <!-- Offcanvas menu button -->
         <div class="d-grid mb-0 d-lg-none w-100">
           <button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-            <i class="fas fa-sliders-h"></i> Menu
+            <i class="fas fa-sliders-h"></i><%= t("sidebar.menu.menu") %>
           </button>
         </div>
 
@@ -86,7 +86,7 @@
           <div class="card border" id="personalInfoBlock">
             <!-- Card header -->
             <div class="card-header border-bottom">
-              <h4 class="card-header-title">Personal Information</h4>
+              <h4 class="card-header-title"><%= t("sidebar.card.personal_information") %></h4>
             </div>
 
             <!-- Card body START -->
@@ -96,25 +96,25 @@
                 <!-- Name -->
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <%= f.label :producer_name, "Name<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
-                    <%= f.text_field :producer_name, class: "form-control", placeholder: "Enter your name" %>
+                    <%= f.label :producer_name, t("activerecord.attributes.producer.producer_name").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_field :producer_name, class: "form-control", placeholder: t("placeholder.producer.enter_name") %>
                   </div>
 
                   <div class="col-md-6">
-                    <%= f.label :country, "Country<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
-                    <%= f.text_field :country, class: "form-control", placeholder: "Enter your country" %>
+                    <%= f.label :country, t("activerecord.attributes.producer.country").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_field :country, class: "form-control", placeholder: t("placeholder.producer.enter_country") %>
                   </div>
 
                   <!-- Email -->
                   <div class="col-md-6">
-                    <%= f.label :email, "Email address<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
-                    <%= f.email_field :email, class: "form-control", placeholder: "Enter your email id" %>
+                    <%= f.label :email, t("activerecord.attributes.producer.email").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.email_field :email, class: "form-control", placeholder: t("placeholder.producer.enter_email") %>
                   </div>
 
                   <!-- Mobile -->
                   <div class="col-md-6">
-                    <%= f.label :phone, "Mobile number".html_safe, class: "form-label" %>
-                    <%= f.text_field :phone, class: "form-control", placeholder: "Enter your mobile number" %>
+                    <%= f.label :phone, t("activerecord.attributes.producer.phone").html_safe, class: "form-label" %>
+                    <%= f.text_field :phone, class: "form-control", placeholder: t("placeholder.producer.enter_phone") %>
                   </div>
 
                   <!-- CSRF Token -->
@@ -137,7 +137,7 @@
 
                   <!-- Button -->
                   <div class="col-12 text-end">
-                    <%= f.submit "Save Changes", class: "btn btn-primary mb-0" %>
+                    <%= f.submit t("buttons.save_changes"), class: "btn btn-primary mb-0" %>
                   </div>
                 </div>
               <% end %>
@@ -151,7 +151,7 @@
         <!-- Product info START -->
         <div id="productInfoBlock" class="card border">
           <div class="card-header border-bottom">
-            <h4 class="card-header-title">Products</h4>
+            <h4 class="card-header-title"><%= t("sidebar.menu.products") %></h4>
           </div>
           <div class="card-body">
             <div class="table-responsive mx-auto" style="width: 95%;">
@@ -159,15 +159,15 @@
                 <thead>
                 <tr>
                   <th class="w-10">ID</th>
-                  <th class="w-10">Subcategory</th>
-                  <th class="w-10">Name</th>
-                  <th class="w-10">Price</th>
-                  <th class="w-10">Height</th>
-                  <th class="w-10">Width</th>
-                  <th class="w-10">Length</th>
-                  <th class="w-10">Color</th>
-                  <th class="w-10">Material</th>
-                  <th class="w-10">Availability</th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.subcategory_id") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.name") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.price") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.height") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.width") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.length") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.color") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.material") %></th>
+                  <th class="w-10"><%= t("activerecord.attributes.product.availability") %></th>
                   <th class="w-10">Actions</th>
                 </tr>
                 </thead>
@@ -176,7 +176,7 @@
                   <tr>
                     <td><%= product.id %></td>
                     <td><%= product.subcategory_id %></td>
-                    <td><%= product.name %></td>
+                    <td><%= t("products.#{product.name}") %></td>
                     <td><%= product.price %></td>
                     <td><%= product.height %></td>
                     <td><%= product.width %></td>
@@ -185,7 +185,7 @@
                     <td><%= product.material %></td>
                     <td><%= product.availability %></td>
                     <td>
-                      <%= link_to "Show", product, class: "btn btn-primary btn-sm mr-2" %>
+                      <%= link_to t("buttons.show"), product, class: "btn btn-primary btn-sm mr-2" %>
                     </td>
                   </tr>
                 <% end %>
@@ -199,7 +199,7 @@
         <!-- newProduct info START -->
         <div id="newProductInfoBlock" class="card border">
           <div class="card-header border-bottom">
-            <h4 class="card-header-title">Add New Products</h4>
+            <h4 class="card-header-title"><%= t("sidebar.card.add_new_product") %></h4>
           </div>
           <div class="card-body">
             <%= render "products/form", product: Product.new() %>
