@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "payment_history_id"
+    t.datetime "order_completion_date"
     t.index ["payment_history_id"], name: "index_orders_on_payment_history_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :producers
   devise_for :users
+
+  get 'orders/prodlist', to: 'orders#prodlist', as: :orders_prodlist
   resources :orders
   resources :producers
   resources :subcategories
