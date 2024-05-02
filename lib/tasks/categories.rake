@@ -24,7 +24,7 @@ namespace :categories do
       {category_id: categories.find_by(category_name: "Upholstered furniture").id, subcategory_name: "Ottomans"},
 
       {category_id: categories.find_by(category_name: "Display & storage cabinets").id, subcategory_name: "Showcases"},
-      {category_id:      categories.find_by(category_name: "Display & storage cabinets").id,
+      {category_id: categories.find_by(category_name: "Display & storage cabinets").id,
        subcategory_name: "Cabinets for storage"},
 
       {category_id: categories.find_by(category_name: "Hallways").id, subcategory_name: "Racks"},

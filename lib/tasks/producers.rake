@@ -5,8 +5,6 @@ namespace :producers do
   task create_producer: :environment do
     producer_data = [
       {producer_name: "Producer1", country: "Ukraine", phone: "0631111111", email: "producer1@karazin.ua",
-password: "12345678"},
-      {producer_name: "Producer2", country: "Ukraine", phone: "0632222222", email: "producer2@karazin.ua",
 password: "12345678"}
     ]
 
