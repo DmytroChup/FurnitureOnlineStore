@@ -3,7 +3,7 @@
 <h1 class="text-center">Categories</h1>
 
 <div class="row justify-content-center">
-  <% @categories.each_slice((@categories.size / 3.0).ceil) do |group| %>
+  <% @categories.each_slice(3) do |group| %>
     <div class="col-md-4">
       <div class="list-group">
         <% group.each do |category| %>
