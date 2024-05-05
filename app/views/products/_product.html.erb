@@ -11,7 +11,7 @@
 
   <p>
     <strong><%= t("activerecord.attributes.product.name") %> :</strong>
-    <%= product.name %>
+    <%= t("products.#{product.name}") %>
   </p>
 
   <p>
@@ -36,12 +36,12 @@
 
   <p>
     <strong><%= t("activerecord.attributes.product.color") %> :</strong>
-    <%= product.color %>
+    <%= t("colors.#{product.color}") %>
   </p>
 
   <p>
     <strong><%= t("activerecord.attributes.product.material") %> :</strong>
-    <%= product.material %>
+    <%= t("materials.#{product.material}") %>
   </p>
 
   <p>

@@ -9,7 +9,7 @@
           <div class="card-body">
             <p class="card-text text-center h5"><%= t("products.#{product.name}") %></p>
             <% if product.subcategory.present? && product.subcategory.category.present? %>
-              <p class="card-category text-center h5">Category: <%= product.subcategory.category.category_name %></p>
+              <p class="card-category text-center h5"><%= t("heading.category.category") %>: <%= t("categories.#{product.subcategory.category.category_name}") %></p>
             <% end %>
           </div>
         </div>

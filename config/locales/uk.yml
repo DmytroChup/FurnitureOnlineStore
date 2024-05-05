@@ -28,6 +28,8 @@ uk:
   heading:
     login: "Вхід"
     create_account: "Створіть обліковий запис"
+    resend_confirmation: "Повторне надіслання інструкції для підтвердження"
+    forgot_your_password: "Забули пароль?"
     product:
       edit: "Редагування товару"
       product: "Товар"
@@ -37,6 +39,15 @@ uk:
       new_order: "Нове замовлення"
       select_products: "Виберіть товари: "
       edit: "Редагування замовлення"
+    category:
+      category: "Категорія"
+      categories: "Категорії"
+      new_category: "Нова категорія"
+      edit: "Редагування категорії"
+    subcategory:
+      subcategories: "Підкатегорії"
+      edit: "Редагування підкатегорії"
+      new_subcategory: "Нова підкатегорія"
   footer:
     nav:
       section: "Розділ"
@@ -55,6 +66,8 @@ uk:
     change_password: "Змінити пароль"
     didn_t_receive_confirmation_instructions: "Не отримали листа з підтвердженням?"
     forgot_your_password: "Забули пароль?"
+    resend_confirmation: "Повторно надіслати інструкції з підтвердження"
+    send_reset_password_instructions: "Надіслати інструкцію зі зміни паролю"
     product:
       new_product: "Новий товар"
       add_product: "Додати товар"
@@ -68,6 +81,20 @@ uk:
       create_order: "Створити замовлення"
       destroy_order: "Знищити це замовлення"
       edit_order: "Відредагувати це замовлення"
+    category:
+      new_category: "Нова категорія"
+      back_categories: "Повернутися до категорій"
+      create_category: "Створити категорію"
+      edit_category: "Відредагувати категорію"
+      destroy_category: "Знищити цю категорію"
+      show_category: "Показати цю категорію"
+    subcategory:
+      new_subcategory: "Нова підкатегорія"
+      edit_subcategory: "Відредагувати підкатегорію"
+      back_subcategories: "Повернутися до підкатегорій"
+      destroy_subcategory: "Знищити цю підкатегорію"
+      show_subcategory: "Показати цю підкатегорію"
+      create_subcategory: "Створити підкатегорію"
   placeholder:
     producer:
       enter_name: "Введіть своє ім'я"
@@ -116,11 +143,72 @@ uk:
         order_address: "Адреса замовлення"
         order_date: "Дата замовлення"
         item_name: "Назва товару"
-      order_items:
+      order_item:
         quantity: "Кількість"
         price: "Ціна"
         product_id: "Товар"
         order_id: "Замовлення"
+      category:
+        category_name: "Назва категорії"
+      subcategory:
+        subcategory_name: "Назва підкатегорії"
+        category_id: "Категорія"
+  categories:
+    Upholstered furniture: "М'які меблі"
+    Display & storage cabinets: "Шафи"
+    Hallways: "Передпокої"
+    Beds: "Ліжка"
+    Tables: "Столи"
+    Armchairs & chairs: "Крісла & стільці"
+    Garden furniture: "Меблі для саду"
+    Accessories: "Аксесуари"
+  subcategories:
+    Sofas: "Дивани"
+    Ottomans: "Пуфи"
+    Showcases: "Вітрини"
+    Cabinets for storage: "Шафи"
+    Racks: "Стелажі"
+    Cabinets: "Шафи"
+    Beds: "Ліжка"
+    Mattresses: "Матраци"
+    Work tables: "Письмові столи"
+    Outdoor tables: "Столи для саду"
+    Gaming tables: "Ігрові столи"
+    Other tables: "Інші столи"
+    Office chairs: "Офісні крісла"
+    Dining chairs: "Обідні стільці"
+    Rocking chairs: "Крісла-гойдалки"
+    Other chairs: "Інші крісла"
+    Benches: "Лавки"
+    Lounge chairs: "Шезлонги"
+    Lights: "Лампи"
+    Curtains & Blinds: "Штори та жалюзі"
+    Duvets & Pillows: "Ковдри та подушки"
+    Mirrors: "Дзеркала"
+    Clocks: "Годинники"
+    Rugs: "Килими"
+    Room dividers: "Перегородки"
+    Other accessories: "Інші аксесуари"
+  colors:
+    black: "чорний"
+    white: "білий"
+    brown: "коричневий"
+    red: "червоний"
+    grey: "сірий"
+  materials:
+    Wood: "Дерево"
+    Cotton: "Бавовна"
+    Plastic: "Пластик"
+    Vinyl: "Вініл"
+    Polyester: "Поліестер"
+    Metal: "Метал"
+    Bamboo: "Бамбук"
+    Foam: "Піна"
+    Linen: "Льон"
+    Faux Leather: "Штучна шкіра"
+    Microfiber: "Мікрофібра"
+    Artificial suede: "Штучна замша"
+    Memory Foam: "Піна з ефектом пам'яті"
   products:
     armchair: "крісло"
     armoire: "шафа"
