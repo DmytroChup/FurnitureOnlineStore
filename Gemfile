@@ -25,6 +25,7 @@ gem "sassc-rails", "2.1.2"
 
 gem "devise", "4.9.3"
 gem "rails-i18n", "~> 7.0.0"
+gem "rss", "~> 0.2.9"
 
 group :development, :test do
   gem "debug", "1.9.1", platforms: %i[mri windows]
