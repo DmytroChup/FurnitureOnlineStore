@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     resources :producers
     resources :subcategories
     resources :categories
-    resources :products
+    resources :products do
+      collection do
+        get "export_to_csv"
+      end
+    end
     resources :carts
     resources :users
     resources :payment_histories

@@ -104,6 +104,7 @@ en:
       back_to_products: "Back to products"
       edit_product: "Edit this product"
       show_product: "Show this product"
+      export_CSV: "Export to CSV"
     order:
       show_order: "Show this order"
       back_orders: "Back to orders"
