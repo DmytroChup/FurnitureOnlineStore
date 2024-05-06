@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     def prodlist
-      @orders = current_producer.orders.includes(order_items: { product: :producer })
+      @orders = current_producer.orders.includes(:order_items, products: :producer)
       @orders = current_producer.orders.includes(:users)
     end
 
