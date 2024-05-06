@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ProducersController < ApplicationController
-  before_action :set_producer, only: %i[ show edit update destroy ]
+  before_action :set_producer, only: %i[show edit update destroy]
 
   # GET /producers or /producers.json
   def index
@@ -18,8 +20,7 @@ class ProducersController < ApplicationController
   end
 
   # GET /producers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /producers or /producers.json
   def create
@@ -60,13 +61,14 @@ class ProducersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_producer
-      @producer = Producer.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def producer_params
-      params.require(:producer).permit(:producer_name, :country, :email, :phone)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_producer
+    @producer = Producer.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def producer_params
+    params.require(:producer).permit(:producer_name, :country, :email, :phone)
+  end
 end

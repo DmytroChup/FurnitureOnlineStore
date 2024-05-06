@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   belongs_to :user
-  belongs_to :payment_history
+  belongs_to :payment_history, optional: true
   has_many :order_items
   has_many :products, through: :order_items
 
+  accepts_nested_attributes_for :order_items
+  
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "id_value", "order_address", "order_date", "payment_histories_id", "updated_at", "user_id"]
   end

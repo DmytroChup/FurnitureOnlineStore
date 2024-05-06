@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cart < ApplicationRecord
   # validates :cart_id, presence: true
   # validates :product_id, presence: true

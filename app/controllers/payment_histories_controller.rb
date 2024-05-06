@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PaymentHistoriesController < ApplicationController
-  before_action :set_payment_history, only: %i[ show edit update destroy ]
+  before_action :set_payment_history, only: %i[show edit update destroy]
 
   # GET /payment_histories or /payment_histories.json
   def index
@@ -7,8 +9,7 @@ class PaymentHistoriesController < ApplicationController
   end
 
   # GET /payment_histories/1 or /payment_histories/1.json
-  def show
-  end
+  def show; end
 
   # GET /payment_histories/new
   def new
@@ -16,8 +17,7 @@ class PaymentHistoriesController < ApplicationController
   end
 
   # GET /payment_histories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /payment_histories or /payment_histories.json
   def create
@@ -25,7 +25,9 @@ class PaymentHistoriesController < ApplicationController
 
     respond_to do |format|
       if @payment_history.save
-        format.html { redirect_to payment_history_url(@payment_history), notice: "Payment history was successfully created." }
+        format.html {
+          redirect_to payment_history_url(@payment_history), notice: "Payment history was successfully created."
+        }
         format.json { render :show, status: :created, location: @payment_history }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,9 @@ class PaymentHistoriesController < ApplicationController
   def update
     respond_to do |format|
       if @payment_history.update(payment_history_params)
-        format.html { redirect_to payment_history_url(@payment_history), notice: "Payment history was successfully updated." }
+        format.html {
+          redirect_to payment_history_url(@payment_history), notice: "Payment history was successfully updated."
+        }
         format.json { render :show, status: :ok, location: @payment_history }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,13 +62,14 @@ class PaymentHistoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_payment_history
-      @payment_history = PaymentHistory.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def payment_history_params
-      params.require(:payment_history).permit(:user_id, :payment_method, :payment_date, :amount)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_payment_history
+    @payment_history = PaymentHistory.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def payment_history_params
+    params.require(:payment_history).permit(:user_id, :payment_method, :payment_date, :amount)
+  end
 end

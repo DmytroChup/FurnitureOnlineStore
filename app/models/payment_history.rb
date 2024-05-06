@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentHistory < ApplicationRecord
   belongs_to :user
   has_many :orders
@@ -7,7 +9,7 @@ class PaymentHistory < ApplicationRecord
   # validates :payment_method, presence: true
   # validates :payment_date, presence: true
   # validates :amount, presence: true, numericality: { greater_than: 0 }
-
+  
   def self.ransackable_attributes(auth_object = nil)
     ["amount", "created_at", "id", "id_value", "payment_date", "payment_method", "updated_at", "user_id"]
   end

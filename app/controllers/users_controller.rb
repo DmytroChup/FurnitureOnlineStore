@@ -1,6 +1,8 @@
-class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+# frozen_string_literal: true
 
+class UsersController < ApplicationController
+  before_action :set_user, only: %i[show edit update destroy]
+  
   def create_chat
     @selected_profile = Producer.find(params[:producer_id])
 
@@ -31,8 +33,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1 or /users/1.json
-  def show
-  end
+  def show; end
 
   # GET /users/new
   def new
@@ -40,8 +41,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /users or /users.json
   def create
@@ -63,24 +63,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     # Проверяем, если текущий пароль введен правильно
-    if params[:user][:password].present? && !@user.valid_password?(params[:user][:current_password])
-      @user.errors.add(:current_password, "is invalid")
-      respond_to do |format|
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-      return
-    end
+    return render_error(:current_password, "is invalid") if invalid_current_password?
 
     # Проверяем, что новый пароль совпадает с подтверждением
-    if params[:user][:password].present? && params[:user][:password] != params[:user][:password_confirmation]
-      @user.errors.add(:password_confirmation, "doesn't match New password")
-      respond_to do |format|
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-      return
-    end
+    return render_error(:password_confirmation, "doesn't match New password") if password_mismatch?
 
     respond_to do |format|
       if @user.update(user_params)
@@ -105,13 +91,35 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:user_role, :first_name, :patronymic, :last_name, :phone, :username, :password, :password_confirmation, :cart_id)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:user_role, :first_name, :patronymic, :last_name, :phone, :username, :password,
+                                 :password_confirmation, :cart_id)
+  end
+
+  def invalid_current_password?
+    params[:user][:password].present? && !@user.valid_password?(params[:user][:current_password])
+  end
+
+  def password_mismatch?
+    params[:user][:password].present? && params[:user][:password] != params[:user][:password_confirmation]
+  end
+
+  def render_error(attribute, message)
+    @user.errors.add(attribute, message)
+    respond_to_render_errors
+  end
+
+  def respond_to_render_errors
+    respond_to do |format|
+      format.html { render :edit, status: :unprocessable_entity }
+      format.json { render json: @user.errors, status: :unprocessable_entity }
     end
+  end
 end

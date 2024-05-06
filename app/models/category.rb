@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Category < ApplicationRecord
   has_many :subcategories
-
+  
   def self.ransackable_associations(auth_object = nil)
     ["subcategories"]
   end

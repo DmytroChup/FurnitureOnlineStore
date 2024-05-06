@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
@@ -17,7 +19,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create category" do
     assert_difference("Category.count") do
-      post categories_url, params: { category: { category_name: @category.category_name } }
+      post categories_url, params: {category: {category_name: @category.category_name}}
     end
 
     assert_redirected_to category_url(Category.last)
@@ -34,7 +36,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update category" do
-    patch category_url(@category), params: { category: { category_name: @category.category_name } }
+    patch category_url(@category), params: {category: {category_name: @category.category_name}}
     assert_redirected_to category_url(@category)
   end
 
