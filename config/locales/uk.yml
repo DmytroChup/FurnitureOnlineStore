@@ -75,6 +75,7 @@ uk:
       back_to_products: "Повернутися до товарів"
       edit_product: "Редагувати цей товар"
       show_product: "Показати цей товар"
+      export_CSV: "Експортувати у CSV"
     order:
       show_order: "Показати це замовлення"
       back_orders: "Повернутися до замовлень"
