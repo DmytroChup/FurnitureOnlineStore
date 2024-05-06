@@ -28,7 +28,7 @@ namespace :categories do
        subcategory_name: "Cabinets for storage"},
 
       {category_id: categories.find_by(category_name: "Hallways").id, subcategory_name: "Racks"},
-      {category_id: categories.find_by(category_name: "Hallways").id, subcategory_name: "Сabinets"},
+      {category_id: categories.find_by(category_name: "Hallways").id, subcategory_name: "Cabinets"},
 
       {category_id: categories.find_by(category_name: "Beds").id, subcategory_name: "Beds"},
       {category_id: categories.find_by(category_name: "Beds").id, subcategory_name: "Mattresses"},

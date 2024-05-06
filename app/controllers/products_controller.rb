@@ -58,6 +58,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def export_to_csv
+    @products = Product.all
+
+    respond_to do |format|
+      format.csv do
+        send_data @products.to_csv, filename: "products-#{Date.today}.csv"
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
