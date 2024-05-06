@@ -7,4 +7,8 @@ class Order < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "id_value", "order_address", "order_date", "payment_histories_id", "updated_at", "user_id"]
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["order_items", "payment_history", "products", "user"]
+  end
 end

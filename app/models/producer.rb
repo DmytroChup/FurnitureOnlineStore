@@ -14,6 +14,14 @@ class Producer < ApplicationRecord
 
   validate :email_domain
 
+  def self.ransackable_associations(auth_object = nil)
+    ["messages", "private_chats_as_producer", "products"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["confirmation_sent_at", "confirmation_token", "confirmed_at", "country", "created_at", "email", "encrypted_password", "id", "id_value", "phone", "producer_name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "unconfirmed_email", "updated_at"]
+  end
+
   private
 
   def email_domain
