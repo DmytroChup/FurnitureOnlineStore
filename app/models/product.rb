@@ -9,6 +9,15 @@ class Product < ApplicationRecord
   has_many :orders, through: :order_items
   # has_many :carts
 
+  def self.ransackable_attributes(_auth_object=nil)
+    %w[availability color created_at height id id_value length material name price
+       producer_id subcategory_id updated_at width]
+  end
+
+  def self.ransackable_associations(_auth_object=nil)
+    %w[order_items orders producer subcategory]
+  end
+  
   def self.to_csv
     attributes = %w[name price height width length color material availability]
 

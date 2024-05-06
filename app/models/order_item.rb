@@ -6,6 +6,14 @@ class OrderItem < ApplicationRecord
 
   before_save :set_price
 
+  def self.ransackable_attributes(_auth_object=nil)
+    %w[created_at id id_value order_id price product_id quantity updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object=nil)
+    %w[order product]
+  end
+
   private
 
   def set_price
