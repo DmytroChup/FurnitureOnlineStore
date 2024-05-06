@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PrivateChat < ApplicationRecord
   belongs_to :user, class_name: "User"
   belongs_to :producer, class_name: "Producer"
@@ -7,11 +9,11 @@ class PrivateChat < ApplicationRecord
     where(
       "(user_id = :user_id AND producer_id = :producer_id) OR
       (user_id = :producer_id AND producer_id = :user_id)",
-      user_id: user_id, producer_id: producer_id,
-      ).first
+      user_id:, producer_id:
+    ).first
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "id_value", "producer_id", "updated_at", "user_id"]
+  def self.ransackable_attributes(_auth_object=nil)
+    %w[created_at id id_value producer_id updated_at user_id]
   end
 end

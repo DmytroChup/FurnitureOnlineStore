@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   before_action :find_private_chat
 
@@ -13,7 +15,7 @@ class MessagesController < ApplicationController
     if @message.save
       ChatChannel.broadcast_to(
         @message.private_chat,
-        render_to_string(partial: "message", locals: { message: @message })
+        render_to_string(partial: "message", locals: {message: @message})
       )
     end
 

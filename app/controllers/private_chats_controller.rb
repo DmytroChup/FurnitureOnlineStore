@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PrivateChatsController < ApplicationController
   # before_action :authenticate_user!
   # before_action :authenticate_producer!
@@ -11,7 +13,7 @@ class PrivateChatsController < ApplicationController
       @profile = current_producer
       @private_chats = PrivateChat.where("producer_id = ?", @profile.id).order("created_at DESC")
     else
-      redirect_to '/home/index', notice: 'Please log in first.'
+      redirect_to "/home/index", notice: "Please log in first."
     end
   end
 
