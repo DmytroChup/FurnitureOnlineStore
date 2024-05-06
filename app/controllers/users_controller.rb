@@ -2,6 +2,30 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  
+  def create_chat
+    @selected_profile = Producer.find(params[:producer_id])
+
+    if user_signed_in?
+      user_id = current_user.id
+      producer_id = @selected_profile.id
+    else
+      flash[:alert] = "You need to be logged in."
+      redirect_to '/home/index' and return
+    end
+
+    @private_chat = PrivateChat.get_private_chat(user_id, producer_id)
+
+    unless @private_chat
+        @private_chat = PrivateChat.create(user: current_user, producer: @selected_profile)
+    end
+
+    redirect_to user_private_chat_path(user_id, @private_chat)
+  end
+
+  def create_chat_index
+    @producers = Producer.all
+  end
 
   # GET /users or /users.json
   def index

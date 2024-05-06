@@ -26,6 +26,9 @@ gem "sassc-rails", "2.1.2"
 gem "devise", "4.9.3"
 gem "rails-i18n", "~> 7.0.0"
 
+gem 'activeadmin', "3.2.0"
+gem 'simple_form'
+
 group :development, :test do
   gem "debug", "1.9.1", platforms: %i[mri windows]
   gem "lefthook", "~> 1.6.7"

@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_13_123722) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_20_152912) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
 
   create_table "carts", force: :cascade do |t|
     t.integer "product_id"
@@ -26,6 +52,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_123722) do
     t.string "category_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "private_chat_id", null: false
+    t.string "profile_type", null: false
+    t.bigint "profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["private_chat_id"], name: "index_messages_on_private_chat_id"
+    t.index ["profile_type", "profile_id"], name: "index_messages_on_profile"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -58,6 +95,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_123722) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_payment_histories_on_user_id"
+  end
+
+  create_table "private_chats", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "producer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["producer_id"], name: "index_private_chats_on_producer_id"
+    t.index ["user_id"], name: "index_private_chats_on_user_id"
   end
 
   create_table "producers", force: :cascade do |t|
@@ -106,7 +152,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_123722) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_role"
     t.string "first_name"
     t.string "patronymic"
     t.string "last_name"
@@ -130,11 +175,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_123722) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "messages", "private_chats"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "payment_histories"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_histories", "users"
+  add_foreign_key "private_chats", "producers"
+  add_foreign_key "private_chats", "users"
   add_foreign_key "products", "producers"
   add_foreign_key "products", "subcategories"
   add_foreign_key "subcategories", "categories"
