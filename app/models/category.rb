@@ -3,6 +3,10 @@
 class Category < ApplicationRecord
   has_many :subcategories
 
+  def display_name
+    category_name
+  end
+
   def self.ransackable_associations(_auth_object=nil)
     ["subcategories"]
   end

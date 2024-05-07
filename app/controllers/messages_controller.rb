@@ -11,7 +11,6 @@ class MessagesController < ApplicationController
       @message.profile = current_producer
     end
 
-
     if @message.save
       ChatChannel.broadcast_to(
         @message.private_chat,

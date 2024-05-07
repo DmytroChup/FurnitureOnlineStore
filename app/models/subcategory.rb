@@ -4,6 +4,10 @@ class Subcategory < ApplicationRecord
   belongs_to :category
   has_many :products
 
+  def display_name
+    subcategory_name
+  end
+
   def self.ransackable_associations(_auth_object=nil)
     %w[category products]
   end

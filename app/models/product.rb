@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   def self.ransackable_associations(_auth_object=nil)
     %w[order_items orders producer subcategory]
   end
-  
+
   def self.to_csv
     attributes = %w[name price height width length color material availability]
 
