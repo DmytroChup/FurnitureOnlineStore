@@ -6,6 +6,7 @@ uk:
     catalog: "Каталог"
     faqs: "Поширені запитання"
     about: "Про нас"
+    my_chats: "Мої чати"
     profile: "Профіль"
     dropdown: "Випадаюче меню"
     search_form:
@@ -121,6 +122,7 @@ uk:
         availability: "Статус"
         subcategory_id: "Підкатегорія"
         producer_id: "Виробник"
+        product_image: "Зображення продукту"
       producer:
         producer_name: "Ім'я виробника"
         country: "Країна"
@@ -354,8 +356,4 @@ uk:
     wing chair: "крісло крило"
     work table: "робочий стіл"
     writing desk: "письмовий стіл"
-    Шафа1: "Шафа1"
-    Шафа2: "Шафа2"
-    Шафа3: "Шафа3"
-    Шафа4: "Шафа4"
   hello: "Привіт світ"

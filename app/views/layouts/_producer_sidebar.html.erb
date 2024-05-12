@@ -11,7 +11,7 @@
         <%= link_to t("nav.profile") + ' (producer)', producer_path(current_producer), class: 'nav-link' %>
       </li>
       <li class="nav-item">
-        <%= link_to 'My chats', producer_private_chats_path(current_producer), class: 'nav-link' %>
+        <%= link_to t("nav.my_chats"), producer_private_chats_path(current_producer), class: 'nav-link' %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
