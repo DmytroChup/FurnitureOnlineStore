@@ -72,7 +72,6 @@
               <h4 class="card-header-title">Your orders</h4>
             </div>
 
-
             <div class="card-body">
 
               <table class="table table-striped">
@@ -80,7 +79,8 @@
                 <tr>
                   <th>User</th>
                   <th>Order date</th>
-                  <th>Adress</th>
+                  <th>Order completion date</th>
+                  <th>Address</th>
                   <th>Product</th>
                   <th>Price</th>
                 </tr>
@@ -88,12 +88,9 @@
                 <tbody>
                 <% @orders&.each do |order| %>
                   <tr>
-                    <td>
-                      <% order.users.each do |user| %>
-                        <%= user.username %><br>
-                      <% end %>
-                    </td>
+                    <td><%= order.user.username %></td>
                     <td><%= order.order_date %></td>
+                    <td><%= order.order_completion_date %></td>
                     <td><%= order.order_address %></td>
                     <td>
                       <% order.order_items.each do |order_item| %>
@@ -109,6 +106,7 @@
                 <% end %>
                 </tbody>
               </table>
+
             </div>
 
           </div>
@@ -175,12 +173,11 @@
                   }
               </style>
 
-
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    </div>
   </div>
 </section>
