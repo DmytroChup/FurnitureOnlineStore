@@ -5,8 +5,8 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
-    # @products = Product.all.order(:name)
+    # @products = Product.all
+    @products = Product.all.order(:name)
   end
 
   # GET /products/1 or /products/1.json
@@ -79,6 +79,6 @@ class ProductsController < ApplicationController
   def product_params
     params[:product][:price] = params[:product][:price].to_s
     params.require(:product).permit(:subcategory_id, :name, :price, :height, :width, :length, :color, :material,
-                                    :producer_id, :availability)
+                                    :producer_id, :availability, :product_image)
   end
 end

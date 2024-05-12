@@ -12,6 +12,7 @@ AllCops:
     - 'app/controllers/users_controller.rb'
     - 'lib/tasks/categories.rake'
     - 'lib/tasks/products.rake'
+    - 'db/migrate/20240508202329_create_active_storage_tables.active_storage.rb'
 
 #  RunRailsCops is not available
 #  Rails:
