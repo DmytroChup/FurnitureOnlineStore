@@ -37,31 +37,48 @@
       <%= form.text_field :length, class: "form-control", placeholder: t("activerecord.attributes.product.length") %>
     </div>
 
-    <div class="col-md-4 mb-3">
-      <%= form.label :color, class: "form-label" %>
-      <%= form.text_field :color, class: "form-control", placeholder: t("activerecord.attributes.product.color") %>
-    </div>
-
-    <div class="col-md-4 mb-3">
-      <%= form.label :material, class: "form-label" %>
-      <%= form.text_field :material, class: "form-control", placeholder: t("activerecord.attributes.product.material") %>
-    </div>
-
     <div>
       <%= form.hidden_field :producer_id, value: current_producer.id %>
     </div>
 
-    <div class="col-md-4 mb-3">
-      <%= form.label :availability, class: "form-label" %>
-      <%= form.text_field :availability, class: "form-control", placeholder: t("activerecord.attributes.product.availability") %>
+    <div class="col-md-8 mb-3">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :color, class: "form-label" %>
+          <%= form.text_field :color, class: "form-control", placeholder: t("activerecord.attributes.product.color") %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :material, class: "form-label" %>
+          <%= form.text_field :material, class: "form-control", placeholder: t("activerecord.attributes.product.material") %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :availability, class: "form-label" %>
+          <%= form.select :availability, options_for_select([%w[true true], %w[false false]]), { prompt: t("activerecord.attributes.product.availability") }, { class: "form-control" } %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :price, class: "form-label" %>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <%= form.text_field :price, class: "form-control", placeholder: t("activerecord.attributes.product.price") %>
+          </div>
+        </div>
+
+        <div class="col mb-3">
+          <%= form.label :product_image, class: "form-label" %>
+          <%= form.file_field :product_image, class: "form-control", id: "product_image_input" %>
+        </div>
+      </div>
     </div>
 
-    <div class="col-md-4 mb-3">
-      <%= form.label :price, class: "form-label" %>
-      <div class="input-group">
-        <span class="input-group-text">$</span>
-        <%= form.text_field :price, class: "form-control", placeholder: t("activerecord.attributes.product.price") %>
-      </div>
+    <div class="col-md-4 mb-3 text-center"  id="product_image_container">
+      <% if product.product_image.attached? %>
+        <%= image_tag url_for(product.product_image), class: "mx-auto img-fluid", id: "product_image_preview"  %>
+      <% else %>
+        <div class="placeholder" style="background-color: #c6c8c9; width: 90%; height: 100%;"></div>
+      <% end %>
     </div>
   </div>
 
@@ -69,3 +86,39 @@
     <%= form.submit t("buttons.product.add_product"), class: "btn btn-primary mb-0" %>
   </div>
 <% end %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const productImageInput = document.getElementById('product_image_input');
+        const productImageContainer = document.getElementById('product_image_container');
+
+        productImageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const image = new Image();
+                image.src = e.target.result;
+
+                image.onload = function() {
+                    const productImagePreview = document.getElementById('product_image_preview');
+
+                    if (productImagePreview) {
+                        productImagePreview.src = image.src;
+                    } else {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image.src;
+                        imgElement.classList.add('mx-auto', 'img-fluid');
+                        imgElement.id = 'product_image_preview';
+                        productImageContainer.innerHTML = '';
+                        productImageContainer.appendChild(imgElement);
+                    }
+                };
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>

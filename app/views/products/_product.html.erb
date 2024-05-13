@@ -1,20 +1,25 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong><%= t("heading.product.product") %> :</strong>
-    <%= product.id %>
-  </p>
+<div id="<%= dom_id product %>" class="product-container">
+  <% if @product.product_image.attached? %>
+    <%= image_tag url_for(@product.product_image), class: "product-image", style: "width: 30%;" %>
+  <% end %>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.subcategory_id") %> :</strong>
-    <%= product.subcategory_id %>
-  </p>
+  <div class="product-details">
+    <p>
+      <strong><%= t("heading.product.product") %> :</strong>
+      <%= product.id %>
+    </p>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.name") %> :</strong>
-    <%= t("products.#{product.name}") %>
-  </p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.subcategory_id") %> :</strong>
+      <%= t("subcategories.#{product.subcategory.subcategory_name}") %>
+    </p>
 
-  <p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.name") %> :</strong>
+      <%= t("products.#{product.name}") %>
+    </p>
+
+    <p>
     <strong><%= t("activerecord.attributes.product.price") %> :</strong>
     <% case current_user.preferred_currency %>
       <% when 'UAH' %>
@@ -24,42 +29,41 @@
       <% when 'EUR' %>
         <%= number_to_currency(product.price / @eur_buy, precision: 2, unit: '', format: "%n €") if @eur_buy.present? %>
       <% end %>
+    </p>
 
-  </p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.height") %> :</strong>
+      <%= product.height %>
+    </p>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.height") %> :</strong>
-    <%= product.height %>
-  </p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.width") %> :</strong>
+      <%= product.width %>
+    </p>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.width") %> :</strong>
-    <%= product.width %>
-  </p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.length") %> :</strong>
+      <%= product.length %>
+    </p>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.length") %> :</strong>
-    <%= product.length %>
-  </p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.color") %> :</strong>
+      <%= t("colors.#{product.color}") %>
+    </p>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.color") %> :</strong>
-    <%= t("colors.#{product.color}") %>
-  </p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.material") %> :</strong>
+      <%= t("materials.#{product.material}") %>
+    </p>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.material") %> :</strong>
-    <%= t("materials.#{product.material}") %>
-  </p>
+    <p>
+      <strong><%= t("activerecord.attributes.product.producer_id") %> :</strong>
+      <%= product.producer.producer_name %>
+    </p>
 
-  <p>
-    <strong><%= t("activerecord.attributes.product.producer_id") %> :</strong>
-    <%= product.producer_id %>
-  </p>
-
-  <p>
-    <strong><%= t("activerecord.attributes.product.availability") %> :</strong>
-    <%= product.availability %>
-  </p>
-
+    <p>
+      <strong><%= t("activerecord.attributes.product.availability") %> :</strong>
+      <%= product.availability %>
+    </p>
+  </div>
 </div>

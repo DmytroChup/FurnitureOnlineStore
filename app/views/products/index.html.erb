@@ -28,7 +28,7 @@
       <% @products.each do |product| %>
         <tr>
           <td><%= product.id %></td>
-          <td><%= product.subcategory_id %></td>
+          <td><%= t("subcategories.#{product.subcategory.subcategory_name}") %></td>
           <td><%= t("products.#{product.name}") %></td>
           <td>
             <% case current_user.preferred_currency %>
@@ -45,7 +45,7 @@
           <td><%= product.length %></td>
           <td><%= t("colors.#{product.color}") %></td>
           <td><%= t("materials.#{product.material}") %></td>
-          <td><%= product.producer_id %></td>
+          <td><%= product.producer.producer_name %></td>
           <td><%= product.availability %></td>
           <td>
             <%= link_to t("buttons.show"), product, class: "btn btn-primary btn-sm mr-2" %>

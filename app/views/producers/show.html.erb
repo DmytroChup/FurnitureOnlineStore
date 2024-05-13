@@ -54,8 +54,12 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link text-dark"><%= t("sidebar.menu.settings") %></a>
+                    <%= link_to t("nav.my_chats"), producer_private_chats_path(current_producer), class: 'nav-link text-dark' %>
                   </li>
+
+<!--                  <li class="nav-item">-->
+<!--                    <a class="nav-link text-dark"><%#= t("sidebar.menu.settings") %></a>-->
+<!--                  </li>-->
 
                   <li class="nav-item">
                     <%= button_to t("buttons.sign_out"), destroy_producer_session_path, method: :delete, class: "nav-link text-danger" %>
@@ -175,7 +179,7 @@
                 <% @products.each do |product| %>
                   <tr>
                     <td><%= product.id %></td>
-                    <td><%= product.subcategory_id %></td>
+                    <td><%= t("subcategories.#{product.subcategory.subcategory_name}") %></td>
                     <td><%= t("products.#{product.name}") %></td>
                     <td><%= product.price %></td>
                     <td><%= product.height %></td>
