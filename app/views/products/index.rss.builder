@@ -18,9 +18,15 @@ xml.rss version: "2.0" do
           xml.text "Length: #{product.length}"
           xml.text "Color: #{product.color}"
           xml.text "Material: #{product.material}"
+          xml.text "Availability: #{product.availability}"
+          xml.text "Subcategory_id: #{product.subcategory_id}, Producer_id: #{product.producer_id}"
         end
         xml.link product_url(product)
         xml.pubDate product.created_at.rfc2822
+        if product.product_image.attached?
+          xml.enclosure url: url_for(product.product_image), length: product.product_image.byte_size,
+                        type: product.product_image.content_type
+        end
       end
     end
   end

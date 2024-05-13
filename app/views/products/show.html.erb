@@ -1,14 +1,14 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <% if notice %>
     <div class="alert alert-success" role="alert">
       <%= notice %>
     </div>
   <% end %>
 
-  <h1><%= t("heading.product.product") %></h1>
+  <h1><%= t("heading.product.product") %></h1><br>
   <%= render @product %>
 
-  <div class="d-flex align-items-center gap-2">
+  <div class="d-flex align-items-center gap-2 mt-5">
     <%= link_to t("buttons.product.edit_product"), edit_product_path(@product), class: "btn btn-primary" %> |
     <%= link_to t("buttons.product.back_to_products"), products_path, class: "btn btn-primary" %>
     <%= button_to t("buttons.product.destroy_product"), @product, method: :delete, class: "btn btn-danger" %>

@@ -5,21 +5,14 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
-    # @products = Product.all.order(:name)
+    # @products = Product.all
+    @usd_buy, @eur_buy = find_currency
+    @products = Product.all.order(:name)
   end
 
   # GET /products/1 or /products/1.json
   def show
-    @currency_rates = PrivatbankApi.fetch_currency_rates
-    @currency_rates.each do |rate|
-      case rate["ccy"]
-      when "USD"
-        @usd_buy = rate["buy"].to_f
-      when "EUR"
-        @eur_buy = rate["buy"].to_f
-      end
-    end
+    @usd_buy, @eur_buy = find_currency
   end
 
   # GET /products/new
@@ -89,6 +82,19 @@ class ProductsController < ApplicationController
   def product_params
     params[:product][:price] = params[:product][:price].to_s
     params.require(:product).permit(:subcategory_id, :name, :price, :height, :width, :length, :color, :material,
-                                    :producer_id, :availability)
+                                    :producer_id, :availability, :product_image)
+  end
+
+  def find_currency
+    @currency_rates = PrivatbankApi.fetch_currency_rates
+    @currency_rates.each do |rate|
+      case rate["ccy"]
+      when "USD"
+        @usd_buy = rate["buy"].to_f
+      when "EUR"
+        @eur_buy = rate["buy"].to_f
+      end
+    end
+    [@usd_buy, @eur_buy]
   end
 end

@@ -38,6 +38,7 @@ en:
     catalog: "Catalog"
     faqs: "FAQs"
     about: "About"
+    my_chats: "My chats"
     profile: "Profile"
     dropdown: "Dropdown"
     search_form:
@@ -153,6 +154,7 @@ en:
         availability: "Availability"
         subcategory_id: "Subcategory"
         producer_id: "Producer"
+        product_image: "Product image"
       producer:
         producer_name: "Producer name"
         country: "Country"
@@ -386,8 +388,4 @@ en:
     wing chair: "wing chair"
     work table: "work table"
     writing desk: "writing desk"
-    Шафа1: "Шафа1"
-    Шафа2: "Шафа2"
-    Шафа3: "Шафа3"
-    Шафа4: "Шафа4"
   hello: "Hello world"
