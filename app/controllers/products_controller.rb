@@ -10,7 +10,17 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1 or /products/1.json
-  def show; end
+  def show
+    @currency_rates = PrivatbankApi.fetch_currency_rates
+    @currency_rates.each do |rate|
+      case rate["ccy"]
+      when "USD"
+        @usd_buy = rate["buy"].to_f
+      when "EUR"
+        @eur_buy = rate["buy"].to_f
+      end
+    end
+  end
 
   # GET /products/new
   def new

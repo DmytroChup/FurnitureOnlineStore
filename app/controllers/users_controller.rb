@@ -27,6 +27,10 @@ class UsersController < ApplicationController
     @producers = Producer.all
   end
 
+  def find_people
+    @found_users = User.joins(:subcategories).where(subcategories: { id: current_user.subcategory_ids }).distinct
+  end
+
   # GET /users or /users.json
   def index
     @users = User.all
@@ -99,8 +103,8 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:user_role, :first_name, :patronymic, :last_name, :phone, :username, :password,
-                                 :password_confirmation, :cart_id)
+    params.require(:user).permit(:first_name, :patronymic, :last_name, :phone, :username, :password,
+                                 :password_confirmation, :cart_id, :preferred_currency, subcategory_ids: [])
   end
 
   def invalid_current_password?
