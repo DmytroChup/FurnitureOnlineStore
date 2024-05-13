@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
     
     resources :users do
+      get 'find_people', on: :member
       get 'create_chat_index', on: :member
       post 'create_chat', on: :member
       resources :private_chats, only: [:index, :show] do

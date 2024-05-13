@@ -1,6 +1,9 @@
 uk:
   en: Англійська
   uk: Українська
+  currency:
+    buy: "Купівля"
+    sale: "Продаж"
   nav:
     home: "Головна"
     catalog: "Каталог"

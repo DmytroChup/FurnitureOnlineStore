@@ -30,6 +30,9 @@
 en:
   en: English
   uk: Ukrainian
+  currency:
+    buy: "Buy"
+    sale: "Sale"
   nav:
     home: "Home"
     catalog: "Catalog"

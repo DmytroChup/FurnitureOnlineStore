@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :orders
   has_many :payment_histories
 
+  has_many :users_subcategories
+  has_many :subcategories, through: :users_subcategories
+
   has_many :messages, as: :profile
   has_many :private_chats_as_user, class_name: "PrivateChat", foreign_key: :user_id
   # Include default devise modules. Others available are:

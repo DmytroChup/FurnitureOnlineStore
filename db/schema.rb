@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_08_202329) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_12_101412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -203,6 +203,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_202329) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_subcategories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "subcategory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subcategory_id"], name: "index_users_subcategories_on_subcategory_id"
+    t.index ["user_id"], name: "index_users_subcategories_on_user_id"
+  end
+  
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "messages", "private_chats"
@@ -216,4 +225,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_202329) do
   add_foreign_key "products", "producers"
   add_foreign_key "products", "subcategories"
   add_foreign_key "subcategories", "categories"
+  add_foreign_key "users_subcategories", "subcategories"
+  add_foreign_key "users_subcategories", "users"
 end

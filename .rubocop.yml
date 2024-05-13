@@ -13,6 +13,8 @@ AllCops:
     - 'lib/tasks/categories.rake'
     - 'lib/tasks/products.rake'
     - 'db/migrate/20240508202329_create_active_storage_tables.active_storage.rb'
+    - 'app/helpers/currency_helper.rb'
+
 
 #  RunRailsCops is not available
 #  Rails:
