@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUsersSubcategories < ActiveRecord::Migration[7.1]
   def change
     create_table :users_subcategories do |t|
