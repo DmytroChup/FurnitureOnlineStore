@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :user_role, style: "display: block" %>
-    <%= form.text_field :user_role %>
-  </div>
-
-  <div>
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
@@ -41,9 +36,22 @@
     <%= form.text_field :username %>
   </div>
 
+  <!-- Поле для текущего пароля -->
   <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
+    <%= form.label :current_password, "Current password" %><br />
+    <%= form.password_field :current_password %>
+  </div>
+
+  <!-- Поле для нового пароля -->
+  <div>
+    <%= form.label :password, "New password" %><br />
+    <%= form.password_field :password %>
+  </div>
+
+  <!-- Поле для подтверждения нового пароля -->
+  <div>
+    <%= form.label :password_confirmation, "Confirm new password" %><br />
+    <%= form.password_field :password_confirmation %>
   </div>
 
   <div>

@@ -1,0 +1,33 @@
+<!-- Боковая панель-->
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel"><%= current_producer.producer_name %></h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <!-- Контент боковой панели для производителя -->
+  <div class="offcanvas-body">
+    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 mb-2">
+      <li class="nav-item">
+        <%= link_to t("nav.profile") + ' (producer)', producer_path(current_producer), class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t("nav.my_chats"), producer_private_chats_path(current_producer), class: 'nav-link' %>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= t("nav.more") %>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="<%= products_path %>"><%= t("nav.all_products") %></a></li>
+<!--          <li><a class="dropdown-item" href="#">Another action</a></li>-->
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="<%= export_to_csv_products_path(format: :csv) %>"><%= t("nav.export_CSV") %></a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item mt-4">
+        <%= button_to t("buttons.sign_out"), destroy_producer_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
+      </li>
+    </ul>
+  </div>
+</div>

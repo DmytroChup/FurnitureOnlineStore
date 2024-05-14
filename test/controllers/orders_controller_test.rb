@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class OrdersControllerTest < ActionDispatch::IntegrationTest
@@ -17,7 +19,9 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create order" do
     assert_difference("Order.count") do
-      post orders_url, params: { order: { order_address: @order.order_address, order_date: @order.order_date, payment_id: @order.payment_id, user_id: @order.user_id } }
+      post orders_url,
+           params: {order: {order_address: @order.order_address, order_date: @order.order_date,
+                            payment_id: @order.payment_id, user_id: @order.user_id}}
     end
 
     assert_redirected_to order_url(Order.last)
@@ -34,7 +38,9 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order" do
-    patch order_url(@order), params: { order: { order_address: @order.order_address, order_date: @order.order_date, payment_id: @order.payment_id, user_id: @order.user_id } }
+    patch order_url(@order),
+          params: {order: {order_address: @order.order_address, order_date: @order.order_date,
+                           payment_id: @order.payment_id, user_id: @order.user_id}}
     assert_redirected_to order_url(@order)
   end
 

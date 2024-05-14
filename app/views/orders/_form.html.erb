@@ -12,23 +12,38 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
-  <div>
-    <%= form.label :payment_history_id, style: "display: block" %>
-    <%= form.number_field :payment_history_id %>
+  <div class="form-group mt-3">
+    <%= form.label :product_ids, t("heading.order.select_products"), class: "form-label" %>
+    <div class="checkbox-grid">
+      <%= form.collection_check_boxes :product_ids, Product.all, :id, :name, class: "checkbox" do |b| %>
+        <div class="checkbox-item">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div id="quantities" class="form-group">
+    <!-- Этот блок будет заполняться динамически JavaScript -->
+  </div>
+  <br>
+  <div class="col-md-3 mb-3">
+    <%= form.label :payment_history_id, class: "form-label" %>
+    <%= form.number_field :payment_history_id, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :order_date, style: "display: block" %>
-    <%= form.datetime_field :order_date %>
+  <div class="col-md-3 mb-3">
+    <%= form.label :order_date, class: "form-label" %>
+    <%= form.datetime_field :order_date, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :order_address, style: "display: block" %>
-    <%= form.text_field :order_address %>
+  <div class="col-md-3 mb-3">
+    <%= form.label :order_address, class: "form-label" %>
+    <%= form.text_field :order_address, class: "form-control" %>
   </div>
 
   <div>
@@ -37,6 +52,72 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.hidden_field :total %>
+  </div>
+
+  <div>
+    <%= form.submit t("buttons.order.create_order"), class: "btn btn-primary mt-3" %>
   </div>
 <% end %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Функция для обновления полей ввода количества при изменении чекбоксов
+        function updateQuantities() {
+            var quantitiesDiv = document.getElementById("quantities");
+            quantitiesDiv.innerHTML = ""; // Очищаем содержимое
+
+            // Для каждого выбранного чекбокса создаем соответствующее поле ввода количества
+            document.querySelectorAll('input[name="order[product_ids][]"]:checked').forEach(function(checkbox) {
+                var productId = checkbox.value;
+                var productName = checkbox.parentElement.textContent.trim();
+
+                var quantityLabel = document.createElement("label");
+                quantityLabel.textContent = "Quantity for  " + productName + ":";
+
+                var quantityInput = document.createElement("input");
+                quantityInput.type = "number";
+                quantityInput.name = "order[order_items_attributes][][quantity]";
+                quantityInput.min = 1;
+                // quantityInput.classList.add("quantity-field");
+                quantityInput.classList.add("form-control", "quantity-field");
+                quantityInput.dataset.productId = productId; // Добавляем атрибут для идентификации продукта
+
+                var hiddenProductId = document.createElement("input");
+                hiddenProductId.type = "hidden";
+                hiddenProductId.name = "order[order_items_attributes][][product_id]";
+                hiddenProductId.value = productId;
+
+                var hiddenPrice = document.createElement("input");
+                hiddenPrice.type = "hidden";
+                hiddenPrice.name = "order[order_items_attributes][][price]";
+
+                var quantityDiv = document.createElement("div");
+                quantityDiv.classList.add("col-md-3");
+                quantityDiv.appendChild(quantityLabel);
+                quantityDiv.appendChild(quantityInput);
+                quantityDiv.appendChild(hiddenProductId);
+                quantityDiv.appendChild(hiddenPrice);
+
+                quantitiesDiv.appendChild(quantityDiv);
+
+                // Обработчик для пересчета цены при изменении количества
+                quantityInput.addEventListener("input", function() {
+                    var price = parseFloat(quantityInput.value) * parseFloat(checkbox.dataset.productPrice);
+                    hiddenPrice.value = isNaN(price) ? '' : price.toFixed(2);
+                });
+
+                // Сразу заполняем цену при загрузке страницы
+                quantityInput.dispatchEvent(new Event('input'));
+            });
+        }
+
+        // Обработчик изменения чекбоксов
+        document.querySelectorAll('input[name="order[product_ids][]"]').forEach(function(checkbox) {
+            checkbox.addEventListener("change", updateQuantities);
+        });
+
+        // Вызываем функцию при загрузке страницы, если есть выбранные чекбоксы
+        updateQuantities();
+    });
+</script>

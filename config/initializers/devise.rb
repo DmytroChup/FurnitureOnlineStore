@@ -18,6 +18,8 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '00c104286733352f4e05786c33cd2321661b28a71e670ec6e5dcef683c7386bff09f2f344c46c3a10437b377629febf22f6d2c3c7a7a443754d95a2cbea65e65'
 
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'

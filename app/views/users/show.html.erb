@@ -43,11 +43,11 @@
                 <!-- Sidebar menu item START -->
                 <ul class="nav nav-pills-primary-soft flex-column">
                   <li class="nav-item">
-                    <%= link_to 'My Profile', user_path(current_user), class: 'nav-link text-dark' %>
+                    <%= link_to t("sidebar.menu.my_profile"), "javascript:void(0)", id: "personalInfoLink", class: 'nav-link text-dark' %>
                   </li>
 
                   <li class="nav-item">
-                    <%= link_to 'Order', "#", class: 'nav-link text-dark' %>
+                    <%= link_to t("sidebar.menu.order"), "javascript:void(0)", id: "orderLink", class: 'nav-link text-dark' %>
                   </li>
 
                   <li class="nav-item">
@@ -55,15 +55,19 @@
                   </li>
 
                   <li class="nav-item">
-                    <%= link_to 'Payment History', '#', class: 'nav-link text-dark' %>
+                    <%= link_to t("nav.my_chats"), user_private_chats_path(current_user), class: 'nav-link text-dark' %>
                   </li>
 
                   <li class="nav-item">
-                    <%= link_to 'Settings', '#', class: 'nav-link text-dark' %>
+                    <%= link_to t("sidebar.menu.favourite_category"), "javascript:void(0)", id: "subcategoryLink", class: 'nav-link text-dark' %>
                   </li>
 
+<!--                  <li class="nav-item">-->
+                    <%#= link_to t("sidebar.menu.settings"), '#', class: 'nav-link text-dark' %>
+<!--                  </li>-->
+
                   <li class="nav-item">
-                    <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link text-danger" %>
+                    <%= button_to t("buttons.sign_out"), destroy_user_session_path, method: :delete, class: "nav-link text-danger" %>
                   </li>
                 </ul>
                 <!-- Sidebar menu item END -->
@@ -82,16 +86,16 @@
         <!-- Offcanvas menu button -->
         <div class="d-grid mb-0 d-lg-none w-100">
           <button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-            <i class="fas fa-sliders-h"></i> Menu
+            <i class="fas fa-sliders-h"></i> <%= t("sidebar.menu.menu") %>
           </button>
         </div>
 
         <div class="vstack gap-3">
           <!-- Personal info START -->
-          <div class="card border">
+          <div class="card border" id="personalInfoBlock">
             <!-- Card header -->
             <div class="card-header border-bottom">
-              <h4 class="card-header-title">Personal Information</h4>
+              <h4 class="card-header-title"><%= t("sidebar.card.personal_information") %></h4>
             </div>
 
             <!-- Card body START -->
@@ -101,35 +105,40 @@
                 <!-- Name -->
                 <div class="row g-3">
                   <div class="col-md-4">
-                    <%= f.label :last_name, "Last Name<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.label :last_name, t("activerecord.attributes.user.last_name").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
                   </div>
 
                   <div class="col-md-4">
-                    <%= f.label :first_name, "First Name<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.label :first_name, t("activerecord.attributes.user.first_name").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
                   </div>
 
                   <div class="col-md-4">
-                    <%= f.label :patronymic, "Patronymic<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.label :patronymic, t("activerecord.attributes.user.patronymic").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.text_field :patronymic, class: "form-control", placeholder: "Enter your patronymic" %>
                   </div>
 
                   <div class="col-md-6">
-                    <%= f.label :username, "Username<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.label :username, t("activerecord.attributes.user.username").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.text_field :username, class: "form-control", placeholder: "Enter your username" %>
                   </div>
 
                   <!-- Email -->
                   <div class="col-md-6">
-                    <%= f.label :email, "Email address<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.label :email, t("activerecord.attributes.user.email").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.email_field :email, class: "form-control", placeholder: "Enter your email id" %>
                   </div>
 
                   <!-- Mobile -->
                   <div class="col-md-6">
-                    <%= f.label :phone, "Mobile number<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.label :phone, t("activerecord.attributes.user.phone").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
                     <%= f.text_field :phone, class: "form-control", placeholder: "Enter your mobile number" %>
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    <%= f.label :preferred_currency, t("activerecord.attributes.user.preferred_currency").html_safe + "<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.select :preferred_currency, options_for_select(%w[UAH USD EUR], @user.preferred_currency), {}, class: "form-control" %>
                   </div>
 
                   <!-- CSRF Token -->
@@ -152,7 +161,7 @@
 
                   <!-- Button -->
                   <div class="col-12 text-end">
-                    <%= f.submit "Save Changes", class: "btn btn-primary mb-0" %>
+                    <%= f.submit t("buttons.save_changes"), class: "btn btn-primary mb-0" %>
                     <%#= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %>
                   </div>
                 </div>
@@ -164,78 +173,157 @@
           <!-- Personal info END -->
 
           <!-- Update Password START -->
-          <div class="card border">
+          <div class="card border" id="updatePasswordBlock">
             <!-- Card header -->
             <div class="card-header border-bottom">
-              <h4 class="card-header-title">Update Password</h4>
-              <p class="mb-0">Your current email address is <span class="text-primary"><%= current_user.email %></span></p>
+              <h4 class="card-header-title"><%= t("sidebar.card.update_password") %></h4>
+              <p class="mb-0"><%= t("activerecord.attributes.current_email_address") %><span class="text-primary"><%= current_user.email %></span></p>
             </div>
 
             <!-- Card body START -->
-            <%= form_with(model: current_user, url: user_password_path, method: :put, local: true, class: "card-body") do |form| %>
-              <!-- Current password -->
-              <div class="mb-3">
-                <%= form.label :current_password, class: "form-label" do %>
-                  Current password
-                <% end %>
-                <%= form.password_field :current_password, class: "form-control", placeholder: "Enter current password" %>
-              </div>
-              <!-- New password -->
-              <div class="mb-3">
-                <%= form.label :password, class: "form-label" do %>
-                  Enter new password
-                <% end %>
-                <div class="input-group">
-                  <%= form.password_field :password, class: "form-control fakepassword", placeholder: "Enter new password", id: "psw-input" %>
-                  <span class="input-group-text p-0 bg-transparent">
-                    <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
-                  </span>
+            <div class="card-body">
+              <%= form_for @user do |form| %>
+
+                <!-- Current password -->
+                <div class="mb-3">
+                  <%= form.label :current_password, class: "form-label" do %>
+                    <%= t("activerecord.attributes.user.current_password") %>
+                  <% end %>
+                  <%= form.password_field :current_password, class: "form-control", placeholder: t("placeholder.user.current_password") %>
                 </div>
-              </div>
-              <!-- Confirm -->
-              <div class="mb-3">
-                <%= form.label :password_confirmation, class: "form-label" do %>
-                  Confirm new password
+
+                <!-- New password -->
+                <div class="mb-3">
+                  <%= form.label :password, class: "form-label" do %>
+                    <%= t("placeholder.user.new_password") %>
+                  <% end %>
+                  <div class="input-group">
+                    <%= form.password_field :password, class: "form-control fakepassword", placeholder: t("placeholder.user.new_password"), id: "psw-input" %>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <i class="bi bi-eye-slash-fill"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Confirm -->
+                <div class="mb-3">
+                  <%= form.label :password_confirmation, class: "form-label" do %>
+                    <%= t("placeholder.user.confirm_new_password") %>
+                  <% end %>
+                  <%= form.password_field :password_confirmation, class: "form-control", placeholder: t("placeholder.user.confirm_new_password") %>
+                </div>
+
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <!-- Error Messages -->
+                <% if @user.errors.any? %>
+                  <div class="col-12">
+                    <div style="color: red">
+                      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                      <ul>
+                        <% @user.errors.each do |error| %>
+                          <li><%= error.full_message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
                 <% end %>
-                <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm new password" %>
-              </div>
 
-              <div class="text-end">
-                <%= form.submit "Change Password", class: "btn btn-primary mb-0" %>
-              </div>
-            <% end %>
-<!--            <form class="card-body">-->
-              <!-- Current password -->
-<!--              <div class="mb-3">-->
-<!--                <label class="form-label">Current password</label>-->
-<!--                <input class="form-control" type="password" placeholder="Enter current password">-->
-<!--              </div>-->
-              <!-- New password -->
-<!--              <div class="mb-3">-->
-<!--                <label class="form-label"> Enter new password</label>-->
-<!--                <div class="input-group">-->
-<!--                  <input class="form-control fakepassword" placeholder="Enter new password" type="password" id="psw-input">-->
-<!--                  <span class="input-group-text p-0 bg-transparent">-->
-<!--										<i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>-->
-<!--									</span>-->
-<!--                </div>-->
-<!--              </div>-->
-              <!-- Confirm -->
-<!--              <div class="mb-3">-->
-<!--                <label class="form-label">Confirm new password</label>-->
-<!--                <input class="form-control" type="password" placeholder="Confirm new password">-->
-<!--              </div>-->
-
-<!--              <div class="text-end">-->
-<!--                <a href="#" class="btn btn-primary mb-0">Change Password</a>-->
-<!--              </div>-->
-<!--            </form>-->
+                <div class="text-end">
+                  <%= form.submit t("buttons.change_password"), class: "btn btn-primary mb-0" %>
+                </div>
+              <% end %>
+            </div>
             <!-- Card body END -->
           </div>
           <!-- Update Password END -->
         </div>
+
+        <!-- Favourite subcategories START -->
+        <div class="card border" id="selectSubcategoriesBlock">
+          <div class="card-header border-bottom">
+            <h4 class="card-header-title"><%= t("sidebar.card.select_subcategories") %></h4>
+          </div>
+          <div class="card-body">
+            <%= form_for @user do |f| %>
+              <% Subcategory.all.each do |subcategory| %>
+                <div class="form-check">
+                  <%= check_box_tag "user[subcategory_ids][]", subcategory.id, @user.subcategories.include?(subcategory), class: "form-check-input", id: "subcategory_#{subcategory.id}" %>
+                  <%= label_tag "subcategory_#{subcategory.id}", t("subcategories.#{subcategory.subcategory_name}"), class: "form-check-label" %>
+                </div>
+              <% end %>
+              <div class="mt-3">
+                <%= f.submit t("buttons.save"), class: "btn btn-primary mr-2" %>
+                <%= link_to t("buttons.find_people"), find_people_user_path, type: "button", class: "btn btn-success", id: "findPeopleButton" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <!-- Favourite subcategories END -->
+
+        <!-- Order info START -->
+        <div id="orderInfoBlock" class="card border">
+          <!-- Card header -->
+          <div class="card-header border-bottom">
+            <h4 class="card-header-title"><%= t("sidebar.card.my_orders") %></h4>
+          </div>
+          <!-- Card body START -->
+          <div class="card-body">
+            <%= link_to t("buttons.my_orders"), orders_path(user_id: current_user.id), class: "btn btn-primary me-2" %>
+            <%= link_to t("buttons.new_order"), new_order_path(current_user), class: "btn btn-primary" %>
+          </div>
+          <!-- Card body END -->
+        </div>
+        <!-- Order info END -->
+
       </div>
       <!-- Main content END -->
     </div>
   </div>
 </section>
+
+<script defer>
+    $(document).ready(function() {
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('psw-input');
+
+        // Скрипт для перемикання видимості пароля
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.querySelector('i').classList.toggle('bi-eye');
+            togglePassword.querySelector('i').classList.toggle('bi-eye-slash-fill');
+        });
+
+        const personalInfoLink = $("#personalInfoLink");
+        const orderLink = $("#orderLink");
+        const personalInfoBlock = $("#personalInfoBlock");
+        const orderInfoBlock = $("#orderInfoBlock");
+        const updatePasswordBlock = $("#updatePasswordBlock");
+        const subcategoryLink = $("#subcategoryLink");
+        const subcategoryBlock = $("#selectSubcategoriesBlock");
+
+        personalInfoLink.on("click", function(event) {
+            event.preventDefault();
+            personalInfoBlock.show();
+            updatePasswordBlock.show();
+            subcategoryBlock.hide();
+            orderInfoBlock.hide();
+        });
+
+        orderLink.on("click", function(event) {
+            event.preventDefault();
+            personalInfoBlock.hide();
+            updatePasswordBlock.hide();
+            subcategoryBlock.hide();
+            orderInfoBlock.show();
+        });
+
+        subcategoryLink.on("click", function(event) {
+            event.preventDefault();
+            personalInfoBlock.hide();
+            updatePasswordBlock.hide();
+            orderInfoBlock.hide();
+            subcategoryBlock.show();
+        });
+    });
+</script>
