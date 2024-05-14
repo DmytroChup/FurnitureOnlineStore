@@ -1,4 +1,75 @@
-<div class="container pt-3 mb-5">
+<section class="pt-3 mt-5 mb-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-8 col-xl-8">
+
+        <div class="vstack gap-3">
+
+          <div class="card border" id="personalInfoBlock">
+
+            <div class="card-header border-bottom">
+              <h4 class="card-header-title"><%= @category.category_name %> - Category Information </h4>
+            </div>
+
+            <div class="card-body">
+              <%= form_for @category do |f| %>
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <%= f.label :description, "Description<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
+                    <%= f.text_area :description, class: "form-control large-input", placeholder: "Enter description" %>
+                  </div>
+
+                  <div class="col-12 text-end">
+                    <%= f.submit "Save Changes", class: "btn btn-primary mb-0" %>
+                  </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+              <% end %>
+
+              <div style="margin-top: 20px;"></div>
+
+              <div class="col-lg-4 col-xl-4">
+                <div class="card border" id="personalInfoBlock">
+                  <div class="card-header border-bottom">
+                    <h4 class="card-header-title">Subcategories</h4>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <div class="list-group">
+                        <% @subcategories&.each do |subcategory| %>
+                          <%= link_to subcategory.subcategory_name, subcategory, class: "list-group-item list-group-item-action btn btn-block" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-xl-4">
+                <div class="card border" id="personalInfoBlock">
+                  <div class="card-header border-bottom">
+                    <h4 class="card-header-title">Products</h4>
+                  </div>
+                    <div class="row g-3">
+                      <div class="col-md-12">
+                        <div class="list-group">
+                          <% @products&.each do |product| %>
+                            <%= link_to product.name, product, class: "list-group-item list-group-item-action btn btn-block" %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              </div>
+          </div>
+</section>
+
+<!-- <div class="container pt-3 mb-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card position-relative">
@@ -15,4 +86,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
