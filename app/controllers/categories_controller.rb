@@ -8,6 +8,9 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1 or /categories/1.json
   def show
+    @category = Category.find(params[:id])
+    @subcategories = @category.subcategories
+    @products = @subcategories.map(&:products).flatten
   end
 
   # GET /categories/new
@@ -65,6 +68,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:category_name)
+      params.require(:category).permit(:category_name, :description)
     end
 end
