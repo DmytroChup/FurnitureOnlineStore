@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @subcategories = @category.subcategories
-    @products = @subcategories.map(&:products).flatten
+    # @products = @subcategories.map(&:products).flatten
   end
 
   # GET /categories/new

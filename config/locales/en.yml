@@ -124,6 +124,7 @@ en:
     category:
       new_category: "New category"
       back_categories: "Back to categories"
+      back_category: "Back to category"
       create_category: "Create Category"
       edit_category: "Edit this category"
       destroy_category: "Destroy this category"
@@ -203,6 +204,15 @@ en:
     Armchairs & chairs: "Armchairs & chairs"
     Garden furniture: "Garden furniture"
     Accessories: "Accessories"
+  descriptions:
+    Upholstered furniture: "This category encompasses furniture pieces that feature cushioned seating or surfaces covered in fabric or leather upholstery. Examples include sofas, love seats, armchairs, ottomans, and upholstered beds, offering comfort and style for various interior spaces"
+    Display & storage cabinets: "Furniture pieces designed to showcase decorative items while also providing storage solutions. Display cabinets typically feature glass panels or shelves for exhibiting collectibles, while storage cabinets offer enclosed spaces such as drawers and cabinets for organizing various items"
+    Hallways: "Furniture specifically designed for hallways, transitional spaces in homes or buildings. This category includes items like consoles, hall tables, benches, coat racks, or umbrella stands, enhancing the functionality and aesthetics of hallways while providing storage and seating options"
+    Beds: "Furniture pieces designed for sleeping or resting, ranging from single to king-sized mattresses supported by frames or platforms. Beds come in various styles, such as canopy beds, bunk beds, platform beds, or traditional bed frames, catering to different preferences and room sizes"
+    Tables: "Versatile furniture pieces with flat surfaces supported by legs, used for various purposes such as dining, working, or displaying items. Tables include dining tables, coffee tables, side tables, console tables, and desks, serving as essential elements in residential, commercial, and outdoor spaces"
+    Armchairs & chairs: "Seating furniture designed for individual comfort, typically featuring armrests and backrests. Armchairs and chairs come in diverse styles, including club chairs, wing back chairs, recliners, dining chairs, accent chairs, and occasional chairs, offering functional and decorative seating options for different interior settings"
+    Garden furniture: "Outdoor furniture crafted from weather-resistant materials for use in gardens, patios, or outdoor living spaces. Garden furniture includes items like outdoor dining sets, lounge chairs, benches, hammocks, umbrellas, and garden tables, providing comfort and style for outdoor relaxation and entertainment"
+    Accessories: "Decorative and functional items used to complement and enhance the ambiance of interior spaces. Accessories encompass a wide range of items, including throw pillows, rugs, curtains, lighting fixtures, wall art, mirrors, vases, candles, and decorative objects, allowing for personalization and style expression within a room"
   subcategories:
     Sofas: "Sofas"
     Ottomans: "Ottomans"

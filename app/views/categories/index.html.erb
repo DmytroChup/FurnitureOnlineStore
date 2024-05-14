@@ -1,13 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<h1 class="text-center"><%= t("heading.category.categories") %></h1>
+<h1 class="text-center mb-3"><%= t("heading.category.categories") %></h1>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center mx-3">
   <% @categories.each_slice(3) do |group| %>
     <div class="col-md-4">
       <div class="list-group">
         <% group.each do |category| %>
-          <%= link_to t("categories.#{category.category_name}"), category, class: "list-group-item list-group-item-action" %>
+          <%= link_to t("categories.#{category.category_name}"), category, class: "list-group-item list-group-item-action mb-2" %>
         <% end %>
       </div>
     </div>

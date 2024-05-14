@@ -1,89 +1,24 @@
-<section class="pt-3 mt-5 mb-5">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-lg-8 col-xl-8">
-
-        <div class="vstack gap-3">
-
-          <div class="card border" id="personalInfoBlock">
-
-            <div class="card-header border-bottom">
-              <h4 class="card-header-title"><%= @category.category_name %> - Category Information </h4>
-            </div>
-
-            <div class="card-body">
-              <%= form_for @category do |f| %>
-                <div class="row g-3">
-                  <div class="col-md-4">
-                    <%= f.label :description, "Description<span class='text-danger'>*</span>".html_safe, class: "form-label" %>
-                    <%= f.text_area :description, class: "form-control large-input", placeholder: "Enter description" %>
-                  </div>
-
-                  <div class="col-12 text-end">
-                    <%= f.submit "Save Changes", class: "btn btn-primary mb-0" %>
-                  </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-              <% end %>
-
-              <div style="margin-top: 20px;"></div>
-
-              <div class="col-lg-4 col-xl-4">
-                <div class="card border" id="personalInfoBlock">
-                  <div class="card-header border-bottom">
-                    <h4 class="card-header-title">Subcategories</h4>
-                  </div>
-                  <div class="row g-3">
-                    <div class="col-md-12">
-                      <div class="list-group">
-                        <% @subcategories&.each do |subcategory| %>
-                          <%= link_to subcategory.subcategory_name, subcategory, class: "list-group-item list-group-item-action btn btn-block" %>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-xl-4">
-                <div class="card border" id="personalInfoBlock">
-                  <div class="card-header border-bottom">
-                    <h4 class="card-header-title">Products</h4>
-                  </div>
-                    <div class="row g-3">
-                      <div class="col-md-12">
-                        <div class="list-group">
-                          <% @products&.each do |product| %>
-                            <%= link_to product.name, product, class: "list-group-item list-group-item-action btn btn-block" %>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>
-              </div>
-          </div>
-</section>
-
-<!-- <div class="container pt-3 mb-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card position-relative">
-        <div class="card-body">
-          <p style="color: green;"><%= notice %></p>
-
-          <%= render @category %>
-        </div>
-        <div class="card-footer d-flex justify-content-center gap-2">
-            <%= link_to t("buttons.category.edit_category"), edit_category_path(@category), class: "btn btn-primary btn-sm mr-2" %>
-            <%= link_to t("buttons.category.back_categories"), categories_path, class: "btn btn-secondary btn-sm mr-2" %>
-            <%= button_to t("buttons.category.destroy_category"), @category, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
-        </div>
-      </div>
-    </div>
+<div class="p-4 p-md-5 mb-4 mx-5 rounded text-body-emphasis bg-body-secondary">
+  <div class="col-lg-8 px-0">
+    <h1 class="display-4 fst-italic"><%= t("categories.#{@category.category_name}") %></h1>
+    <p class="lead my-3"><%= t("descriptions.#{@category.category_name}") %></p><br>
+    <p class="lead mb-0"><a href="<%= categories_path %>" class="text-body-emphasis fw-bold"><%= t("buttons.category.back_categories") %></a></p>
   </div>
-</div> -->
+</div>
+
+<div class="container mt-4 mb-5">
+  <h3 class="mb-3"><%= t("heading.subcategory.subcategories") %></h3>
+  <div class="row row-cols-1 row-cols-md-5 g-3 justify-content-start">
+    <% @subcategories&.each do |subcategory| %>
+      <div class="col">
+        <%= link_to subcategory_path(subcategory), class: "link-light" do %>
+          <div class="card shadow-sm d-flex flex-column h-100">
+            <div class="card-body">
+              <p class="card-text text-center h5"><%= t("subcategories.#{subcategory.subcategory_name}") %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
