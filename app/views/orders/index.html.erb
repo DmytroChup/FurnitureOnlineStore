@@ -1,14 +1,50 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <p style="color: green;"><%= notice %></p>
+      <h1><%= t("heading.order.orders") %></h1>
+    </div>
+  </div>
 
-<h1>Orders</h1>
-
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
-  <% end %>
+  <div class="table-responsive mx-auto" style="width: 95%;">
+    <table class="table table-striped" style="width: 100%;">
+      <thead>
+      <tr>
+        <th class="w-10">id</th>
+        <th class="w-10"><%= t("activerecord.attributes.order.items") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.order.total") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.order.order_date") %></th>
+        <th class="w-10">Completion date</th>
+        <th class="w-10"><%= t("activerecord.attributes.order.order_address") %></th>
+        <th class="w-10">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @orders.order(created_at: :desc).each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td>
+              <% order.products.each_with_index do |item, index| %>
+                <%= t("products.#{item.name}") %>
+                <% unless index == order.products.size - 1 %> ,
+                <% end %>
+              <% end %>
+            </td>
+            <td><%= order.total %></td>
+            <td><%= order.order_date %></td>
+            <td><%= order.order_completion_date%></td>
+            <td><%= order.order_address %></td>
+            <td>
+              <%= link_to t("buttons.order.show_order"), order, class: "btn btn-primary btn-sm mr-2" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 text-center">
+      <%= link_to t("buttons.new_order"), new_order_path(current_user), class: "btn btn-success" %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New order", new_order_path %>

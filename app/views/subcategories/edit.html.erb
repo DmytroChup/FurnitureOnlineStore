@@ -1,16 +1,17 @@
-<div class="container">
-  <div class="row justify-content-center align-items-center" style="height: 50vh;">
-    <div class="col-md-6 text-center">
-      <div class="card">
-        <div class="card-body text-center">
-          <h1>Editing subcategory</h1>
-
-          <%= render "form", subcategory: @subcategory %>
-
-          <div class="mt-3">
-          <%= link_to "Show this subcategory", @subcategory, class: "btn btn-primary mr-2" %> |
-          <%= link_to "Back to subcategories", subcategories_path, class: "btn btn-secondary" %>
+<div class="container pt-3 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card position-relative">
+        <div class="card-header">
+          <h1><%= t("heading.subcategory.edit") %></h1>
         </div>
+        <div class="card-body">
+          <%= render "form", subcategory: @subcategory %>
+        </div>
+
+        <div class="card-footer d-flex justify-content-center mt-3">
+            <%= link_to t("buttons.subcategory.show_subcategory"), @subcategory, class: "btn btn-primary me-2" %>
+            <%= link_to t("buttons.subcategory.back_subcategories"), subcategories_path, class: "btn btn-secondary" %>
         </div>
       </div>
     </div>

@@ -50,3 +50,37 @@
 #newProductInfoBlock {
   display: none;
 }
+
+#selectSubcategoriesBlock {
+  display: none;
+}
+
+.large-input {
+  width: 250%;
+  height: 100px;
+  resize: vertical;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* меняйте 150px на нужную вам ширину чекбокса */
+  gap: 10px; /* расстояние между чекбоксами */
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
+.product-container {
+  display: flex;
+}
+
+.product-image {
+  flex: 0 0 auto;
+  margin-right: 50px;
+}
+
+.product-details {
+  flex: 1 1 auto;
+}

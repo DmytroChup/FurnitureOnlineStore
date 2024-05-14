@@ -3,7 +3,7 @@
     <h1 class="text-center">New product</h1>
 
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div class="card">
           <div class="card-body mx-auto">
               <%= render "form", product: @product %>
@@ -13,7 +13,7 @@
     </div>
     <br>
     <div class="text-center">
-      <%= link_to "Back to products", products_path, class: "btn btn-secondary" %>
+      <%= link_to t("buttons.product.back_to_products"), products_path, class: "btn btn-secondary" %>
     </div>
   </div>
 </div>

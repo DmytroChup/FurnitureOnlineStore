@@ -1,0 +1,21 @@
+<div class="container private_chat" data-controller="chat-subscription" data-chat-subscription-private-chat-id-value="<%= @private_chat.id %>">
+  <% profile_to_show = @profile %>
+  <% profile_name = profile_to_show.is_a?(User) ? profile_to_show.username : profile_to_show.producer_name %>
+
+  <h1><%= profile_name %></h1>
+
+  <div class="messages" data-chat-subscription-target="messages">
+    <% @private_chat.messages.each do |message| %>
+      <%= render "messages/message", message: message %>
+    <% end %>
+  </div>
+
+  <%= simple_form_for [@profile, @private_chat, @message],
+                      html: { data: { action: "turbo:submit-end->chat-subscription#resetForm" }, class: "d-flex"} do |f| %>
+    <%= f.input :content,
+                label: false,
+                placeholder: "Message to #{profile_name}",
+                wrapper_html: {class: "flex-grow-1"} %>
+    <%= f.submit "Send", class: "btn btn-primary mb-3 send__btn" %>
+  <% end %>
+</div>

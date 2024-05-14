@@ -1,0 +1,14 @@
+# lefthook.yml
+
+pre-commit:
+  parallel: true
+  commands:
+    rubocop:
+      tags: backend style
+      exclude: "lint_commit_msg.rb"
+      run: rubocop --force-exclusion {all_files}
+
+commit-msg:
+  commands:
+    lint-commit-msg:
+      run: ruby .hooks/lint_commit_msg.rb

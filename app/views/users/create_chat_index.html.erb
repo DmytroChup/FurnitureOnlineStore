@@ -1,0 +1,10 @@
+<h1>Choose a Producer to Chat With:</h1>
+
+<%= form_tag create_chat_user_path, method: :post do %>
+  <div class="form-group">
+    <%= label_tag :producer_id, "Choose a Producer:" %>
+    <%= select_tag :producer_id, options_for_select(@producers.map { |producer| [producer.producer_name, producer.id] }) %>
+  </div>
+
+  <%= submit_tag "Create Chat", class: "btn btn-primary" %>
+<% end %>

@@ -1,37 +1,44 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[show edit update destroy]
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = if params[:user_id]
+                Order.where(user_id: params[:user_id])
+              else
+                Order.all
+              end
   end
 
   # GET /orders/1 or /orders/1.json
-  def show
+  def show; end
+
+  def list
+    @orders = current_user.orders.includes(order_items: {product: :producer})
   end
 
   # GET /orders/new
   def new
     @order = Order.new
+
+    Product.all.each do |product|
+      @order.order_items.build(product_id: product.id)
+    end
   end
 
   # GET /orders/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
 
-    def prodlist
-      @orders = Order.includes(:user, order_items: { product: :producer }).joins(order_items: :product).where(products: { producer_id: current_producer.id })
-    end
-
-
-
-
     respond_to do |format|
       if @order.save
+        calculate_total(@order) # Вызываем метод для вычисления общей суммы
+
         format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @order }
       else
@@ -45,6 +52,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
+        calculate_total(@order) # Вызываем метод для вычисления общей суммы
         format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -56,7 +64,8 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
-    @order.destroy!
+    @order.order_items.destroy_all # Удаляем все связанные элементы заказа
+    @order.destroy # Затем удаляем сам заказ
 
     respond_to do |format|
       format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
@@ -65,13 +74,19 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:user_id, :payment_history_id, :order_date, :order_address)
-    end
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Метод для вычисления и обновления общей суммы заказа
+  def calculate_total(order)
+    total = order.order_items.sum(:price)
+    order.update(total:)
+  end
+
+  def order_params
+    params.require(:order).permit(:user_id, :payment_history_id, :order_date, :order_address, :total,
+                                  :order_completion_date, order_items_attributes: %i[id quantity product_id price])
+  end
 end
