@@ -24,8 +24,10 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     def prodlist
-      @orders = current_produser.products.order_items.order.includes(order_items: { product: :producer }, user: :orders)
+      @orders = Order.includes(:user, order_items: { product: :producer }).joins(order_items: :product).where(products: { producer_id: current_producer.id })
     end
+
+
 
 
     respond_to do |format|

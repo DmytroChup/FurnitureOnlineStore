@@ -2,8 +2,6 @@ class Producer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :products
-  has_many :order_items, through: :products
-  has_many :orders, through: :order_items
 
   validates :phone, presence: true, format: { with: /\A\d{10}\z/, message: "must be 10 digits" }
   # validates :producer_id, presence: true
