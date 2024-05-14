@@ -28,6 +28,7 @@ gem "rails-i18n", "~> 7.0.0"
 gem "rss", "~> 0.2.9"
 
 gem "activeadmin", "3.2.0"
+gem "simple_calendar", "~>  3.0.4"
 gem "simple_form", "~> 5.3.0"
 
 group :development, :test do

@@ -15,6 +15,10 @@ class OrdersController < ApplicationController
   # GET /orders/1 or /orders/1.json
   def show; end
 
+  def list
+    @orders = current_user.orders.includes(order_items: {product: :producer})
+  end
+
   # GET /orders/new
   def new
     @order = Order.new
@@ -83,6 +87,6 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:user_id, :payment_history_id, :order_date, :order_address, :total,
-                                  order_items_attributes: %i[id quantity product_id price])
+                                  :order_completion_date, order_items_attributes: %i[id quantity product_id price])
   end
 end
