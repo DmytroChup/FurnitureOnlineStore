@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h1>Subcategories</h1>
+  <h1><%= t("heading.subcategory.subcategories") %></h1>
 </div>
 
 <div class="table-responsive mx-auto" style="width: 75%;">
@@ -7,18 +7,19 @@
     <thead>
     <tr>
       <th class="w-20">ID</th>
-      <th class="w-50">Name</th>
-      <th class="w-20">Main category</th>
+      <th class="w-50"><%= t("activerecord.attributes.subcategory.subcategory_name") %></th>
+      <th class="w-20"><%= t("activerecord.attributes.subcategory.category_id") %></th>
+      <th class="w-10">Actions</th>
     </tr>
     </thead>
     <tbody>
     <% @subcategories.each do |subcategory| %>
       <tr>
         <td><%= subcategory.id %></td>
-        <td><%= subcategory.subcategory_name %></td>
+        <td><%= t("subcategories.#{subcategory.subcategory_name}") %></td>
         <td><%= subcategory.category_id %></td>
         <td>
-          <%= link_to "Show", subcategory, class: "btn btn-primary btn-sm" %>
+          <%= link_to t("buttons.show"), subcategory, class: "btn btn-primary btn-sm" %>
         </td>
       </tr>
     <% end %>
@@ -27,5 +28,5 @@
 </div>
 
 <div class="text-center">
-  <%= link_to "New subcategory", new_subcategory_path, class: "btn btn-success" %>
+  <%= link_to t("buttons.subcategory.new_subcategory"), new_subcategory_path, class: "btn btn-success" %>
 </div>

@@ -1,11 +1,11 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <div class="container">
     <div>
-      <h1 class="text-center">Editing product</h1>
+      <h1 class="text-center"><%= t("heading.product.edit") %></h1>
     </div>
 
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div class="card">
           <div class="card-body mx-auto">
             <%= render "form", product: @product %>
@@ -17,7 +17,7 @@
   </div>
 
   <div class="text-center">
-    <%= link_to "Show this product", @product, class: "btn btn-primary" %> |
-    <%= link_to "Back to products", products_path, class: "btn btn-secondary" %>
+    <%= link_to t("buttons.product.show_product"), @product, class: "btn btn-primary" %> |
+    <%= link_to t("buttons.product.back_to_products"), products_path, class: "btn btn-secondary" %>
   </div>
 </div>

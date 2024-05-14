@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddConfirmableToProducers < ActiveRecord::Migration[7.1]
   def change
     change_table :producers do |t|

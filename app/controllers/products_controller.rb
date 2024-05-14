@@ -1,13 +1,18 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    # @products = Product.all
+    @usd_buy, @eur_buy = find_currency
+    @products = Product.all.order(:name)
   end
 
   # GET /products/1 or /products/1.json
   def show
+    @usd_buy, @eur_buy = find_currency
   end
 
   # GET /products/new
@@ -16,8 +21,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /products or /products.json
   def create
@@ -57,14 +61,40 @@ class ProductsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  def export_to_csv
+    @products = Product.all
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:subcategory_id, :name, :price, :height, :width, :length, :color, :material, :producer_id, :availability)
+    respond_to do |format|
+      format.csv do
+        send_data @products.to_csv, filename: "products-#{Date.today}.csv"
+      end
     end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params[:product][:price] = params[:product][:price].to_s
+    params.require(:product).permit(:subcategory_id, :name, :price, :height, :width, :length, :color, :material,
+                                    :producer_id, :availability, :product_image)
+  end
+
+  def find_currency
+    @currency_rates = PrivatbankApi.fetch_currency_rates
+    @currency_rates.each do |rate|
+      case rate["ccy"]
+      when "USD"
+        @usd_buy = rate["buy"].to_f
+      when "EUR"
+        @eur_buy = rate["buy"].to_f
+      end
+    end
+    [@usd_buy, @eur_buy]
+  end
 end

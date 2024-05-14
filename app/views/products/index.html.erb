@@ -1,57 +1,66 @@
-<p style="color: green;"><%= notice %></p>
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="text-center">
       <p style="color: green;"><%= notice %></p>
-      <h1>Products</h1>
+      <h1><%= t("sidebar.menu.products") %></h1>
     </div>
   </div>
 
-<div class="table-responsive mx-auto" style="width: 95%;">
-  <table class="table table-striped" style="width: 100%;">
-    <thead>
-    <tr>
-      <th class="w-10">ID</th>
-      <th class="w-10">Subcategory</th>
-      <th class="w-10">Name</th>
-      <th class="w-10">Price</th>
-      <th class="w-10">Height</th>
-      <th class="w-10">Width</th>
-      <th class="w-10">Length</th>
-      <th class="w-10">Color</th>
-      <th class="w-10">Material</th>
-      <th class="w-10">Producer</th>
-      <th class="w-10">Availability</th>
-      <th class="w-10">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @products.each do |product| %>
+  <div class="table-responsive mx-auto" style="width: 95%;">
+    <table class="table table-striped" style="width: 100%;">
+      <thead>
       <tr>
-        <td><%= product.id %></td>
-        <td><%= product.subcategory_id %></td>
-        <td><%= product.name %></td>
-        <td><%= product.price %></td>
-        <td><%= product.height %></td>
-        <td><%= product.width %></td>
-        <td><%= product.length %></td>
-        <td><%= product.color %></td>
-        <td><%= product.material %></td>
-        <td><%= product.producer_id %></td>
-        <td><%= product.availability %></td>
-        <td>
-          <%= link_to "Show", product, class: "btn btn-primary btn-sm mr-2" %>
-        </td>
+        <th class="w-10">ID</th>
+        <th class="w-10"><%= t("activerecord.attributes.product.subcategory_id") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.name") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.price") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.height") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.width") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.length") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.color") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.material") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.producer_id") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.product.availability") %></th>
+        <th class="w-10">Actions</th>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= t("subcategories.#{product.subcategory.subcategory_name}") %></td>
+          <td><%= t("products.#{product.name}") %></td>
+          <td>
+            <% preferred_currency = current_user.present? ? current_user.preferred_currency : 'UAH' %>
+            <% case preferred_currency %>
+            <% when 'UAH' %>
+              <%= number_to_currency(product.price, precision: 2, unit: '', format: "%n ₴") %>
+            <% when 'USD' %>
+              <%= number_to_currency(product.price / @usd_buy, precision: 2, unit: '', format: "%n $") if @usd_buy.present? %>
+            <% when 'EUR' %>
+              <%= number_to_currency(product.price / @eur_buy, precision: 2, unit: '', format: "%n €") if @eur_buy.present? %>
+            <% end %>
+          </td>
+          <td><%= product.height %></td>
+          <td><%= product.width %></td>
+          <td><%= product.length %></td>
+          <td><%= t("colors.#{product.color}") %></td>
+          <td><%= t("materials.#{product.material}") %></td>
+          <td><%= product.producer.producer_name %></td>
+          <td><%= product.availability %></td>
+          <td>
+            <%= link_to t("buttons.show"), product, class: "btn btn-primary btn-sm mr-2" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 
   <div class="row justify-content-center mt-3">
     <div class="col-md-6 text-center">
-      <%= link_to "New product", new_product_path, class: "btn btn-success" %>
+      <%= link_to t("buttons.product.new_product"), new_product_path, class: "btn btn-success" %>
+      <%= link_to t("buttons.product.export_CSV"), export_to_csv_products_path(format: :csv), class: "btn btn-primary" %>
     </div>
   </div>
 </div>
