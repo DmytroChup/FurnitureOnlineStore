@@ -8,16 +8,17 @@
     </div>
   </div>
 
-  <%= form_with(url: products_path, method: "get") do %>
+  <%= form_with(url: products_path, method: "get", local: true, html: { class: "d-flex", style: "justify-content: center;" }) do %>
     <div class="form-group mx-sm-3 mb-2">
-    <%= select_tag :sort_by, options_for_select([['Average rating', 'average_rating'], ['Number of comments', 'review_count'], ['Category', 'category'], ['Creation time', 'created_at']], params[:sort_by]), onchange: 'this.form.submit();', class: 'form-control mr-2' %>
-    <%= select_tag :direction, options_for_select([['Descending', 'desc'], ['Ascending', 'asc']], params[:direction]), onchange: 'this.form.submit();', class: 'form-control mr-2' %>
+      <%= select_tag :sort_by, options_for_select([['Rating', 'average_rating'], ['Number of comments', 'review_count'], ['Time of creation', 'created_at']], params[:sort_by]), class: "custom-select", onchange: 'this.form.submit();' %>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= select_tag :direction, options_for_select([['Ascending', 'asc'], ['Descending', 'desc']], params[:direction]), class: "custom-select", onchange: 'this.form.submit();' %>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= select_tag :category, options_for_select(Category.all.map { |category| [category.category_name, category.id] }, params[:category]), include_blank: true, class: "custom-select", onchange: 'this.form.submit();' %>
     </div>
   <% end %>
-
-
-
-
 
 
   <div class="table-responsive mx-auto" style="width: 95%;">
