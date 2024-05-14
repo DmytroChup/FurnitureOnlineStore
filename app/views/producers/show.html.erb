@@ -62,6 +62,10 @@
 <!--                  </li>-->
 
                   <li class="nav-item">
+                  <%= link_to 'Order list', orders_prodlist_path(current_producer), class: 'nav-link text-dark' %>
+                  </li>
+                  
+                  <li class="nav-item">
                     <%= button_to t("buttons.sign_out"), destroy_producer_session_path, method: :delete, class: "nav-link text-danger" %>
                   </li>
                 </ul>
