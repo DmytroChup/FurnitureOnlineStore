@@ -8,7 +8,19 @@
     </div>
   </div>
 
-<div class="table-responsive mx-auto" style="width: 95%;">
+  <%= form_with(url: products_path, method: "get") do %>
+    <div class="form-group mx-sm-3 mb-2">
+    <%= select_tag :sort_by, options_for_select([['Average rating', 'average_rating'], ['Number of comments', 'review_count'], ['Category', 'category'], ['Creation time', 'created_at']], params[:sort_by]), onchange: 'this.form.submit();', class: 'form-control mr-2' %>
+    <%= select_tag :direction, options_for_select([['Descending', 'desc'], ['Ascending', 'asc']], params[:direction]), onchange: 'this.form.submit();', class: 'form-control mr-2' %>
+    </div>
+  <% end %>
+
+
+
+
+
+
+  <div class="table-responsive mx-auto" style="width: 95%;">
   <table class="table table-striped" style="width: 100%;">
     <thead>
     <tr>

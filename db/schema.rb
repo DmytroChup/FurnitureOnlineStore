@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_14_130933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
     t.string "category_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "payment_history_id"
+    t.datetime "order_completion_date"
     t.index ["payment_history_id"], name: "index_orders_on_payment_history_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -97,6 +99,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.string "comment"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "subcategories", force: :cascade do |t|
     t.string "subcategory_name"
     t.datetime "created_at", null: false
@@ -137,5 +150,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_110945) do
   add_foreign_key "payment_histories", "users"
   add_foreign_key "products", "producers"
   add_foreign_key "products", "subcategories"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
   add_foreign_key "subcategories", "categories"
 end

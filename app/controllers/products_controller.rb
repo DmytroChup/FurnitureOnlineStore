@@ -3,8 +3,25 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = Product.all.includes(:subcategory => :category)
+    @products = case params[:sort_by]
+                when 'average_rating'
+                  @products.sort_by { |product| product.average_rating.to_f }
+                when 'review_count'
+                  @products.sort_by { |product| product.review_count }
+                when 'category'
+                  @products.sort_by { |product| product.subcategory.category.category_name }
+                when 'created_at'
+                  @products.sort_by { |product| product.created_at.to_i }
+                else
+                  @products
+                end
+    @products.reverse! if params[:direction] == 'asc'
   end
+
+
+
+
 
   # GET /products/1 or /products/1.json
   def show
