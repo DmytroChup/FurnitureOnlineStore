@@ -6,12 +6,6 @@ class ProductsController < ApplicationController
     @products = SortProductsQuery.new(Product.all.includes(:subcategory => :category), params).call
   end
 
-
-
-
-
-
-
   # GET /products/1 or /products/1.json
   def show
   end
