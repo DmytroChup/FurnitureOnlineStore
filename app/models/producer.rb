@@ -5,6 +5,9 @@ class Producer < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :products
 
+  has_many :messages, as: :profile
+  has_many :private_chats_as_producer, class_name: "PrivateChat", foreign_key: :producer_id
+
   validates :phone, presence: true, format: {with: /\A\d{10}\z/, message: "must be 10 digits"}
   # validates :producer_id, presence: true
   # validates :producer_name, presence: true
