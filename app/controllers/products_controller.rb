@@ -3,8 +3,10 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = SortProductsQuery.new(Product.all.includes(:subcategory => :category), params).call
+    @products = SortProductsQuery.new(
+      SearchProductsQuery.new(Product.all.includes(:subcategory => :category), params).call, params).call
   end
+
 
   # GET /products/1 or /products/1.json
   def show
