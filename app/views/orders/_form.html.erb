@@ -47,12 +47,30 @@
   </div>
 
   <div>
-    <%= form.label :order_completion_date, style: "display: block" %>
-    <%= form.datetime_field :order_completion_date %>
+    <%= form.hidden_field :order_completion_date, id: "order_completion_date" %>
   </div>
 
   <div>
     <%= form.hidden_field :total %>
+  </div>
+
+  <div class="card">
+    <div class="card-header border-bottom">
+      <h4 class="card-header-title"><%= t("activerecord.attributes.order.order_completion_date") %></h4>
+    </div>
+    <div class="card-body text-center">
+      <%= month_calendar do |date| %>
+        <%= link_to '#' do %>
+          <div class="calendar-date" data-date="<%= date %>">
+            <%= date.day %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="selected_date_display" style="margin-top: 20px;" class="col-md-3 mb-3">
+    <%= t("activerecord.attributes.order.order_completion_date") %>: <span id="selected_date"></span>
   </div>
 
   <div>
@@ -119,5 +137,64 @@
 
         // Вызываем функцию при загрузке страницы, если есть выбранные чекбоксы
         updateQuantities();
+
+        // Работа с календарем
+        var currentDate = new Date();
+        var completionDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+        var completionDateString = completionDate.toISOString().split('T')[0];
+        document.getElementById("order_completion_date").value = completionDateString;
+
+        var selectedGreenDates = [];
+
+        function recalculateCompletionDate() {
+            let closestDate = null;
+            const completionDateObj = new Date(completionDateString);
+            selectedGreenDates.forEach(date => {
+                if (date >= completionDateObj && (!closestDate || date < closestDate)) {
+                    closestDate = date;
+                }
+            });
+
+            if (closestDate) {
+                document.getElementById("order_completion_date").value = closestDate.toISOString().split('T')[0];
+            } else {
+                let nextDate = new Date(completionDateObj);
+                while (true) {
+                    nextDate.setDate(nextDate.getDate() + 1);
+                    const dateElement = document.querySelector(`.calendar-date[data-date="${nextDate.toISOString().split('T')[0]}"]`);
+                    if (!dateElement || dateElement.style.backgroundColor !== 'red') {
+                        break;
+                    }
+                }
+                document.getElementById("order_completion_date").value = nextDate.toISOString().split('T')[0];
+            }
+        }
+
+        document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+            dateElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                const colors = ['', 'green', 'red'];
+                const currentColorIndex = colors.indexOf(dateElement.style.backgroundColor);
+                const nextColorIndex = (currentColorIndex + 1) % colors.length;
+                dateElement.style.backgroundColor = colors[nextColorIndex];
+                localStorage.setItem(dateElement.dataset.date, colors[nextColorIndex]);
+
+                if (colors[nextColorIndex] === 'green') {
+                    selectedGreenDates.push(new Date(dateElement.dataset.date));
+                } else {
+                    selectedGreenDates = selectedGreenDates.filter(d => d.getTime() !== new Date(dateElement.dataset.date).getTime());
+                }
+
+                recalculateCompletionDate();
+            });
+        });
+
+        // Добавляем код для отображения выбранной даты
+        document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+            dateElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById("selected_date").textContent = document.getElementById("order_completion_date").value;
+            });
+        });
     });
 </script>

@@ -1,6 +1,10 @@
 uk:
   en: Англійська
   uk: Українська
+  simple_calendar:
+    previous: "Попередній"
+    next: "Наступний"
+    today: "Сьогодні"
   currency:
     buy: "Купівля"
     sale: "Продаж"
@@ -156,6 +160,7 @@ uk:
         order_address: "Адреса замовлення"
         order_date: "Дата замовлення"
         item_name: "Назва товару"
+        order_completion_date: "Термін виконання замовлення"
       order_item:
         quantity: "Кількість"
         price: "Ціна"

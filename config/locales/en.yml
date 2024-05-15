@@ -185,6 +185,7 @@ en:
         order_address: "Order address"
         order_date: "Order date"
         item_name: "Item Name"
+        order_completion_date: "Order completion date"
       order_item:
         quantity: "Quantity"
         price: "Price"

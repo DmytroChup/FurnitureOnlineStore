@@ -84,3 +84,14 @@
 .product-details {
   flex: 1 1 auto;
 }
+
+.calendar-date {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  color: black;
+}
