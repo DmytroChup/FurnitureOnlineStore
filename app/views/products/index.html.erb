@@ -6,6 +6,26 @@
     </div>
   </div>
 
+  <%= form_with(url: products_path, method: "get", local: true, html: { class: "d-flex", style: "justify-content: center;" }) do %>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= select_tag :sort_by, options_for_select([['Rating', 'average_rating'], ['Number of comments', 'review_count'], ['Time of creation', 'created_at']], params[:sort_by]), class: "custom-select", onchange: 'this.form.submit();' %>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= select_tag :direction, options_for_select([['Ascending', 'asc'], ['Descending', 'desc']], params[:direction]), class: "custom-select", onchange: 'this.form.submit();' %>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= select_tag :category, options_for_select(Category.all.map { |category| [category.category_name, category.id] }, params[:category]), include_blank: true, class: "custom-select", onchange: 'this.form.submit();' %>
+    </div>
+  <% end %>
+  <%= form_with(url: products_path, method: "get", local: true, html: { class: "d-flex", style: "justify-content: center;" }) do %>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= text_field_tag :keyword, params[:keyword], class: "form-control square-input", placeholder: "Enter product name", style: "border-radius: 0; height: 30px; border: 1px solid black;" %>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= submit_tag "Search", class: "btn btn-primary mb-2", style: "border-radius: 0; height: 30px; padding: 0px 10px;" %>
+    </div>
+  <% end %>
+
   <div class="table-responsive mx-auto" style="width: 95%;">
     <table class="table table-striped" style="width: 100%;">
       <thead>

@@ -7,7 +7,9 @@ class ProductsController < ApplicationController
   def index
     # @products = Product.all
     @usd_buy, @eur_buy = find_currency
-    @products = Product.all.order(:name)
+    # @products = Product.all.order(:name)
+    @products = SortProductsQuery.new(
+      SearchProductsQuery.new(Product.all.includes(:subcategory => :category), params).call, params).call
   end
 
   # GET /products/1 or /products/1.json
