@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SortProductsQuery
-  def initialize(relation = Product.all, params = {})
+  def initialize(relation=Product.all, params={})
     @relation = relation
     @params = params
   end
@@ -12,25 +14,25 @@ class SortProductsQuery
   end
 
   def filter_by_category
-    if @params[:category].present?
-      @relation = @relation.joins(:subcategory).where(subcategories: { category_id: @params[:category] })
-    end
+    return unless @params[:category].present?
+
+    @relation = @relation.joins(:subcategory).where(subcategories: {category_id: @params[:category]})
   end
 
   def sort_by_param
     @relation = case @params[:sort_by]
-                when 'average_rating'
-                  @relation.sort_by { |product| product.average_rating.to_f }
-                when 'review_count'
-                  @relation.sort_by { |product| product.review_count }
-                when 'created_at'
-                  @relation.sort_by { |product| product.created_at.to_i }
+                when "average_rating"
+                  @relation.sort_by {|product| product.average_rating.to_f }
+                when "review_count"
+                  @relation.sort_by(&:review_count)
+                when "created_at"
+                  @relation.order(created_at: :desc)
                 else
                   @relation
                 end
   end
 
   def reverse_if_needed
-    @relation.reverse! if @params[:direction] == 'asc'
+    @relation = @relation.reverse if @params[:direction] == "asc"
   end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SearchProductsQuery
-  def initialize(scope = Product.all, params)
+  def initialize(params, scope=Product.all)
     @scope = scope
     @params = params
   end
@@ -11,9 +13,7 @@ class SearchProductsQuery
   private
 
   def by_keyword
-    if @params[:keyword].present?
-      @scope = @scope.where("name LIKE ?", "%#{@params[:keyword]}%")
-    end
+    @scope = @scope.where("name LIKE ?", "%#{@params[:keyword]}%") if @params[:keyword].present?
     @scope
   end
 end
