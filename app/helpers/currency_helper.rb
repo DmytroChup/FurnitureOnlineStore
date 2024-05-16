@@ -25,4 +25,17 @@ module CurrencyHelper
         (usd_sale / eur_sale)}"
     end
   end
+
+  def display_price(product_price, usd_buy, eur_buy, preferred_currency)
+    case preferred_currency
+    when 'UAH'
+      number_to_currency(product_price, precision: 2, unit: '', format: "%n ₴")
+    when 'USD'
+      number_to_currency(product_price / usd_buy, precision: 2, unit: '', format: "%n $") if usd_buy.present?
+    when 'EUR'
+      number_to_currency(product_price / eur_buy, precision: 2, unit: '', format: "%n €") if eur_buy.present?
+    else
+      number_to_currency(product_price, precision: 2, unit: '', format: "%n ₴")
+    end
+  end
 end

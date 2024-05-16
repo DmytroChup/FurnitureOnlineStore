@@ -30,7 +30,10 @@
                 <% end %>
               <% end %>
             </td>
-            <td><%= order.total %></td>
+            <td>
+              <% preferred_currency = current_user.present? ? current_user.preferred_currency : 'UAH' %>
+              <%= display_price(order.total, @usd_buy, @eur_buy, preferred_currency) %>
+            </td>
             <td><%= order.order_date %></td>
             <td><%= order.order_completion_date%></td>
             <td><%= order.order_address %></td>

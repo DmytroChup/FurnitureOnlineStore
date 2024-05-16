@@ -8,17 +8,13 @@ class UsersController < ApplicationController
 
     if user_signed_in?
       user_id = current_user.id
-      producer_id = @selected_profile.id
     else
       flash[:alert] = "You need to be logged in."
       redirect_to '/home/index' and return
     end
 
-    @private_chat = PrivateChat.get_private_chat(user_id, producer_id)
-
-    unless @private_chat
-        @private_chat = PrivateChat.create(user: current_user, producer: @selected_profile)
-    end
+    chat_service = PrivateChatService.new(current_user, @selected_profile)
+    @private_chat = chat_service.find_or_create_chat
 
     redirect_to user_private_chat_path(user_id, @private_chat)
   end
@@ -28,7 +24,8 @@ class UsersController < ApplicationController
   end
 
   def find_people
-    @found_users = User.joins(:subcategories).where(subcategories: { id: current_user.subcategory_ids }).distinct
+    search_service = UserSearchService.new(current_user)
+    @found_users = search_service.find_people
   end
 
   # GET /users or /users.json

@@ -10,10 +10,16 @@ class OrdersController < ApplicationController
               else
                 Order.all
               end
+
+    find_currency_service = FindCurrencyService.new
+    @usd_buy, @eur_buy = find_currency_service.call
   end
 
   # GET /orders/1 or /orders/1.json
-  def show; end
+  def show
+    find_currency_service = FindCurrencyService.new
+    @usd_buy, @eur_buy = find_currency_service.call
+  end
 
   def list
     @orders = current_user.orders.includes(order_items: {product: :producer})
