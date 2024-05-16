@@ -2,17 +2,22 @@
   <div class="row row-cols-1 row-cols-md-3 g-3 justify-content-center">
     <% @products.each do |product| %>
       <div class="col">
-        <div class="card shadow-sm">
-          <div class="photo">
-            <!-- Placeholder for photo -->
-          </div>
-          <div class="card-body">
-            <p class="card-text text-center h5"><%= product.name %></p>
-            <% if product.subcategory.present? && product.subcategory.category.present? %>
-              <p class="card-category text-center h5">Category: <%= product.subcategory.category.category_name %></p>
+        <%= link_to product_path(product), class: "link-light" do %>
+          <div class="card shadow-sm d-flex flex-column h-100">
+            <% if product.product_image.attached? %>
+              <%= image_tag url_for(product.product_image), class: "mx-auto img-fluid" %>
+            <% else %>
+              <div class="placeholder" style="background-color: #55595c; width: 100%; height: 250px;"></div>
             <% end %>
+
+            <div class="card-body">
+              <p class="card-text text-center h5"><%= t("products.#{product.name}") %></p>
+              <% if product.subcategory.present? && product.subcategory.category.present? %>
+                <p class="card-category text-center h5"><%= t("heading.category.category") %>: <%= t("categories.#{product.subcategory.category.category_name}") %></p>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>

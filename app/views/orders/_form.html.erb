@@ -12,26 +12,189 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="form-group mt-3">
+    <%= form.label :product_ids, t("heading.order.select_products"), class: "form-label" %>
+    <div class="checkbox-grid">
+      <%= form.collection_check_boxes :product_ids, Product.all, :id, :name, class: "checkbox" do |b| %>
+        <div class="checkbox-item">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div id="quantities" class="form-group">
+    <!-- Этот блок будет заполняться динамически JavaScript -->
+  </div>
+  <br>
+  <div class="col-md-3 mb-3">
+    <%= form.label :payment_history_id, class: "form-label" %>
+    <%= form.number_field :payment_history_id, class: "form-control" %>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <%= form.label :order_date, class: "form-label" %>
+    <%= form.datetime_field :order_date, class: "form-control" %>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <%= form.label :order_address, class: "form-label" %>
+    <%= form.text_field :order_address, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :payment_history_id, style: "display: block" %>
-    <%= form.number_field :payment_history_id %>
+    <%= form.hidden_field :order_completion_date, id: "order_completion_date" %>
   </div>
 
   <div>
-    <%= form.label :order_date, style: "display: block" %>
-    <%= form.datetime_field :order_date %>
+    <%= form.hidden_field :total %>
+  </div>
+
+  <div class="card">
+    <div class="card-header border-bottom">
+      <h4 class="card-header-title"><%= t("activerecord.attributes.order.order_completion_date") %></h4>
+    </div>
+    <div class="card-body text-center">
+      <%= month_calendar do |date| %>
+        <%= link_to '#' do %>
+          <div class="calendar-date" data-date="<%= date %>">
+            <%= date.day %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="selected_date_display" style="margin-top: 20px;" class="col-md-3 mb-3">
+    <%= t("activerecord.attributes.order.order_completion_date") %>: <span id="selected_date"></span>
   </div>
 
   <div>
-    <%= form.label :order_address, style: "display: block" %>
-    <%= form.text_field :order_address %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit t("buttons.order.create_order"), class: "btn btn-primary mt-3" %>
   </div>
 <% end %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Функция для обновления полей ввода количества при изменении чекбоксов
+        function updateQuantities() {
+            var quantitiesDiv = document.getElementById("quantities");
+            quantitiesDiv.innerHTML = ""; // Очищаем содержимое
+
+            // Для каждого выбранного чекбокса создаем соответствующее поле ввода количества
+            document.querySelectorAll('input[name="order[product_ids][]"]:checked').forEach(function(checkbox) {
+                var productId = checkbox.value;
+                var productName = checkbox.parentElement.textContent.trim();
+
+                var quantityLabel = document.createElement("label");
+                quantityLabel.textContent = "Quantity for  " + productName + ":";
+
+                var quantityInput = document.createElement("input");
+                quantityInput.type = "number";
+                quantityInput.name = "order[order_items_attributes][][quantity]";
+                quantityInput.min = 1;
+                // quantityInput.classList.add("quantity-field");
+                quantityInput.classList.add("form-control", "quantity-field");
+                quantityInput.dataset.productId = productId; // Добавляем атрибут для идентификации продукта
+
+                var hiddenProductId = document.createElement("input");
+                hiddenProductId.type = "hidden";
+                hiddenProductId.name = "order[order_items_attributes][][product_id]";
+                hiddenProductId.value = productId;
+
+                var hiddenPrice = document.createElement("input");
+                hiddenPrice.type = "hidden";
+                hiddenPrice.name = "order[order_items_attributes][][price]";
+
+                var quantityDiv = document.createElement("div");
+                quantityDiv.classList.add("col-md-3");
+                quantityDiv.appendChild(quantityLabel);
+                quantityDiv.appendChild(quantityInput);
+                quantityDiv.appendChild(hiddenProductId);
+                quantityDiv.appendChild(hiddenPrice);
+
+                quantitiesDiv.appendChild(quantityDiv);
+
+                // Обработчик для пересчета цены при изменении количества
+                quantityInput.addEventListener("input", function() {
+                    var price = parseFloat(quantityInput.value) * parseFloat(checkbox.dataset.productPrice);
+                    hiddenPrice.value = isNaN(price) ? '' : price.toFixed(2);
+                });
+
+                // Сразу заполняем цену при загрузке страницы
+                quantityInput.dispatchEvent(new Event('input'));
+            });
+        }
+
+        // Обработчик изменения чекбоксов
+        document.querySelectorAll('input[name="order[product_ids][]"]').forEach(function(checkbox) {
+            checkbox.addEventListener("change", updateQuantities);
+        });
+
+        // Вызываем функцию при загрузке страницы, если есть выбранные чекбоксы
+        updateQuantities();
+
+        // Работа с календарем
+        var currentDate = new Date();
+        var completionDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+        var completionDateString = completionDate.toISOString().split('T')[0];
+        document.getElementById("order_completion_date").value = completionDateString;
+
+        var selectedGreenDates = [];
+
+        function recalculateCompletionDate() {
+            let closestDate = null;
+            const completionDateObj = new Date(completionDateString);
+            selectedGreenDates.forEach(date => {
+                if (date >= completionDateObj && (!closestDate || date < closestDate)) {
+                    closestDate = date;
+                }
+            });
+
+            if (closestDate) {
+                document.getElementById("order_completion_date").value = closestDate.toISOString().split('T')[0];
+            } else {
+                let nextDate = new Date(completionDateObj);
+                while (true) {
+                    nextDate.setDate(nextDate.getDate() + 1);
+                    const dateElement = document.querySelector(`.calendar-date[data-date="${nextDate.toISOString().split('T')[0]}"]`);
+                    if (!dateElement || dateElement.style.backgroundColor !== 'red') {
+                        break;
+                    }
+                }
+                document.getElementById("order_completion_date").value = nextDate.toISOString().split('T')[0];
+            }
+        }
+
+        document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+            dateElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                const colors = ['', 'green', 'red'];
+                const currentColorIndex = colors.indexOf(dateElement.style.backgroundColor);
+                const nextColorIndex = (currentColorIndex + 1) % colors.length;
+                dateElement.style.backgroundColor = colors[nextColorIndex];
+                localStorage.setItem(dateElement.dataset.date, colors[nextColorIndex]);
+
+                if (colors[nextColorIndex] === 'green') {
+                    selectedGreenDates.push(new Date(dateElement.dataset.date));
+                } else {
+                    selectedGreenDates = selectedGreenDates.filter(d => d.getTime() !== new Date(dateElement.dataset.date).getTime());
+                }
+
+                recalculateCompletionDate();
+            });
+        });
+
+        // Добавляем код для отображения выбранной даты
+        document.querySelectorAll('.calendar-date').forEach(function(dateElement) {
+            dateElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById("selected_date").textContent = document.getElementById("order_completion_date").value;
+            });
+        });
+    });
+</script>
