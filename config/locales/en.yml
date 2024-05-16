@@ -85,6 +85,8 @@ en:
       subcategories: "Subcategories"
       edit: "Editing subcategory"
       new_subcategory: "New subcategory"
+    review:
+      reviews: "Reviews"
   footer:
     nav:
       section: "Section"
@@ -136,6 +138,8 @@ en:
       destroy_subcategory: "Destroy this subcategory"
       show_subcategory: "Show this subcategory"
       create_subcategory: "Create Subcategory"
+    reviews:
+      new_review: "New review"
   placeholder:
     producer:
       enter_name: "Enter your name"
@@ -196,6 +200,11 @@ en:
       subcategory:
         subcategory_name: "Subcategory name"
         category_id: "Category"
+      reviews:
+        user_id: "User"
+        product_id: "Product"
+        comment: "Comment"
+        rating: "Rating"
   categories:
     Upholstered furniture: "Upholstered furniture"
     Display & storage cabinets: "Display & storage cabinets"

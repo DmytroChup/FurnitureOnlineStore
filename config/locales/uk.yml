@@ -60,6 +60,8 @@ uk:
       subcategories: "Підкатегорії"
       edit: "Редагування підкатегорії"
       new_subcategory: "Нова підкатегорія"
+    review:
+      reviews: "Відгуки"
   footer:
     nav:
       section: "Розділ"
@@ -111,6 +113,8 @@ uk:
       destroy_subcategory: "Знищити цю підкатегорію"
       show_subcategory: "Показати цю підкатегорію"
       create_subcategory: "Створити підкатегорію"
+    reviews:
+      new_review: "Новий відгук"
   placeholder:
     producer:
       enter_name: "Введіть своє ім'я"
@@ -171,6 +175,11 @@ uk:
       subcategory:
         subcategory_name: "Назва підкатегорії"
         category_id: "Категорія"
+      reviews:
+        user_id: "Користувач"
+        product_id: "Товар"
+        comment: "Коментарій"
+        rating: "Рейтинг"
   categories:
     Upholstered furniture: "М'які меблі"
     Display & storage cabinets: "Шафи"
