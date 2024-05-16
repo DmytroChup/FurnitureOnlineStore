@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class ReviewsControllerTest < ActionDispatch::IntegrationTest
@@ -17,7 +19,9 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create review" do
     assert_difference("Review.count") do
-      post reviews_url, params: { review: { comment: @review.comment, product_id: @review.product_id, rating: @review.rating, user_id: @review.user_id } }
+      post reviews_url,
+           params: {review: {comment: @review.comment, product_id: @review.product_id, rating: @review.rating,
+user_id: @review.user_id}}
     end
 
     assert_redirected_to review_url(Review.last)
@@ -34,7 +38,9 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update review" do
-    patch review_url(@review), params: { review: { comment: @review.comment, product_id: @review.product_id, rating: @review.rating, user_id: @review.user_id } }
+    patch review_url(@review),
+          params: {review: {comment: @review.comment, product_id: @review.product_id, rating: @review.rating,
+user_id: @review.user_id}}
     assert_redirected_to review_url(@review)
   end
 

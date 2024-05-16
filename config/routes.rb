@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :subcategories
     resources :categories
     resources :products do
+      resources :reviews, only: [:new, :create]
       collection do
         get "export_to_csv"
       end

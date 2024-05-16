@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :set_review, only: %i[show edit update destroy]
 
   # GET /reviews or /reviews.json
   def index
@@ -7,25 +9,26 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/1 or /reviews/1.json
-  def show
-  end
+  def show; end
 
   # GET /reviews/new
   def new
+    @product = Product.find(params[:product_id])
     @review = Review.new
   end
 
   # GET /reviews/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reviews or /reviews.json
   def create
-    @review = Review.new(review_params)
+    @product = Product.find(params[:product_id])
+    @review = @product.reviews.build(review_params)
+    @review.user = current_user
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
+        format.html { redirect_to @product, notice: "Review was successfully created." }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,13 +61,14 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def review_params
-      params.require(:review).permit(:user_id, :product_id, :comment, :rating)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def review_params
+    params.require(:review).permit(:user_id, :product_id, :comment, :rating)
+  end
 end

@@ -1,14 +1,42 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <p style="color: green;"><%= notice %></p>
+  <div class="row justify-content-center mb-3">
+    <div class="text-center">
+      <h1><%= t("heading.review.reviews") %></h1>
+    </div>
+  </div>
 
-<h1>Reviews</h1>
-
-<div id="reviews">
-  <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review %>
-    </p>
-  <% end %>
+  <div class="table-responsive mx-auto mt-3" style="width: 95%;">
+    <table class="table table-striped" style="width: 100%;">
+      <thead>
+      <tr>
+        <th class="w-10">ID</th>
+        <th class="w-10"><%= t("activerecord.attributes.reviews.user_id") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.reviews.product_id") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.reviews.comment") %></th>
+        <th class="w-10"><%= t("activerecord.attributes.reviews.rating") %></th>
+        <th class="w-10">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @reviews.each do |review| %>
+        <tr>
+          <td><%= review.id %></td>
+          <td><%= review.user_id %></td>
+          <td><%= t("products.#{review.product.name}") %></td>
+          <td><%= review.comment %></td>
+          <td><%= review.rating %></td>
+          <td>
+            <%= link_to t("buttons.show"), review, class: "btn btn-primary btn-sm mr-2" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 text-center">
+      <%= link_to t("buttons.reviews.new_review"), new_review_path, class: "btn btn-success"  %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New review", new_review_path %>
