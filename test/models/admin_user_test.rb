@@ -25,4 +25,10 @@ class AdminUserTest < ActiveSupport::TestCase
     refute @admin_user.valid?
     assert_not_nil @admin_user.errors[:password]
   end
+
+  test "invalid with short password" do
+    @admin_user.password = "short"
+    refute @admin_user.valid?, "saved admin user with short password"
+    assert_not_nil @admin_user.errors[:password]
+  end
 end
