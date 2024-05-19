@@ -10,9 +10,9 @@ module ActiveSupport
     parallelize(workers: :number_of_processors, with: :threads)
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-    #fixtures :all
-    #fixtures :reviews, :users, :products, :subcategories
-    fixtures :subcategories, :categories
+    fixtures :all
+    #fixtures :reviews, :users, :products
+    #fixtures :subcategories, :categories
 
     # Add more helper methods to be used by all tests here...
   end
