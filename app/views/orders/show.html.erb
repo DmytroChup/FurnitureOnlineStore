@@ -17,9 +17,15 @@
       <tr>
         <td><%= item.product.id %></td>
         <td><%= t("products.#{item.product.name}") %></td>
-        <td>$<%= item.product.price %></td>
+        <td>
+          <% preferred_currency = current_user.present? ? current_user.preferred_currency : 'UAH' %>
+          <%= display_price(item.product.price, @usd_buy, @eur_buy, preferred_currency) %>
+        </td>
         <td><%= item.quantity %></td>
-        <td>$<%= item.price %></td>
+        <td>
+          <% preferred_currency = current_user.present? ? current_user.preferred_currency : 'UAH' %>
+          <%= display_price(item.price, @usd_buy, @eur_buy, preferred_currency) %>
+        </td>
       </tr>
     <% end %>
     </tbody>

@@ -23,13 +23,10 @@
         <% end %>
 
         <div class="chat-details">
-          <% last_message = other_profile.messages.last %>
-          <p class="card-text">
-            <strong>Last Activity:</strong> <%= last_message.updated_at.strftime("%d/%m/%Y %H:%M:%S") %>
-          </p>
-          <p class="card-text">
-            <strong>Last Message:</strong> <%= last_message.content if last_message %>
-          </p>
+            <% last_message = other_profile.messages.last %>
+            <p class="card-text">
+              <strong>Last Activity:</strong> <%= last_message.updated_at.strftime("%d/%m/%Y %H:%M:%S") if last_message %>
+            </p>
         </div>
       </div>
     </div>

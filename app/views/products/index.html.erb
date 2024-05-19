@@ -59,14 +59,7 @@
           <td><%= t("products.#{product.name}") %></td>
           <td>
             <% preferred_currency = current_user.present? ? current_user.preferred_currency : 'UAH' %>
-            <% case preferred_currency %>
-            <% when 'UAH' %>
-              <%= number_to_currency(product.price, precision: 2, unit: '', format: "%n ₴") %>
-            <% when 'USD' %>
-              <%= number_to_currency(product.price / @usd_buy, precision: 2, unit: '', format: "%n $") if @usd_buy.present? %>
-            <% when 'EUR' %>
-              <%= number_to_currency(product.price / @eur_buy, precision: 2, unit: '', format: "%n €") if @eur_buy.present? %>
-            <% end %>
+            <%= display_price(product.price, @usd_buy, @eur_buy, preferred_currency) %>
           </td>
           <td><%= product.height %></td>
           <td><%= product.width %></td>
