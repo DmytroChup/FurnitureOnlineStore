@@ -3,11 +3,11 @@
 one:
   producer_name: MyString
   country: MyString
-  email: MyString
+  email: MyString@karazin.ua
   phone: MyString
 
 two:
   producer_name: MyString
   country: MyString
-  email: MyString
+  email: MyString@karazin.ua
   phone: MyString

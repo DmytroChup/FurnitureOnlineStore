@@ -4,10 +4,14 @@ one:
   user_id: 1
   payment_id: 1
   order_date: 2024-03-03 13:31:15
+  order_completion_date: 2024-03-03 13:31:15
   order_address: MyString
+  total: 300
 
 two:
   user_id: 1
   payment_id: 1
   order_date: 2024-03-03 13:31:15
+  order_completion_date: 2024-03-03 13:31:15
   order_address: MyString
+  total: 300

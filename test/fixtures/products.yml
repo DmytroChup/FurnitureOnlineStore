@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  subcategory_id: 1
   name: MyString
   price: 1.5
   height: 1.5
@@ -9,11 +8,9 @@ one:
   length: 1.5
   color: MyString
   material: MyString
-  producer_id: MyString
   availability: MyString
 
 two:
-  subcategory_id: 1
   name: MyString
   price: 1.5
   height: 1.5
@@ -21,5 +18,4 @@ two:
   length: 1.5
   color: MyString
   material: MyString
-  producer_id: MyString
   availability: MyString

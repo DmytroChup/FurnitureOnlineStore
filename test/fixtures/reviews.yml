@@ -4,7 +4,7 @@ one:
   user: one
   product: one
   comment: MyString
-  rating: 1
+  rating: 4
 
 two:
   user: two
