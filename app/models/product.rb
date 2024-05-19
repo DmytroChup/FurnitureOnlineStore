@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   has_many :order_items
   has_many :orders, through: :order_items
   has_one_attached :product_image, dependent: :destroy
+  has_many :reviews
   # has_many :carts
 
   validate :acceptable_image
@@ -47,5 +48,13 @@ class Product < ApplicationRecord
         csv << attributes.map {|attr| product.send(attr) }
       end
     end
+  end
+
+  def average_rating
+    reviews.average(:rating)
+  end
+
+  def review_count
+    reviews.count
   end
 end

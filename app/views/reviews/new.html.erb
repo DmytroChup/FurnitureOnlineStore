@@ -1,0 +1,17 @@
+<div class="container pt-3 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card position-relative">
+        <div class="card-header">
+          <h1>New review</h1>
+        </div>
+        <div class="card-body">
+          <%= render "form", review: @review %>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+          <%= link_to "Back to reviews", reviews_path, class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,10 @@ class ProductsController < ApplicationController
     # @products = Product.all
     find_currency_service = FindCurrencyService.new
     @usd_buy, @eur_buy = find_currency_service.call
-    @products = Product.all.order(:name)
+    # @products = Product.all.order(:name)
+    @products = SortProductsQuery.new(
+      SearchProductsQuery.new(params, Product.all.includes(subcategory: :category)).call, params
+    ).call
   end
 
   # GET /products/1 or /products/1.json

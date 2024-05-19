@@ -4,6 +4,7 @@ class User < ApplicationRecord
   # has_many :carts
   has_many :orders
   has_many :payment_histories
+  has_many :reviews
 
   has_many :users_subcategories
   has_many :subcategories, through: :users_subcategories

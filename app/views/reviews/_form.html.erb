@@ -1,0 +1,37 @@
+<%= form_with(model: review) do |form| %>
+  <% if review.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+        <% review.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mb-3">
+    <%= form.label :user_id, class: "form-label" %>
+    <%= form.text_field :user_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :product_id, class: "form-label" %>
+    <%= form.text_field :product_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :comment, class: "form-label" %>
+    <%= form.text_field :comment, class: "form-control" %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :rating, class: "form-label" %>
+    <%= form.number_field :rating, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.submit class: "btn btn-primary mt-3" %>
+  </div>
+<% end %>

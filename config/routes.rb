@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :orders
+  resources :reviews
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
     resources :subcategories
     resources :categories
     resources :products do
+      resources :reviews, only: [:new, :create]
       collection do
         get "export_to_csv"
       end
