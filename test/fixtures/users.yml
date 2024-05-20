@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_role: MyString
   first_name: MyString
   patronymic: MyString
   last_name: MyString
@@ -9,15 +8,14 @@ one:
   username: MyString
   password: MyString
   cart_id: 1
-  email: MyString
+  email: test1@karazin.ua
 
 two:
-  user_role: MyString
   first_name: MyString
   patronymic: MyString
   last_name: MyString
   phone: MyString
   username: MyString
   password: MyString
-  cart_id: 1
-  email: MyString2
+  cart_id: 2
+  email: test2@karazin.ua

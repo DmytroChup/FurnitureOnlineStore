@@ -1,9 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  subcategory_name: MyString
-  category_id: 1
+one :
+  category: one
+  subcategory_name: Table
 
-two:
-  subcategory_name: MyString
-  category_id: 1
+two :
+  subcategory_name: Chair
