@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class ProductTest < ActiveSupport::TestCase
   def setup
@@ -11,7 +13,7 @@ class ProductTest < ActiveSupport::TestCase
 
   test "ransackable_attributes should return correct attributes" do
     expected_attributes = %w[availability color created_at height id id_value length material name price
-       producer_id subcategory_id updated_at width]
+                             producer_id subcategory_id updated_at width]
     assert_equal expected_attributes, Product.ransackable_attributes
   end
 
@@ -23,7 +25,7 @@ class ProductTest < ActiveSupport::TestCase
   test "to_csv should return csv string" do
     csv = Product.to_csv
     assert csv.is_a?(String)
-    assert csv.lines.first.chomp.split(',').include?('name')
+    assert csv.lines.first.chomp.split(",").include?("name")
   end
 
   test "average_rating should return average rating of product reviews" do

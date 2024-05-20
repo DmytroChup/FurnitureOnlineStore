@@ -5,7 +5,7 @@ class Subcategory < ApplicationRecord
   has_many :products
 
   has_many :users_subcategories
-  has_many :found_users, through: :users_subcategories
+  has_many :users, through: :users_subcategories
 
   def display_name
     subcategory_name

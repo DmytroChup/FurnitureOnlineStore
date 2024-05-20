@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class OrderTest < ActiveSupport::TestCase
   def setup
@@ -10,7 +12,8 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   test "ransackable_attributes should return correct attributes" do
-    expected_attributes = %w[created_at id id_value order_address order_date payment_history_id updated_at user_id total]
+    expected_attributes = %w[created_at id id_value order_address order_date payment_history_id updated_at user_id
+                             total]
     assert_equal expected_attributes, Order.ransackable_attributes
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FindCurrencyService
   def call
     @currency_rates = PrivatbankApi.fetch_currency_rates
