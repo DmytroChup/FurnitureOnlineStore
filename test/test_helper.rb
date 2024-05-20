@@ -11,9 +11,11 @@ module ActiveSupport
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
-    #fixtures :reviews, :users, :products
-    #fixtures :subcategories, :categories
-    #fixtures :orders, :order_items, :payment_histories, :products, :users
+    # fixtures :producers, :admin_users
+    # fixtures :reviews, :users, :products
+    # fixtures :subcategories, :categories
+    # fixtures :orders, :order_items, :payment_histories, :products, :users
+
     # Add more helper methods to be used by all tests here...
   end
 end
