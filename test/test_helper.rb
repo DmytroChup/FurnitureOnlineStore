@@ -13,7 +13,7 @@ module ActiveSupport
     fixtures :all
     #fixtures :reviews, :users, :products
     #fixtures :subcategories, :categories
-
+    #fixtures :orders, :order_items, :payment_histories, :products, :users
     # Add more helper methods to be used by all tests here...
   end
 end
