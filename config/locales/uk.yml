@@ -65,8 +65,11 @@ uk:
   footer:
     nav:
       section: "Розділ"
+      categories: "Категорії"
       features: "Можливості"
       pricing: "Ціни"
+      top_of_the_week: "Топ неділі"
+      product: "Продукт"
   buttons:
     login: "Увійти"
     login_producer: "Увійти як виробник"
