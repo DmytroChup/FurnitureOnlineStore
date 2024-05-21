@@ -4,8 +4,8 @@
       <div class="col-6 col-md-2 mb-3">
         <h5><%= t("footer.nav.section") %></h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.home") %></a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("footer.nav.features") %></a></li>
+          <li class="nav-item mb-2"><a href="/<%= I18n.locale %>" class="nav-link p-0 text-body-secondary"><%= t("nav.home") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= categories_path %>" class="nav-link p-0 text-body-secondary"><%= t("nav.catalog") %></a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("footer.nav.pricing") %></a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.faqs") %></a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.about") %></a></li>
@@ -13,10 +13,10 @@
       </div>
 
       <div class="col-6 col-md-2 mb-3">
-        <h5><%= t("footer.nav.section") %></h5>
+        <h5><%= t("footer.nav.product") %></h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.home") %></a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("footer.nav.features") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= products_path %>" class="nav-link p-0 text-body-secondary"><%= t("nav.all_products") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= product_path(id: 3) %>" class="nav-link p-0 text-body-secondary"><%= t("footer.nav.top_of_the_week") %></a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("footer.nav.pricing") %></a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.faqs") %></a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.about") %></a></li>
@@ -24,13 +24,13 @@
       </div>
 
       <div class="col-6 col-md-2 mb-3">
-        <h5><%= t("footer.nav.section") %></h5>
+        <h5><%= t("footer.nav.categories") %></h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.home") %></a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("footer.nav.features") %></a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("footer.nav.pricing") %></a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.faqs") %></a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><%= t("nav.about") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= category_path(id: 3) %>" class="nav-link p-0 text-body-secondary"><%= t("categories.Hallways") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= category_path(id: 8) %>" class="nav-link p-0 text-body-secondary"><%= t("categories.Accessories") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= category_path(id: 1) %>" class="nav-link p-0 text-body-secondary"><%= t("categories.Upholstered furniture") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= category_path(id: 5) %>" class="nav-link p-0 text-body-secondary"><%= t("categories.Tables") %></a></li>
+          <li class="nav-item mb-2"><a href="<%= category_path(id: 4) %>" class="nav-link p-0 text-body-secondary"><%= t("categories.Beds") %></a></li>
         </ul>
       </div>
     </div>

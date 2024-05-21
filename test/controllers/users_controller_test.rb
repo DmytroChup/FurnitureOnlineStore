@@ -22,7 +22,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       post users_url,
            params: {user: {cart_id: @user.cart_id, first_name: @user.first_name, last_name: @user.last_name,
                            password: @user.password, patronymic: @user.patronymic, phone: @user.phone,
-                           user_role: @user.user_role, username: @user.username}}
+                           username: @user.username}}
     end
 
     assert_redirected_to user_url(User.last)
@@ -42,7 +42,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     patch user_url(@user),
           params: {user: {cart_id: @user.cart_id, first_name: @user.first_name, last_name: @user.last_name,
                           password: @user.password, patronymic: @user.patronymic, phone: @user.phone,
-                          user_role: @user.user_role, username: @user.username}}
+                          username: @user.username}}
     assert_redirected_to user_url(@user)
   end
 

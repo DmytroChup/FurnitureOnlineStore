@@ -16,6 +16,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :username, presence: true, uniqueness: true
+
   def self.ransackable_associations(_auth_object=nil)
     %w[messages orders payment_histories private_chats_as_user]
   end

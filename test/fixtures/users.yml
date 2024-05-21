@@ -1,21 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  first_name: MyString
-  patronymic: MyString
-  last_name: MyString
-  phone: MyString
-  username: MyString
-  password: MyString
-  cart_id: 1
-  email: test1@karazin.ua
+  first_name: "Dima"
+  patronymic: "Ch"
+  last_name: "Wab"
+  phone: "0987654321"
+  username: "dima"
+  email: "dima@gmail.com"
 
 two:
-  first_name: MyString
-  patronymic: MyString
-  last_name: MyString
-  phone: MyString
-  username: MyString
-  password: MyString
-  cart_id: 2
-  email: test2@karazin.ua
+  first_name: "Egor"
+  patronymic: "Kia"
+  last_name: "Flf"
+  phone: "0987654333"
+  username: "egor"
+  email: "egor@gmail.com"
