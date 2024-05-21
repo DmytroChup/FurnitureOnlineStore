@@ -6,15 +6,15 @@ class UsersSubcategoryTest < ActiveSupport::TestCase
   setup do
     @user = User.create(
       first_name: "Test",
-      last_name: "User",
-      username: "testuser",
-      password: "password"
+      last_name:  "User",
+      username:   "testuser",
+      password:   "password"
     )
 
     @subcategory = Subcategory.create(subcategory_name: "Test Subcategory")
 
     @users_subcategory = UsersSubcategory.new(
-      user: @user,
+      user:        @user,
       subcategory: @subcategory
     )
   end

@@ -6,10 +6,10 @@ class UserTest < ActiveSupport::TestCase
   setup do
     @user = User.new(
       first_name: "Test",
-      last_name: "User",
-      username: "testuser",
-      password: "password",
-      email: "user@example.com"
+      last_name:  "User",
+      username:   "testuser",
+      password:   "password",
+      email:      "user@example.com"
     )
   end
 

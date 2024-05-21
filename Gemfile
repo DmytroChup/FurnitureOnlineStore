@@ -31,6 +31,8 @@ gem "activeadmin", "3.2.0"
 gem "simple_calendar", "~>  3.0.4"
 gem "simple_form", "~> 5.3.0"
 
+gem "activerecord", "7.1.3.2"
+
 group :development, :test do
   gem "debug", "1.9.1", platforms: %i[mri windows]
   gem "lefthook", "~> 1.6.7"

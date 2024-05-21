@@ -1,38 +1,40 @@
-<div class="private_chat_index_page">
-  <% @private_chats.each do |private_chat| %>
-    <% if current_user %>
-      <% other_profile = private_chat.producer %>
-    <% elsif current_producer %>
-      <% other_profile = private_chat.user %>
-    <% end %>
+<div class="container mt-4">
+  <div class="private_chat_index_page">
+    <% @private_chats.each do |private_chat| %>
+      <% if current_user %>
+        <% other_profile = private_chat.producer %>
+      <% elsif current_producer %>
+        <% other_profile = private_chat.user %>
+      <% end %>
 
-    <div class="card mb-3">
-      <div class="card-body">
-        <% if other_profile.is_a?(Producer) %>
-          <%= link_to user_private_chat_path(@profile, private_chat), class: "card-link" do %>
-            <h3 class="card-title">
-              <%= other_profile.producer_name %>
-            </h3>
+      <div class="card mb-3">
+        <div class="card-body">
+          <% if other_profile.is_a?(Producer) %>
+            <%= link_to user_private_chat_path(@profile, private_chat), class: "card-link" do %>
+              <h3 class="card-title">
+                <%= other_profile.producer_name %>
+              </h3>
+            <% end %>
+          <% elsif other_profile.is_a?(User) %>
+            <%= link_to producer_private_chat_path(@profile, private_chat), class: "card-link" do %>
+              <h3 class="card-title">
+                <%= other_profile.username %>
+              </h3>
+            <% end %>
           <% end %>
-        <% elsif other_profile.is_a?(User) %>
-          <%= link_to producer_private_chat_path(@profile, private_chat), class: "card-link" do %>
-            <h3 class="card-title">
-              <%= other_profile.username %>
-            </h3>
-          <% end %>
-        <% end %>
 
-        <div class="chat-details">
-            <% last_message = other_profile.messages.last %>
-            <p class="card-text">
-              <strong>Last Activity:</strong> <%= last_message.updated_at.strftime("%d/%m/%Y %H:%M:%S") if last_message %>
-            </p>
+          <div class="chat-details">
+              <% last_message = other_profile.messages.last %>
+              <p class="card-text">
+                <strong>Last Activity:</strong> <%= last_message.updated_at.strftime("%d/%m/%Y %H:%M:%S") if last_message %>
+              </p>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
 
-  <% if current_user %>
-    <%= link_to "Create Chat", create_chat_index_user_path(current_user.id), method: :get, class: "btn btn-primary" %>
-  <% end %>
+    <% if current_user %>
+      <%= link_to "Create Chat", create_chat_index_user_path(current_user.id), method: :get, class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>

@@ -9,10 +9,9 @@ class Producer < ApplicationRecord
   has_many :private_chats_as_producer, class_name: "PrivateChat", foreign_key: :producer_id
 
   validates :phone, presence: true, format: {with: /\A\d{10}\z/, message: "must be 10 digits"}
-  # validates :producer_id, presence: true
-  # validates :producer_name, presence: true
-  # validates :country, presence: true
-  # validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :producer_name, presence: true
+  validates :email, presence: true
+  validates :country, presence: true
 
   validate :email_domain
 
@@ -29,6 +28,8 @@ class Producer < ApplicationRecord
   private
 
   def email_domain
+    return unless email.present? # Добавленная проверка на наличие email
+
     domain = email.split("@").last
     allowed_domains = ["karazin.ua"]
     errors.add(:email, "Invalid Domain") unless allowed_domains.include?(domain)
