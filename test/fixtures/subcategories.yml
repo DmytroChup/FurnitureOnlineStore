@@ -2,8 +2,8 @@
 
 one:
   subcategory_name: MyString
-  category_id: 1
+  category: one
 
 two:
   subcategory_name: MyString
-  category_id: 1
+  category: two
