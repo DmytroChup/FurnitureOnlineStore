@@ -12,7 +12,7 @@ class Subcategory < ApplicationRecord
   end
 
   def self.ransackable_associations(_auth_object=nil)
-    %w[category products]
+    %w[category products users users_subcategories]
   end
 
   def self.ransackable_attributes(_auth_object=nil)

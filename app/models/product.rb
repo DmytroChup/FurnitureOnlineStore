@@ -31,11 +31,11 @@ class Product < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object=nil)
     %w[availability color created_at height id id_value length material name price
-       producer_id subcategory_id updated_at width]
+       producer_id subcategory_id updated_at width image_attached]
   end
 
   def self.ransackable_associations(_auth_object=nil)
-    %w[order_items orders producer subcategory]
+    %w[order_items orders producer product_image_attachment product_image_blob reviews subcategory]
   end
 
   def self.to_csv

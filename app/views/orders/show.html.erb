@@ -32,7 +32,7 @@
   </table>
 
   <div class="d-flex align-items-center gap-2">
-    <%= link_to t("buttons.order.edit_order"), edit_order_path(@order), class: "btn btn-primary" %> |
+<!--    <%#= link_to t("buttons.order.edit_order"), edit_order_path(@order), class: "btn btn-primary" %> |-->
     <%#= link_to "Back to orders", orders_path, class: "btn btn-primary" %>
     <%= link_to t("buttons.order.back_orders"), current_user ? orders_path(user_id: current_user.id) : orders_path, class: "btn btn-primary" %>
 

@@ -21,12 +21,13 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   def self.ransackable_associations(_auth_object=nil)
-    %w[messages orders payment_histories private_chats_as_user]
+    %w[messages orders payment_histories private_chats_as_user reviews subcategories
+       users_subcategories]
   end
 
   def self.ransackable_attributes(_auth_object=nil)
     %w[cart_id confirmation_sent_at confirmation_token confirmed_at created_at email
-       encrypted_password first_name id id_value last_name password patronymic
-       phone remember_created_at reset_password_sent_at reset_password_token unconfirmed_email updated_at username]
+       encrypted_password first_name id id_value last_name password patronymic phone preferred_currency
+       remember_created_at reset_password_sent_at reset_password_token unconfirmed_email updated_at username]
   end
 end
